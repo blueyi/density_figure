@@ -34,6 +34,9 @@ namespace Density_figure
         Graphics g;  //封装的绘图画面
 
 
+
+
+
         //Picture deal function
 
         //------Picture cut
@@ -152,7 +155,7 @@ namespace Density_figure
                     }
                     System.Runtime.InteropServices.Marshal.Copy(rgbvalues6, 0, ptr6, bytes6);
                     pic1.UnlockBits(bd6);
-                    pic1.Save(Application.StartupPath + "\\fit.jpg");  //存储处理后的图片
+                    pic1.Save(Application.StartupPath + "\\Temp" + "\\fit.jpg");  //存储处理后的图片
 
                     //显示处理后的图片
                     /*
@@ -196,8 +199,8 @@ namespace Density_figure
 
 
 
-        //----选择图片
-        private void openPicButton_Click(object sender, EventArgs e)
+        //----选择图片函数
+        public void openPictFunction()
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.InitialDirectory = Application.StartupPath + @"\File\Images";
@@ -226,7 +229,14 @@ namespace Density_figure
             }
         }
 
+        private void openPicButton_Click(object sender, EventArgs e)
+        {
+            openPictFunction();
+        }
+
         //----选择图片区域
+
+        //写出起点
         private void originalPic_MouseDown(object sender, MouseEventArgs e)
         {
             start = new Point();
@@ -243,12 +253,12 @@ namespace Density_figure
             blnDraw = true;
         }
 
+        //移动并选择计算区域
         private void originalPic_MouseUp(object sender, MouseEventArgs e)
         {
             g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, e.X - start.X, e.Y - start.Y);
             blnDraw = false;
         }
-
         private void originalPic_MouseMove(object sender, MouseEventArgs e)
         {
             if (blnDraw)
@@ -262,61 +272,71 @@ namespace Density_figure
                 //再画
                 g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, end.X - start.X, end.Y - start.Y);
             }
-            double heigh = originalPic.Image.Height;
-            double width = originalPic.Image.Width;
-            double h = (double)originalPic.Height / heigh;
-            double w = (double)originalPic.Width / width;
-            if (h <= w)
+        
+            if (originalPic.Image != null)
             {
-                double wid = ((double)originalPic.Width - originalPic.Image.Width * h) / 2;
-                if ((int)wid < e.X && e.X < (int)(originalPic.Width - wid))
+                double heigh = originalPic.Image.Height;
+                double width = originalPic.Image.Width;
+                double h = (double)originalPic.Height / heigh;
+                double w = (double)originalPic.Width / width;
+                if (h <= w)
                 {
-                    int x = (int)(e.X - wid);
-                    Bitmap bm = (Bitmap)originalPic.Image;
-                    //label1.Text = string.Format("当前坐标点：（{0}，{1}） 灰度值：{2}", x, e.Y, bm.GetPixel(x, e.Y));
-
-                    int x1 = (int)(x / h);
-                    int y1 = (int)(e.Y / h);
-                    if (x1 <= originalPic.Image.Width && x1 >= 0)
+                    double wid = ((double)originalPic.Width - originalPic.Image.Width * h) / 2;
+                    if ((int)wid < e.X && e.X < (int)(originalPic.Width - wid))
                     {
-                        if (y1 >= 0 && y1 <= originalPic.Image.Height)
+                        int x = (int)(e.X - wid);
+                        Bitmap bm = (Bitmap)originalPic.Image;
+                        //label1.Text = string.Format("当前坐标点：（{0}，{1}） 灰度值：{2}", x, e.Y, bm.GetPixel(x, e.Y));
+
+                        int x1 = (int)(x / h);
+                        int y1 = (int)(e.Y / h);
+                        if (x1 <= originalPic.Image.Width && x1 >= 0)
                         {
-                            Color color = bm.GetPixel(x1, y1);
-                            int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
-                            picCoordinateTip.Show("（" + x + ";" + e.Y + " ）" + gray, this, new Point(e.X + 120, e.Y));
-                            //toolTip1.Show("("+x+";"+e.Y+")"+gray);
-                            //textBox19.Text = string.Format("灰度值{0}", gray);
-
-
+                            if (y1 >= 0 && y1 <= originalPic.Image.Height)
+                            {
+                                Color color = bm.GetPixel(x1, y1);
+                                int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
+                                picCoordinateTip.Show("（" + x + ";" + e.Y + " ）" + gray, this, new Point(e.X + 120, e.Y));
+                                //picCoordinateTip.Show("("+x+";"+e.Y+")"+gray);
+                                //textBox19.Text = string.Format("灰度值{0}", gray);
+                            }
                         }
                     }
+
+                }
+                else
+                {
+                    double hei = ((double)originalPic.Height - originalPic.Image.Height * w) / 2;
+                    if ((int)hei < e.Y && e.Y < (int)(originalPic.Height - hei))
+                    {
+                        int y = (int)(e.Y - hei);
+                        Bitmap bm = (Bitmap)originalPic.Image;
+                        //label1.Text = string.Format("当前坐标点：（{0}，{1}） 灰度值：{2}", e.X, y, bm.GetPixel(e.X, y));
+
+                        int x1 = (int)(e.X / w);
+                        int y1 = (int)(y / w);
+                        if (x1 <= originalPic.Image.Width && x1 >= 0)
+                        {
+                            if (y1 >= 0 && y1 <= originalPic.Image.Height)
+                            {
+                                Color color = bm.GetPixel(x1, y1);
+                                int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
+                                //textBox19.Text = string.Format("灰度值{0}", gray);
+                                picCoordinateTip.Show("" + e.X + ";" + y + " (" + gray + ")", this, new Point(e.X + 120, e.Y));
+
+                            }
+                        }
+                    }
+
                 }
 
             }
             else
             {
-                double hei = ((double)originalPic.Height - originalPic.Image.Height * w) / 2;
-                if ((int)hei < e.Y && e.Y < (int)(originalPic.Height - hei))
-                {
-                    int y = (int)(e.Y - hei);
-                    Bitmap bm = (Bitmap)originalPic.Image;
-                    //label1.Text = string.Format("当前坐标点：（{0}，{1}） 灰度值：{2}", e.X, y, bm.GetPixel(e.X, y));
+                MessageBox.Show("Please select picture to calculate!");
+                openPictFunction();
+            } 
 
-                    int x1 = (int)(e.X / w);
-                    int y1 = (int)(y / w);
-                    if (x1 <= originalPic.Image.Width && x1 >= 0)
-                    {
-                        if (y1 >= 0 && y1 <= originalPic.Image.Height)
-                        {
-                            Color color = bm.GetPixel(x1, y1);
-                            int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
-                            //textBox19.Text = string.Format("灰度值{0}", gray);
-                            picCoordinateTip.Show("" + e.X + ";" + y + " (" + gray + ")", this, new Point(e.X + 120, e.Y));
-
-                        }
-                    }
-                }
-            }
         }
     }
 }

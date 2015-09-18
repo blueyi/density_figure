@@ -80,12 +80,17 @@
             // 
             // originalPic
             // 
+            this.originalPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.originalPic.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.originalPic.Location = new System.Drawing.Point(35, 7);
             this.originalPic.Name = "originalPic";
             this.originalPic.Size = new System.Drawing.Size(629, 360);
+            this.originalPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.originalPic.TabIndex = 0;
             this.originalPic.TabStop = false;
             this.originalPic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseDown);
+            this.originalPic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseMove);
+            this.originalPic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseUp);
             // 
             // iceNumLabel
             // 
