@@ -196,11 +196,12 @@ namespace Density_figure
             }
             catch(Exception err)
             {
-                MessageBox.Show("系统出错，请退出!" + err.Message);
+                MessageBox.Show("系统出错，请重试!---1" + err.Message);
                 return "";
             }
         }
 
+        //picture to grayscale
         public string picGrayScale(string picName, int grayValue)
         {
             try
@@ -263,13 +264,163 @@ namespace Density_figure
 
                         return Application.StartupPath + @"\Temp\" + Path.GetFileNameWithoutExtension(picName) + "_Grayed.jpg"; 
             }
-            catch
+            catch(Exception err)
             {
-                MessageBox.Show("系统出错，请退出!");
+                MessageBox.Show("系统出错，请重试!---2" + err.Message);
                 return "";
             }
         }
 
+        double sumwidth = 0;
+        double sumheight = 0;
+        double num = 0;
+        int minw;
+        int minh;
+        int nstep = 4;
+        double[] numstep1;
+//        int cnt2 = 0;
+        int[] hist;
+        int[,] board1;
+        int maxw;
+        int maxh;
+        bool fill(int i, int j)
+        {
+
+
+            if (i < sWidth && j < sHeight && i >= 0 && j >= 0 && board[i, j] == 3)
+            {
+                board[i, j] = nstep;
+                if (maxw < i)
+                    maxw = i;
+                if (maxh < j)
+                    maxh = j;
+                fill(i + 1, j);
+                fill(i - 1, j);
+                fill(i, j + 1);
+                fill(i, j - 1);
+                num++;
+                sumwidth = sumwidth + i;
+                sumheight = sumheight + j;
+                return true;
+            }
+            return false;
+        }
+
+        //grayscale to calculate
+        public void picCalculate(string picName, int areaLevel, int areaMin, int areaMax)
+        {
+            int cnt = 0;
+            double maxice = 0;
+            try
+            {
+                int minlh = (int)Convert.ToDouble(areaMin) * 22 / 50 * 22 / 50;
+                int maxlh = (int)Convert.ToDouble(areaMax) * 22 / 50 * 22 / 50;
+                int cntlh = Convert.ToInt32(areaLevel);
+                int steplh = (maxlh - minlh) / cntlh;
+                double icenum = 0;
+                Bitmap pic = new Bitmap(picName);
+                // Bitmap bgr = new Bitmap(longName3);
+
+                sWidth = pic.Width;
+                sHeight = pic.Height;
+                board1 = new int[sWidth, sHeight];
+                board = new int[sWidth, sHeight];
+                // int a = sWidth * sHeight;
+
+                Rectangle rec = new Rectangle(0, 0, sWidth, sHeight);
+                BitmapData bd = pic.LockBits(rec, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+                IntPtr ptr = bd.Scan0;
+                int bytes = bd.Stride * bd.Height;
+                byte[] Trgbvalues;
+                Trgbvalues = new byte[bytes];
+                //Trgbvalues1 = new byte[bytes];
+                System.Runtime.InteropServices.Marshal.Copy(ptr, Trgbvalues, 0, bytes);
+
+                for (int i = 0; i < sWidth; i++)
+                {
+                    for (int j = 0; j < sHeight; j++)
+                    {
+                        if (Trgbvalues[j * bd.Stride + i * 3] == 255 && Trgbvalues[j * bd.Stride + i * 3 + 1] == 255 && Trgbvalues[j * bd.Stride + i * 3 + 2] == 255)
+                        {
+                            icenum++;
+                            board[i, j] = 3;
+                        }
+                        else
+                            board[i, j] = 2;
+                        board1[i, j] = board[i, j];
+                    }
+                }
+                hist = new int[cntlh + 2];
+                for (int i = 0; i < cntlh + 2; i++)
+                    hist[i] = 0;
+                //MessageBox.Show(P1.Y.ToString());
+                //MessageBox.Show(sHeight.ToString());
+
+
+                numstep1 = new double[500];
+                //List<string> result = new List<string>();
+                //double maxnum = 0;
+
+//                if (cnt2 == 1)
+//                {
+                for (int i = 0; i < sWidth; i++)
+                {
+                    for (int j = 0; j < sHeight; j++)
+                    {
+                        sumheight = 0;
+                        sumwidth = 0;
+                        num = 0;
+                        minh = j;
+                        minw = i;
+                        if (board[i, j] == 3 && fill(i, j))
+                        {
+                            if (num >= 5)
+                            {
+                                if (num > maxice)
+                                    maxice = num;
+                                cnt++;
+                                numstep1[nstep] = num;
+                                nstep++;
+                                if (num < minlh)
+                                    hist[0]++;
+                                else if (num > maxlh)
+                                    hist[cntlh + 1]++;
+                                else
+                                {
+                                    for (int k = 0; k < cntlh; k++)
+                                    {
+                                        if (num < (minlh + (k + 1) * steplh))
+                                        {
+                                            hist[k + 1]++;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                double icesum = sWidth * sHeight;
+                double mjd = icenum / icesum;
+                double de = Math.Round(mjd, 4);//将小数值舍入到指定精度
+                iceDensity.Text = de.ToString();
+                //  textBox5.Text = mjd.ToString();
+                iceNum.Text = cnt.ToString();
+                maxIce.Text = maxice.ToString();
+                minIce.Text = Convert.ToString(5);
+                panel3.Refresh();
+
+                //                    cnt2 = 0;
+
+
+                pic.Dispose();
+            }
+//            }
+            catch(Exception err)
+            {
+                MessageBox.Show("系统出错，请重试!---3 " + err.Message);
+            }
+        }
 
 
 
@@ -290,14 +441,15 @@ namespace Density_figure
                     shortName = Path.GetFileNameWithoutExtension(longName);
                     //Bitmap pic = new Bitmap(longName);
                     originalPic.Image = new Bitmap(longName);
+                    originalPic.Refresh();
                     //picBox.SizeMode = PictureBoxSizeMode.StretchImage;
                     // button16.Enabled = true;
                     //                    button22.Enabled = true;
                 }
 
-                catch
+                catch(Exception err)
                 {
-                    MessageBox.Show("没打开文件，请重试！");
+                    MessageBox.Show("系统出错，请重试!---5" + err.Message);
                     //                    button6.Enabled = false;
                 }
             }
@@ -339,12 +491,20 @@ namespace Density_figure
                 if (longName.Length !=0)
                     cuttedPic = picCutFunction(originalPic, longName, start, end);
                 else
-                    MessageBox.Show("No picture name!");
+                    MessageBox.Show("数据处理未完成!---No originalPic");
 
                 if (cuttedPic.Length != 0)
                     grayedPic = picGrayScale(cuttedPic,Convert.ToInt32(grayNum.Value));
                 else
-                    MessageBox.Show("No picture name!");
+                    MessageBox.Show("数据处理未完成!---No cuttedPic");
+
+                if (grayedPic.Length != 0)
+                {
+                    picCalculate(grayedPic, Convert.ToInt32(areaLevelNum.Value), Convert.ToInt32(areaSectionMin.Value), Convert.ToInt32(areaSectionMax.Value));
+                }
+                else
+                    MessageBox.Show("数据处理未完成!---No grayedPic");
+
             }
         }
         private void originalPic_MouseMove(object sender, MouseEventArgs e)

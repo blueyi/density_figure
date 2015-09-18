@@ -37,7 +37,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.areaLevelNum = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.areaSectionMax = new System.Windows.Forms.NumericUpDown();
             this.areaSectionMin = new System.Windows.Forms.NumericUpDown();
             this.grayNum = new System.Windows.Forms.NumericUpDown();
             this.areaSection = new System.Windows.Forms.Label();
@@ -61,7 +61,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.originalPic)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.areaLevelNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.areaSectionMax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.areaSectionMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grayNum)).BeginInit();
             this.panel4.SuspendLayout();
@@ -127,7 +127,7 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.areaLevelNum);
-            this.panel2.Controls.Add(this.numericUpDown1);
+            this.panel2.Controls.Add(this.areaSectionMax);
             this.panel2.Controls.Add(this.areaSectionMin);
             this.panel2.Controls.Add(this.grayNum);
             this.panel2.Controls.Add(this.areaSection);
@@ -168,22 +168,22 @@
             0,
             0});
             // 
-            // numericUpDown1
+            // areaSectionMax
             // 
-            this.numericUpDown1.DecimalPlaces = 1;
-            this.numericUpDown1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.numericUpDown1.Location = new System.Drawing.Point(262, 74);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.areaSectionMax.DecimalPlaces = 1;
+            this.areaSectionMax.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.areaSectionMax.Location = new System.Drawing.Point(262, 74);
+            this.areaSectionMax.Maximum = new decimal(new int[] {
             9999,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(67, 26);
-            this.numericUpDown1.TabIndex = 4;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            10,
+            this.areaSectionMax.Name = "areaSectionMax";
+            this.areaSectionMax.Size = new System.Drawing.Size(67, 26);
+            this.areaSectionMax.TabIndex = 4;
+            this.areaSectionMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.areaSectionMax.Value = new decimal(new int[] {
+            50,
             0,
             0,
             65536});
@@ -408,13 +408,13 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "冰密度计算";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.originalPic)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.areaLevelNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.areaSectionMax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.areaSectionMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grayNum)).EndInit();
             this.panel4.ResumeLayout(false);
@@ -453,7 +453,7 @@
         private System.Windows.Forms.Label minIce;
         private System.Windows.Forms.Label maxIce;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown areaSectionMax;
         private System.Windows.Forms.NumericUpDown areaSectionMin;
         private System.Windows.Forms.ToolTip picCoordinateTip;
 
