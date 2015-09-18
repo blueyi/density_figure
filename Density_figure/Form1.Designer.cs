@@ -75,7 +75,7 @@
             this.panel1.Controls.Add(this.originalPic);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(703, 391);
+            this.panel1.Size = new System.Drawing.Size(715, 391);
             this.panel1.TabIndex = 0;
             // 
             // originalPic
@@ -210,7 +210,6 @@
             // 
             // grayNum
             // 
-            this.grayNum.DecimalPlaces = 1;
             this.grayNum.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.grayNum.Location = new System.Drawing.Point(158, 38);
             this.grayNum.Maximum = new decimal(new int[] {
@@ -387,7 +386,8 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(686, 28);
             this.label2.TabIndex = 8;
-            this.label2.Text = "提示：选择计算参数后，设置图像路径，点击自动计算 则对应文件夹下的图像会自动被计算。打开图像则选择\r\n单张图片进行计算";
+            this.label2.Text = "提示：选择计算参数后，设置图像路径，点击自动计算,则对应文件夹下的图像会自动被计算。打开图像则选择\r\n单张图片进行计算。鼠标置于图片上时显示的参数为(坐标), 灰" +
+    "度值，以便参考设置需要的灰度值";
             // 
             // panel5
             // 

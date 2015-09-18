@@ -40,13 +40,13 @@ namespace Density_figure
         //Picture deal function
 
         //------Picture cut
-        public void picCut(PictureBox picBox)
+        public string picCutFunction(PictureBox picBox, string picName, Point start, Point end)
         {
             try
             {
                 if (start.X <= end.X && start.Y <= end.Y)
                 {
-                    Bitmap pic = new Bitmap(longName);
+                    Bitmap pic = new Bitmap(picName);
                     sWidth = pic.Width;
                     sHeight = pic.Height;
                     int xa = start.X * sWidth / picBox.Width;
@@ -155,8 +155,10 @@ namespace Density_figure
                     }
                     System.Runtime.InteropServices.Marshal.Copy(rgbvalues6, 0, ptr6, bytes6);
                     pic1.UnlockBits(bd6);
-                    pic1.Save(Application.StartupPath + "\\Temp" + "\\fit.jpg");  //存储处理后的图片
+                    pic1.Save(Application.StartupPath + @"\Temp\" + Path.GetFileNameWithoutExtension(picName) + "_cuted.jpg");  //存储剪切后的图片
+                    pic1.Dispose();
 
+                    return Application.StartupPath + @"\Temp\" + Path.GetFileNameWithoutExtension(picName) + "_cuted.jpg";
                     //显示处理后的图片
                     /*
                     pictureBox3.Image = new Bitmap(Application.StartupPath + "\\fit.jpg");
@@ -181,9 +183,10 @@ namespace Density_figure
                 else
                 {
                     //                    cnt1 = 0;
-                    panel1.VerticalScroll.Value = 450;
-                    panel1.VerticalScroll.Value = 0;
+//                    panel1.VerticalScroll.Value = 450;
+//                    panel1.VerticalScroll.Value = 0;
                     MessageBox.Show("划线未完成，请重新划线！");
+                    return "";
 
                 }
                 //                button8.Enabled = true;
@@ -191,11 +194,82 @@ namespace Density_figure
                 //                button4.Enabled = true;
                 //                button13.Enabled = true;
             }
+            catch(Exception err)
+            {
+                MessageBox.Show("系统出错，请退出!" + err.Message);
+                return "";
+            }
+        }
+
+        public string picGrayScale(string picName, int grayValue)
+        {
+            try
+            {
+                        Bitmap pic = new Bitmap(picName);
+                        int size =grayValue;
+                        int width = pic.Width;
+                        int height = pic.Height;
+                        sWidth = width;
+                        sHeight = height;
+//                        cnt2 = 1;
+                        Rectangle rec = new Rectangle(0, 0, pic.Width, pic.Height);
+                        BitmapData bd = pic.LockBits(rec, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+                        IntPtr ptr = bd.Scan0;
+                        int bytes = bd.Stride * bd.Height;
+                        byte[] rgbvalues = new byte[bytes];
+                        System.Runtime.InteropServices.Marshal.Copy(ptr, rgbvalues, 0, bytes);
+                        board = new int[bd.Width, bd.Height];
+                        for (int i = 0; i < width; i++)
+                        {
+                            for (int j = 0; j < height; j++)
+                            {
+                                if (rgbvalues[j * bd.Stride + i * 3 + 2] > size)
+                                {
+                                    board[i, j] = 3;
+                                }
+                                else
+                                {
+                                    /*if (rgbvalues[j * width * 3 + i * 3 + 2] > 200 && rgbvalues[j * width * 3 + i * 3 + 1] < 100 && rgbvalues[j * width * 3 + i * 3] < 100)
+                                    {
+                                        board[i, j] = 1;
+                                    }
+                                    else*/
+                                    board[i, j] = 2;
+                                }
+                            }
+                        }
+                        for (int i = 0; i < width; i++)
+                        {
+                            for (int j = 0; j < height; j++)
+                            {
+                                if (board[i, j] == 3)
+                                {
+                                    rgbvalues[j * bd.Stride + i * 3] = 255;
+                                    rgbvalues[j * bd.Stride + i * 3 + 1] = 255;
+                                    rgbvalues[j * bd.Stride + i * 3 + 2] = 255;
+                                }
+                                else
+                                {
+                                    rgbvalues[j * bd.Stride + i * 3] = 0;
+                                    rgbvalues[j * bd.Stride + i * 3 + 1] = 0;
+                                    rgbvalues[j * bd.Stride + i * 3 + 2] = 0;
+                                }
+                            }
+                        }
+                        System.Runtime.InteropServices.Marshal.Copy(rgbvalues, 0, ptr, bytes);
+                        pic.UnlockBits(bd);
+                        pic.Save(Application.StartupPath + @"\Temp\" + Path.GetFileNameWithoutExtension(picName) + "_Grayed.jpg");
+                        pic.Dispose();
+
+                        return Application.StartupPath + @"\Temp\" + Path.GetFileNameWithoutExtension(picName) + "_Grayed.jpg"; 
+            }
             catch
             {
                 MessageBox.Show("系统出错，请退出!");
+                return "";
             }
         }
+
 
 
 
@@ -256,8 +330,22 @@ namespace Density_figure
         //移动并选择计算区域
         private void originalPic_MouseUp(object sender, MouseEventArgs e)
         {
-            g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, e.X - start.X, e.Y - start.Y);
-            blnDraw = false;
+            string cuttedPic = "";
+            string grayedPic = "";
+            if (originalPic.Image != null && blnDraw)
+            {
+                g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, e.X - start.X, e.Y - start.Y);
+                blnDraw = false;  //表示图片不需要重画，可以用于计算
+                if (longName.Length !=0)
+                    cuttedPic = picCutFunction(originalPic, longName, start, end);
+                else
+                    MessageBox.Show("No picture name!");
+
+                if (cuttedPic.Length != 0)
+                    grayedPic = picGrayScale(cuttedPic,Convert.ToInt32(grayNum.Value));
+                else
+                    MessageBox.Show("No picture name!");
+            }
         }
         private void originalPic_MouseMove(object sender, MouseEventArgs e)
         {
