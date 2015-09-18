@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.picPanel = new System.Windows.Forms.Panel();
             this.originalPic = new System.Windows.Forms.PictureBox();
             this.iceNumLabel = new System.Windows.Forms.Label();
             this.iceDensityLabel = new System.Windows.Forms.Label();
@@ -57,7 +57,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.picCoordinateTip = new System.Windows.Forms.ToolTip(this.components);
-            this.panel1.SuspendLayout();
+            this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPic)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.areaLevelNum)).BeginInit();
@@ -69,23 +69,24 @@
             this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // picPanel
             // 
-            this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.originalPic);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(715, 391);
-            this.panel1.TabIndex = 0;
+            this.picPanel.AutoScroll = true;
+            this.picPanel.Controls.Add(this.originalPic);
+            this.picPanel.Location = new System.Drawing.Point(12, 12);
+            this.picPanel.Name = "picPanel";
+            this.picPanel.Size = new System.Drawing.Size(715, 391);
+            this.picPanel.TabIndex = 0;
             // 
             // originalPic
             // 
             this.originalPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.originalPic.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.originalPic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.originalPic.Cursor = System.Windows.Forms.Cursors.Cross;
             this.originalPic.Location = new System.Drawing.Point(35, 7);
             this.originalPic.Name = "originalPic";
             this.originalPic.Size = new System.Drawing.Size(629, 360);
-            this.originalPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.originalPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.originalPic.TabIndex = 0;
             this.originalPic.TabStop = false;
             this.originalPic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseDown);
@@ -406,10 +407,11 @@
             this.ClientSize = new System.Drawing.Size(739, 622);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.picPanel);
             this.Name = "Form1";
             this.Text = "冰密度计算";
-            this.panel1.ResumeLayout(false);
+            this.picPanel.ResumeLayout(false);
+            this.picPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPic)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -428,7 +430,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel picPanel;
         private System.Windows.Forms.PictureBox originalPic;
         private System.Windows.Forms.Label iceNumLabel;
         private System.Windows.Forms.Label iceDensityLabel;

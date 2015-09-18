@@ -273,20 +273,17 @@ namespace Density_figure
 
         double sumwidth = 0;
         double sumheight = 0;
-        double num = 0;
+        int num = 0;
         int minw;
         int minh;
-        int nstep = 4;
-        double[] numstep1;
+
 //        int cnt2 = 0;
-        int[] hist;
-        int[,] board1;
+
+
         int maxw;
         int maxh;
-        bool fill(int i, int j)
+        bool fill(int i, int j, int nstep)
         {
-
-
             if (i < sWidth && j < sHeight && i >= 0 && j >= 0 && board[i, j] == 3)
             {
                 board[i, j] = nstep;
@@ -294,10 +291,10 @@ namespace Density_figure
                     maxw = i;
                 if (maxh < j)
                     maxh = j;
-                fill(i + 1, j);
-                fill(i - 1, j);
-                fill(i, j + 1);
-                fill(i, j - 1);
+                fill(i + 1, j, nstep);
+                fill(i - 1, j, nstep);
+                fill(i, j + 1, nstep);
+                fill(i, j - 1, nstep);
                 num++;
                 sumwidth = sumwidth + i;
                 sumheight = sumheight + j;
@@ -311,6 +308,11 @@ namespace Density_figure
         {
             int cnt = 0;
             double maxice = 0;
+            int[] hist;
+            int[,] board1;
+            double[] numstep1;
+            int nstep = 4;
+
             try
             {
                 int minlh = (int)Convert.ToDouble(areaMin) * 22 / 50 * 22 / 50;
@@ -363,7 +365,8 @@ namespace Density_figure
 
 //                if (cnt2 == 1)
 //                {
-                for (int i = 0; i < sWidth; i++)
+                //----------以下代码用于计算冰块数目
+/*                for (int i = 0; i < sWidth; i++)
                 {
                     for (int j = 0; j < sHeight; j++)
                     {
@@ -372,7 +375,7 @@ namespace Density_figure
                         num = 0;
                         minh = j;
                         minw = i;
-                        if (board[i, j] == 3 && fill(i, j))
+                        if (board[i, j] == 3 && fill(i, j, nstep))
                         {
                             if (num >= 5)
                             {
@@ -399,7 +402,7 @@ namespace Density_figure
                             }
                         }
                     }
-                }
+                }*/
                 double icesum = sWidth * sHeight;
                 double mjd = icenum / icesum;
                 double de = Math.Round(mjd, 4);//将小数值舍入到指定精度
@@ -415,7 +418,6 @@ namespace Density_figure
 
                 pic.Dispose();
             }
-//            }
             catch(Exception err)
             {
                 MessageBox.Show("系统出错，请重试!---3 " + err.Message);
@@ -462,7 +464,7 @@ namespace Density_figure
 
         //----选择图片区域
 
-        //写出起点
+        //画出起点
         private void originalPic_MouseDown(object sender, MouseEventArgs e)
         {
             start = new Point();
@@ -498,6 +500,9 @@ namespace Density_figure
                 else
                     MessageBox.Show("数据处理未完成!---No cuttedPic");
 
+                //----------debug------------
+//                grayedPic = Application.StartupPath + @"\Temp\" + "first1.jpg";
+
                 if (grayedPic.Length != 0)
                 {
                     picCalculate(grayedPic, Convert.ToInt32(areaLevelNum.Value), Convert.ToInt32(areaSectionMin.Value), Convert.ToInt32(areaSectionMax.Value));
@@ -509,6 +514,8 @@ namespace Density_figure
         }
         private void originalPic_MouseMove(object sender, MouseEventArgs e)
         {
+            Rectangle rectangle = originalPic.RectangleToClient(this.ClientRectangle);
+
             if (blnDraw)
             {
                 //先擦除
@@ -544,13 +551,15 @@ namespace Density_figure
                             {
                                 Color color = bm.GetPixel(x1, y1);
                                 int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
-                                picCoordinateTip.Show("（" + x + ";" + e.Y + " ）" + gray, this, new Point(e.X + 120, e.Y));
+                                if (rectangle.Contains(MousePosition))
+                                    picCoordinateTip.Show("（" + x + ";" + e.Y + " ）" + gray, this.originalPic, new Point(e.X + 120, e.Y));
+                                else
+                                    picCoordinateTip.Hide(originalPic);
                                 //picCoordinateTip.Show("("+x+";"+e.Y+")"+gray);
                                 //textBox19.Text = string.Format("灰度值{0}", gray);
                             }
                         }
                     }
-
                 }
                 else
                 {
@@ -570,7 +579,10 @@ namespace Density_figure
                                 Color color = bm.GetPixel(x1, y1);
                                 int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
                                 //textBox19.Text = string.Format("灰度值{0}", gray);
-                                picCoordinateTip.Show("" + e.X + ";" + y + " (" + gray + ")", this, new Point(e.X + 120, e.Y));
+                                if (rectangle.Contains(MousePosition))
+                                    picCoordinateTip.Show("" + e.X + ";" + y + " (" + gray + ")", this.originalPic, new Point(e.X + 120, e.Y));
+                                else
+                                    picCoordinateTip.Hide(originalPic);
 
                             }
                         }
@@ -584,7 +596,6 @@ namespace Density_figure
                 MessageBox.Show("Please select picture to calculate!");
                 openPictFunction();
             } 
-
         }
     }
 }
