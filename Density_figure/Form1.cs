@@ -366,7 +366,7 @@ namespace Density_figure
 //                if (cnt2 == 1)
 //                {
                 //----------以下代码用于计算冰块数目
-/*                for (int i = 0; i < sWidth; i++)
+                for (int i = 0; i < sWidth; i++)
                 {
                     for (int j = 0; j < sHeight; j++)
                     {
@@ -402,7 +402,7 @@ namespace Density_figure
                             }
                         }
                     }
-                }*/
+                }
                 double icesum = sWidth * sHeight;
                 double mjd = icenum / icesum;
                 double de = Math.Round(mjd, 4);//将小数值舍入到指定精度
@@ -572,9 +572,9 @@ namespace Density_figure
 
                         int x1 = (int)(e.X / w);
                         int y1 = (int)(y / w);
-                        if (x1 <= originalPic.Image.Width && x1 >= 0)
+                        if (x1 < originalPic.Image.Width && x1 >= 0)
                         {
-                            if (y1 >= 0 && y1 <= originalPic.Image.Height)
+                            if (y1 >= 0 && y1 < originalPic.Image.Height)
                             {
                                 Color color = bm.GetPixel(x1, y1);
                                 int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
