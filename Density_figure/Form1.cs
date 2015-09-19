@@ -125,168 +125,6 @@ namespace Density_figure
         }
 
 
-/*   //old pic cut
-        public string picCutFunction(PictureBox picBox, string picName, Point start, Point end)
-        {
-            try
-            {
-                if (start.X <= end.X && start.Y <= end.Y)
-                {
-                    Bitmap pic = new Bitmap(picName);
-                    sWidth = pic.Width;
-                    sHeight = pic.Height;
-                    int xa = start.X * sWidth / picBox.Width;
-                    int xb = end.X * sWidth / picBox.Width;
-                    int ya = start.Y * sHeight / picBox.Height;
-                    int yb = end.Y * sHeight / picBox.Height;
-
-//                    int width = pic.Width;
-//                    int height = pic.Height;
-                    //int newwidth;
-                    //int newheigh;
-                    Rectangle rec = new Rectangle(0, 0, pic.Width, pic.Height);
-                    BitmapData bd = pic.LockBits(rec, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-                    IntPtr ptr = bd.Scan0;
-                    int bytes = bd.Stride * bd.Height;
-                    byte[] rgbvalues = new byte[bytes];
-                    System.Runtime.InteropServices.Marshal.Copy(ptr, rgbvalues, 0, bytes);
-                    board = new int[bd.Width, bd.Height];
-                    //for (int i = 0; i < width; i++)
-                    //{
-                    //    for (int j = 0; j < height; j++)
-                    //    {
-                    //        if (i < xa || i > xb || j < ya || j > yb)
-                    //        {
-                    //            board[i, j] = 2;
-                    //        }
-                    //    }
-                    //}
-
-                    //for (int i = 0; i < width; i++)
-                    //{
-                    //    for (int j = 0; j < height; j++)
-                    //    {
-                    //        if (board[i, j] == 2)
-                    //        {
-                    //            rgbvalues[j * bd.Stride + i * 3] = 0;
-                    //            rgbvalues[j * bd.Stride + i * 3 + 1] = 0;
-                    //            rgbvalues[j * bd.Stride + i * 3 + 2] = 0;
-                    //        }
-                    //    }
-                    //}
-                    //System.Runtime.InteropServices.Marshal.Copy(rgbvalues, 0, ptr, bytes);
-                    int w;
-                    int h;
-                    w = xb - xa + 1;
-                    h = yb - ya;
-                    Bitmap pic1 = new Bitmap(w, h + 1);// (Application.StartupPath + @"\11.jpg");
-                    Rectangle rec6 = new Rectangle(0, 0, w, h + 1);
-                    BitmapData bd6 = pic1.LockBits(rec6, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-                    IntPtr ptr6 = bd6.Scan0;
-                    int bytes6 = bd6.Stride * bd6.Height;
-                    byte[] rgbvalues6 = new byte[bytes6];
-                    System.Runtime.InteropServices.Marshal.Copy(ptr6, rgbvalues6, 0, bytes6);
-                    //// board = new int[bd.Width, bd.Height];
-                    //// //Bitmap resizedBmp = new Bitmap(w, h);
-                    ////// Graphics g = Graphics.FromImage(resizedBmp);
-                    ////// g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                    //// //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-                    //// //g.DrawImage(image_dest, new Rectangle(0, 0, w, h), new Rectangle(0, 0, image_dest.Width, image_dest.Height), GraphicsUnit.Pixel);
-                    int k = 0;
-                    int t = 0;
-
-                    for (int i = xa; i < xb; i++)
-                    {
-                        for (int j = ya; j <= yb; j++)
-                        {
-                            if (t < h)
-                            {
-                                if (k > w)
-                                    k = w;
-                                rgbvalues6[t * bd6.Stride + k * 3] = rgbvalues[j * bd.Stride + i * 3];
-                                rgbvalues6[t * bd6.Stride + k * 3 + 1] = rgbvalues[j * bd.Stride + i * 3 + 1];
-                                rgbvalues6[t * bd6.Stride + k * 3 + 2] = rgbvalues[j * bd.Stride + i * 3 + 2];
-                                t++;
-                            }
-                            else if ((t == h) & (k <= w))
-                            {
-                                rgbvalues6[t * bd6.Stride + k * 3] = rgbvalues[j * bd.Stride + i * 3];
-                                rgbvalues6[t * bd6.Stride + k * 3 + 1] = rgbvalues[j * bd.Stride + i * 3 + 1];
-                                rgbvalues6[t * bd6.Stride + k * 3 + 2] = rgbvalues[j * bd.Stride + i * 3 + 2];
-                                k++;
-                                t = 0;
-                            }
-
-                            //if (board[i, j] != 2)
-                            //{
-                            //    if ((t == h - 1) & (k < w))
-                            //    {
-                            //        rgbvalues6[t * bd6.Stride + k * 3] = rgbvalues[j * bd.Stride + i * 3];
-                            //        rgbvalues6[t * bd6.Stride + k * 3 + 1] = rgbvalues[j * bd.Stride + i * 3 + 1];
-                            //        rgbvalues6[t * bd6.Stride + k * 3 + 2] = rgbvalues[j * bd.Stride + i * 3 + 2];
-                            //        t = 0;
-                            //        k = k + 1;
-                            //    }
-                            //    else
-                            //        if (k < w)
-                            //        {
-                            //            rgbvalues6[t * bd6.Stride + k * 3] = rgbvalues[j * bd.Stride + i * 3];
-                            //            rgbvalues6[t * bd6.Stride + k * 3 + 1] = rgbvalues[j * bd.Stride + i * 3 + 1];
-                            //            rgbvalues6[t * bd6.Stride + k * 3 + 2] = rgbvalues[j * bd.Stride + i * 3 + 2];
-                            //            t++;
-                            //        }
-
-                            //}
-                        }
-                    }
-                    System.Runtime.InteropServices.Marshal.Copy(rgbvalues6, 0, ptr6, bytes6);
-                    pic1.UnlockBits(bd6);
-                    pic1.Save(Application.StartupPath + @"\Temp\" + Path.GetFileNameWithoutExtension(picName) + "_cuted.jpg");  //存储剪切后的图片
-                    pic1.Dispose();
-
-                    return Application.StartupPath + @"\Temp\" + Path.GetFileNameWithoutExtension(picName) + "_cuted.jpg";
-                    //显示处理后的图片
-                    /*
-                    pictureBox3.Image = new Bitmap(Application.StartupPath + "\\fit.jpg");
-                    pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-                    // pictureBox3.Refresh();
-                    button7.Enabled = false;
-                    button16.Enabled = true;
-                    longName3 = Application.StartupPath + "\\fit.jpg";
-                    //System.Runtime.InteropServices.Marshal.Copy(rgbvalues, 0, ptr, bytes);
-                    //pic.UnlockBits(bd);
-                    //pic.Save(Application.StartupPath + "\\fit.jpg");
-                    //pictureBox3.Image = new Bitmap(Application.StartupPath + "\\fit.jpg");
-                    //pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-
-                    ////// vScrollBar1.Maximum = tableLayoutPanel9.Height;
-                    //////vScrollBar1.Value = 800;
-                    //////panel1.VerticalScroll.Value = panel1.VerticalScroll.Value + picBox.Height * 2;
-                    panel1.VerticalScroll.Value = picBox.Height * 2 + 100;
-                    //panel1.VerticalScroll.Value + picBox.Height * 2;   */
-/*                }
-
-                else
-                {
-                    //                    cnt1 = 0;
-//                    panel1.VerticalScroll.Value = 450;
-//                    panel1.VerticalScroll.Value = 0;
-                    MessageBox.Show("划线未完成，请重新划线！");
-                    return "";
-
-                }
-                //                button8.Enabled = true;
-                //                button3.Enabled = true;
-                //                button4.Enabled = true;
-                //                button13.Enabled = true;
-            }
-            catch(Exception err)
-            {
-                MessageBox.Show("系统出错，请重试!---1" + err.Message);
-                return "";
-            }
-        }
-*/
         //picture to grayscale
         public string picGrayScale(string picName, int grayValue)
         {
@@ -582,24 +420,26 @@ namespace Density_figure
 
                 blnDraw = false;  //表示图片不需要重画，可以用于计算
                 if (longName.Length !=0)
+                {
                     cuttedPic = picCutFunction(originalPic, longName, start, end);
+                    if (cuttedPic.Length != 0)
+                    {
+                        grayedPic = picGrayScale(cuttedPic, Convert.ToInt32(grayNum.Value));
+                        if (grayedPic.Length != 0)
+                        {
+                            picCalculate(grayedPic, Convert.ToInt32(areaLevelNum.Value), Convert.ToInt32(areaSectionMin.Value), Convert.ToInt32(areaSectionMax.Value));
+                        }
+                        else
+                            MessageBox.Show("数据处理未完成!---No grayedPic");
+                    }
+                    else
+                        MessageBox.Show("数据处理未完成!---No cuttedPic");
+                }
                 else
                     MessageBox.Show("数据处理未完成!---No originalPic");
 
-                if (cuttedPic.Length != 0)
-                    grayedPic = picGrayScale(cuttedPic,Convert.ToInt32(grayNum.Value));
-                else
-                    MessageBox.Show("数据处理未完成!---No cuttedPic");
-
                 //----------debug------------
 //                grayedPic = Application.StartupPath + @"\Temp\" + "first1.jpg";
-
-                if (grayedPic.Length != 0)
-                {
-                    picCalculate(grayedPic, Convert.ToInt32(areaLevelNum.Value), Convert.ToInt32(areaSectionMin.Value), Convert.ToInt32(areaSectionMax.Value));
-                }
-                else
-                    MessageBox.Show("数据处理未完成!---No grayedPic");
 
             }
         }
