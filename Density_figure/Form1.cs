@@ -40,6 +40,7 @@ namespace Density_figure
         //Picture deal function
 
         //------Picture cut
+/*
         public string picCutFunction(PictureBox picBox, string picName, Point start, Point end)
         {
             try
@@ -54,8 +55,8 @@ namespace Density_figure
                     int ya = start.Y * sHeight / picBox.Height;
                     int yb = end.Y * sHeight / picBox.Height;
 
-                    int width = pic.Width;
-                    int height = pic.Height;
+//                    int width = pic.Width;
+//                    int height = pic.Height;
                     //int newwidth;
                     //int newheigh;
                     Rectangle rec = new Rectangle(0, 0, pic.Width, pic.Height);
@@ -178,7 +179,7 @@ namespace Density_figure
                     //////panel1.VerticalScroll.Value = panel1.VerticalScroll.Value + picBox.Height * 2;
                     panel1.VerticalScroll.Value = picBox.Height * 2 + 100;
                     //panel1.VerticalScroll.Value + picBox.Height * 2;   */
-                }
+/*                }
 
                 else
                 {
@@ -200,7 +201,7 @@ namespace Density_figure
                 return "";
             }
         }
-
+*/
         //picture to grayscale
         public string picGrayScale(string picName, int grayValue)
         {
@@ -465,8 +466,11 @@ namespace Density_figure
         //----选择图片区域
 
         //画出起点
+
+        bool mouseInPicPress = false;
         private void originalPic_MouseDown(object sender, MouseEventArgs e)
         {
+            mouseInPicPress = true;
             start = new Point();
             end = new Point();
             //            button7.Enabled = true;  //表示图片已经可以开始通过点击显示来截取
@@ -488,7 +492,8 @@ namespace Density_figure
             string grayedPic = "";
             if (originalPic.Image != null && blnDraw)
             {
-                g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, e.X - start.X, e.Y - start.Y);
+                if (e.X <= (originalPic.Location.X + originalPic.Image.Width))
+                    g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, e.X - start.X, e.Y - start.Y);
                 blnDraw = false;  //表示图片不需要重画，可以用于计算
                 if (longName.Length !=0)
                     cuttedPic = picCutFunction(originalPic, longName, start, end);
@@ -522,8 +527,15 @@ namespace Density_figure
 
                 //g.DrawRectangle(new Pen(Color.White), start.X, start.Y, end.X - start.X, end.Y - start.Y);
                 this.originalPic.Refresh();
-                end.X = e.X;
-                end.Y = e.Y;
+                if (mouseInPicPress && (e.X > (originalPic.Location.X + originalPic.Image.Width)))
+                    end.X = originalPic.Location.X + originalPic.Image.Width; 
+                else
+                    end.X = e.X;
+
+                if (mouseInPicPress && (e.Y > (originalPic.Location.Y + originalPic.Image.Height)))
+                    end.Y = originalPic.Location.Y + originalPic.Image.Height;
+                else
+                    end.Y = e.Y;
                 //再画
                 g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, end.X - start.X, end.Y - start.Y);
             }
@@ -545,9 +557,9 @@ namespace Density_figure
 
                         int x1 = (int)(x / h);
                         int y1 = (int)(e.Y / h);
-                        if (x1 <= originalPic.Image.Width && x1 >= 0)
+                        if (x1 < originalPic.Image.Width && x1 >= 0)
                         {
-                            if (y1 >= 0 && y1 <= originalPic.Image.Height)
+                            if (y1 >= 0 && y1 < originalPic.Image.Height)
                             {
                                 Color color = bm.GetPixel(x1, y1);
                                 int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
