@@ -36,11 +36,96 @@ namespace Density_figure
 
 
 
-
         //Picture deal function
 
         //------Picture cut
-/*
+
+        Rectangle selectedRec;
+
+        public string picCutFunction(PictureBox picBox, string picName, Point start, Point end)
+        {
+            //-------debug-----
+//            MessageBox.Show(start.ToString() + "  end:"  + end.ToString());
+            try
+            {
+                if (start.X <= end.X && start.Y <= end.Y)
+                {
+                    Bitmap pic = new Bitmap(picName);
+                    sWidth = pic.Width;
+                    sHeight = pic.Height;
+                    int xa = start.X * sWidth / picBox.Width;
+                    int xb = end.X * sWidth / picBox.Width;
+                    int ya = start.Y * sHeight / picBox.Height;
+                    int yb = end.Y * sHeight / picBox.Height;
+
+                    Rectangle rec = new Rectangle(0, 0, pic.Width, pic.Height);
+                    BitmapData bd = pic.LockBits(rec, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+                    IntPtr ptr = bd.Scan0;
+                    int bytes = bd.Stride * bd.Height;
+                    byte[] rgbvalues = new byte[bytes];
+                    System.Runtime.InteropServices.Marshal.Copy(ptr, rgbvalues, 0, bytes);
+                    board = new int[bd.Width, bd.Height];
+                   int w;
+                    int h;
+                    w = xb - xa + 1;
+                    h = yb - ya;
+                    Bitmap pic1 = new Bitmap(w, h + 1);// (Application.StartupPath + @"\11.jpg");
+                    Rectangle rec6 = new Rectangle(0, 0, w, h + 1);
+                    BitmapData bd6 = pic1.LockBits(rec6, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+                    IntPtr ptr6 = bd6.Scan0;
+                    int bytes6 = bd6.Stride * bd6.Height;
+                    byte[] rgbvalues6 = new byte[bytes6];
+                    System.Runtime.InteropServices.Marshal.Copy(ptr6, rgbvalues6, 0, bytes6);
+                    int k = 0;
+                    int t = 0;
+
+                    for (int i = xa; i < xb; i++)
+                    {
+                        for (int j = ya; j <= yb; j++)
+                        {
+                            if (t < h)
+                            {
+                                if (k > w)
+                                    k = w;
+                                rgbvalues6[t * bd6.Stride + k * 3] = rgbvalues[j * bd.Stride + i * 3];
+                                rgbvalues6[t * bd6.Stride + k * 3 + 1] = rgbvalues[j * bd.Stride + i * 3 + 1];
+                                rgbvalues6[t * bd6.Stride + k * 3 + 2] = rgbvalues[j * bd.Stride + i * 3 + 2];
+                                t++;
+                            }
+                            else if ((t == h) & (k <= w))
+                            {
+                                rgbvalues6[t * bd6.Stride + k * 3] = rgbvalues[j * bd.Stride + i * 3];
+                                rgbvalues6[t * bd6.Stride + k * 3 + 1] = rgbvalues[j * bd.Stride + i * 3 + 1];
+                                rgbvalues6[t * bd6.Stride + k * 3 + 2] = rgbvalues[j * bd.Stride + i * 3 + 2];
+                                k++;
+                                t = 0;
+                            }
+                       }
+                    }
+                    System.Runtime.InteropServices.Marshal.Copy(rgbvalues6, 0, ptr6, bytes6);
+                    pic1.UnlockBits(bd6);
+                    pic1.Save(Application.StartupPath + @"\Temp\" + Path.GetFileNameWithoutExtension(picName) + "_cuted.jpg");  //存储剪切后的图片
+                    pic1.Dispose();
+
+                    return Application.StartupPath + @"\Temp\" + Path.GetFileNameWithoutExtension(picName) + "_cuted.jpg";
+               }
+
+                else
+                {
+                    MessageBox.Show("划线未完成，请重新划线！");
+                    return "";
+
+                }
+            }
+            catch(Exception err)
+            {
+                MessageBox.Show("系统出错，请重试!---1" + err.Message);
+                return "";
+            }
+        }
+
+
+/*   //old pic cut
         public string picCutFunction(PictureBox picBox, string picName, Point start, Point end)
         {
             try
@@ -492,8 +577,9 @@ namespace Density_figure
             string grayedPic = "";
             if (originalPic.Image != null && blnDraw)
             {
-                if (e.X <= (originalPic.Location.X + originalPic.Image.Width))
+                if (e.X <= (originalPic.Location.X + originalPic.Image.Width) && e.Y <= (originalPic.Location.Y + originalPic.Image.Height))
                     g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, e.X - start.X, e.Y - start.Y);
+
                 blnDraw = false;  //表示图片不需要重画，可以用于计算
                 if (longName.Length !=0)
                     cuttedPic = picCutFunction(originalPic, longName, start, end);
@@ -519,7 +605,7 @@ namespace Density_figure
         }
         private void originalPic_MouseMove(object sender, MouseEventArgs e)
         {
-            Rectangle rectangle = originalPic.RectangleToClient(this.ClientRectangle);
+//            Rectangle rectangle = originalPic.RectangleToClient(this.ClientRectangle);
 
             if (blnDraw)
             {
@@ -528,12 +614,14 @@ namespace Density_figure
                 //g.DrawRectangle(new Pen(Color.White), start.X, start.Y, end.X - start.X, end.Y - start.Y);
                 this.originalPic.Refresh();
                 if (mouseInPicPress && (e.X > (originalPic.Location.X + originalPic.Image.Width)))
-                    end.X = originalPic.Location.X + originalPic.Image.Width; 
+                {
+                    end.X = originalPic.Image.Width;
+                }
                 else
                     end.X = e.X;
 
                 if (mouseInPicPress && (e.Y > (originalPic.Location.Y + originalPic.Image.Height)))
-                    end.Y = originalPic.Location.Y + originalPic.Image.Height;
+                    end.Y = originalPic.Image.Height;
                 else
                     end.Y = e.Y;
                 //再画
@@ -563,10 +651,10 @@ namespace Density_figure
                             {
                                 Color color = bm.GetPixel(x1, y1);
                                 int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
-                                if (rectangle.Contains(MousePosition))
+//                                if (rectangle.Contains(MousePosition))
                                     picCoordinateTip.Show("（" + x + ";" + e.Y + " ）" + gray, this.originalPic, new Point(e.X + 120, e.Y));
-                                else
-                                    picCoordinateTip.Hide(originalPic);
+//                                else
+//                                    picCoordinateTip.Hide(originalPic);
                                 //picCoordinateTip.Show("("+x+";"+e.Y+")"+gray);
                                 //textBox19.Text = string.Format("灰度值{0}", gray);
                             }
@@ -591,10 +679,10 @@ namespace Density_figure
                                 Color color = bm.GetPixel(x1, y1);
                                 int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
                                 //textBox19.Text = string.Format("灰度值{0}", gray);
-                                if (rectangle.Contains(MousePosition))
+//                                if (rectangle.Contains(MousePosition))
                                     picCoordinateTip.Show("" + e.X + ";" + y + " (" + gray + ")", this.originalPic, new Point(e.X + 120, e.Y));
-                                else
-                                    picCoordinateTip.Hide(originalPic);
+//                                else
+//                                    picCoordinateTip.Hide(originalPic);
 
                             }
                         }
