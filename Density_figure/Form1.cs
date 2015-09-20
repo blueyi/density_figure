@@ -18,6 +18,8 @@ namespace Density_figure
         public Form1()
         {
             InitializeComponent();
+            if (!Directory.Exists(Application.StartupPath + @"\Temp\"))
+                Directory.CreateDirectory(Application.StartupPath + @"\Temp\");
         }
 
 
@@ -351,10 +353,11 @@ namespace Density_figure
 
         public void allPicFunc(PictureBox picBox, string picName, Point start, Point end)
         {
+            string cuttedPic = "";
+            string grayedPic = "";
             if (picName.Length != 0)
             {
-                string cuttedPic = "";
-                string grayedPic = "";
+
                 //                    MessageBox.Show(originalPic.ImageLocation);   //如何获取picturebox中的图像路径
                 cuttedPic = picCutFunction(originalPic, picName, start, end);
                 if (cuttedPic.Length != 0)
@@ -372,6 +375,11 @@ namespace Density_figure
             }
             else
                 MessageBox.Show("数据处理未完成!---No originalPic");
+
+            if (File.Exists(cuttedPic))
+                File.Delete(cuttedPic);
+            if (File.Exists(grayedPic))
+                File.Delete(grayedPic);
         }
 
 
