@@ -57,6 +57,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.picCoordinateTip = new System.Windows.Forms.ToolTip(this.components);
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.timeLabel = new System.Windows.Forms.Label();
+            this.timeToCalue = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
             this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPic)).BeginInit();
             this.panel2.SuspendLayout();
@@ -67,6 +71,7 @@
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.timeToCalue)).BeginInit();
             this.SuspendLayout();
             // 
             // picPanel
@@ -122,6 +127,7 @@
             this.setFileButton.TabIndex = 0;
             this.setFileButton.Text = "设置图像路径";
             this.setFileButton.UseVisualStyleBackColor = true;
+            this.setFileButton.Click += new System.EventHandler(this.setFileButton_Click);
             // 
             // panel2
             // 
@@ -156,6 +162,11 @@
             this.areaLevelNum.Location = new System.Drawing.Point(343, 38);
             this.areaLevelNum.Maximum = new decimal(new int[] {
             10,
+            0,
+            0,
+            0});
+            this.areaLevelNum.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
@@ -284,13 +295,17 @@
             // 
             this.panel4.Controls.Add(this.autoCalButton);
             this.panel4.Controls.Add(this.setFileButton);
+            this.panel4.Controls.Add(this.timeToCalue);
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Controls.Add(this.timeLabel);
             this.panel4.Location = new System.Drawing.Point(0, 42);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(129, 117);
+            this.panel4.Size = new System.Drawing.Size(185, 117);
             this.panel4.TabIndex = 5;
             // 
             // autoCalButton
             // 
+            this.autoCalButton.Enabled = false;
             this.autoCalButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.autoCalButton.Location = new System.Drawing.Point(0, 60);
             this.autoCalButton.Name = "autoCalButton";
@@ -298,6 +313,7 @@
             this.autoCalButton.TabIndex = 0;
             this.autoCalButton.Text = "自动计算";
             this.autoCalButton.UseVisualStyleBackColor = true;
+            this.autoCalButton.Click += new System.EventHandler(this.autoCalButton_Click);
             // 
             // iceNum
             // 
@@ -400,6 +416,55 @@
             this.panel5.Size = new System.Drawing.Size(651, 171);
             this.panel5.TabIndex = 9;
             // 
+            // timer
+            // 
+            this.timer.Interval = 2000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // timeLabel
+            // 
+            this.timeLabel.AutoSize = true;
+            this.timeLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.timeLabel.Location = new System.Drawing.Point(102, 34);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(76, 32);
+            this.timeLabel.TabIndex = 3;
+            this.timeLabel.Text = "自动计算\r\n时间间隔";
+            // 
+            // timeToCalue
+            // 
+            this.timeToCalue.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.timeToCalue.Location = new System.Drawing.Point(104, 70);
+            this.timeToCalue.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.timeToCalue.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.timeToCalue.Name = "timeToCalue";
+            this.timeToCalue.Size = new System.Drawing.Size(43, 26);
+            this.timeToCalue.TabIndex = 4;
+            this.timeToCalue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.timeToCalue.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(153, 77);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(25, 16);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "秒";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -420,9 +485,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.areaSectionMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grayNum)).EndInit();
             this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.timeToCalue)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -458,6 +525,10 @@
         private System.Windows.Forms.NumericUpDown areaSectionMax;
         private System.Windows.Forms.NumericUpDown areaSectionMin;
         private System.Windows.Forms.ToolTip picCoordinateTip;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.NumericUpDown timeToCalue;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label timeLabel;
 
     }
 }

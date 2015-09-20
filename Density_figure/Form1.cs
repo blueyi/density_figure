@@ -195,17 +195,17 @@ namespace Density_figure
             }
         }
 
-        double sumwidth = 0;
-        double sumheight = 0;
+        int sumwidth = 0;
+        int sumheight = 0;
         int num = 0;
         int minw;
         int minh;
 
 //        int cnt2 = 0;
 
-
         int maxw;
         int maxh;
+        // 该方法由于大量使用递归导致处理太大图片时会出现System.StackOverflowException错误
         bool fill(int i, int j, int nstep)
         {
             if (i < sWidth && j < sHeight && i >= 0 && j >= 0 && board[i, j] == 3)
@@ -215,10 +215,10 @@ namespace Density_figure
                     maxw = i;
                 if (maxh < j)
                     maxh = j;
-                fill(i + 1, j, nstep);
-                fill(i - 1, j, nstep);
-                fill(i, j + 1, nstep);
-                fill(i, j - 1, nstep);
+//                fill(i + 1, j, nstep);
+//                fill(i - 1, j, nstep);
+//                fill(i, j + 1, nstep);
+//                fill(i, j - 1, nstep);
                 num++;
                 sumwidth = sumwidth + i;
                 sumheight = sumheight + j;
@@ -356,6 +356,7 @@ namespace Density_figure
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.InitialDirectory = Application.StartupPath + @"\File\Images";
             openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.Title = "请选择图片";
             openFileDialog1.DefaultExt = "*.jpg";
             openFileDialog1.FileName = "";
             openFileDialog1.Filter = "JPG files(*.jpg)|*.jpg|BMP files(*.bmp)|*.bmp";
@@ -378,6 +379,39 @@ namespace Density_figure
                     MessageBox.Show("系统出错，请重试!---5" + err.Message);
                     //                    button6.Enabled = false;
                 }
+            }
+        }
+
+        //设置自动计算文件夹
+        string folderPath = "";
+        DirectoryInfo dir;
+        FileInfo[] fileInf;
+        string[] picNames;
+        int picNum = 0;
+        public string[] selectPicFolder()
+        {
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
+            folderDialog.Description = "请选择含有图片的文件夹";
+            if (folderDialog.ShowDialog() == DialogResult.OK)
+            {
+                folderPath = folderDialog.SelectedPath;
+                dir = new DirectoryInfo(folderPath);
+                fileInf = dir.GetFiles();
+                picNames = new string[fileInf.Length];
+                int i = 0;
+                foreach (FileInfo finf in fileInf)
+                {
+                    if (finf.Extension.Equals(".jpg") || finf.Extension.Equals(".JPG") || finf.Extension.Equals(".bmp") || finf.Extension.Equals(".BMP"))
+                        picNames[i++] = finf.FullName;
+                }
+                picNum = i;
+                MessageBox.Show("此文件夹中有" + picNum + "张图片。");
+                return picNames;
+            }
+            else
+            {
+                MessageBox.Show("文件夹选择错误");
+                return null;
             }
         }
 
@@ -533,9 +567,50 @@ namespace Density_figure
             }
             else
             {
-                MessageBox.Show("Please select picture to calculate!");
+                MessageBox.Show("请选择图片用于计算!");
                 openPictFunction();
             } 
+        }
+
+
+        private void setFileButton_Click(object sender, EventArgs e)
+        {
+            selectPicFolder();
+            autoCalButton.Enabled = true;
+            originalPic.Enabled = false;
+        }
+
+        bool stopCal = false;
+        private void autoCalButton_Click(object sender, EventArgs e)
+        {
+            openPicButton.Enabled = false;
+            if (!stopCal)
+            {
+                timer.Interval = Convert.ToInt32(timeToCalue.Value) * 1000;
+                timer.Start();
+                stopCal = (!stopCal);
+            }
+            else
+            {
+                timer.Stop();
+                stopCal = (!stopCal);
+                openPicButton.Enabled = true;
+                originalPic.Enabled = true;
+            }
+            if (timer.Enabled)
+                autoCalButton.Text = "停止自动计算";
+            else
+                autoCalButton.Text = "自动计算";
+        }
+
+        int picNumToCyc = 0;
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (picNumToCyc < picNum)
+                originalPic.Image = new Bitmap(picNames[picNumToCyc++]);
+            else
+                picNumToCyc = 0;
+
         }
     }
 }
