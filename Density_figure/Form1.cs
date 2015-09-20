@@ -676,5 +676,15 @@ namespace Density_figure
 //            }
         }
 
+        private void startPointText_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("请使用鼠标在图片中选择自动计算区域");
+        }
+
+        private void endPointText_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("请使用鼠标在图片中选择自动计算区域");
+        }
+
     }
 }

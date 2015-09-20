@@ -341,6 +341,7 @@
             this.endPointText.Size = new System.Drawing.Size(78, 21);
             this.endPointText.TabIndex = 5;
             this.otherTip.SetToolTip(this.endPointText, "设置完图片路径后使用鼠标在图中选择起点和终点");
+            this.endPointText.Click += new System.EventHandler(this.endPointText_Click);
             // 
             // startPointText
             // 
@@ -349,6 +350,7 @@
             this.startPointText.Size = new System.Drawing.Size(78, 21);
             this.startPointText.TabIndex = 5;
             this.otherTip.SetToolTip(this.startPointText, "设置完图片路径后使用鼠标在图中选择起点和终点");
+            this.startPointText.Click += new System.EventHandler(this.startPointText_Click);
             // 
             // autoCalButton
             // 
