@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.picPanel = new System.Windows.Forms.Panel();
             this.originalPic = new System.Windows.Forms.PictureBox();
             this.iceNumLabel = new System.Windows.Forms.Label();
@@ -62,6 +61,7 @@
             this.maxIceLabel = new System.Windows.Forms.Label();
             this.minIce = new System.Windows.Forms.Label();
             this.maxIce = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.picCoordinateTip = new System.Windows.Forms.ToolTip(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
@@ -131,7 +131,6 @@
             this.setFolderButton.Size = new System.Drawing.Size(96, 54);
             this.setFolderButton.TabIndex = 0;
             this.setFolderButton.Text = "设置图像路径";
-            this.otherTip.SetToolTip(this.setFolderButton, "点击选择用于自动计算的文件夹，文件夹内需要是jpg或者bmp图片");
             this.setFolderButton.UseVisualStyleBackColor = true;
             this.setFolderButton.Click += new System.EventHandler(this.setFileButton_Click);
             // 
@@ -239,7 +238,6 @@
             this.grayNum.Size = new System.Drawing.Size(67, 26);
             this.grayNum.TabIndex = 4;
             this.grayNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.otherTip.SetToolTip(this.grayNum, "可以通过将鼠标悬停在图像上并移动，来选择合适的灰度值，\r\n图像中高于该灰度值的区域将被识别为冰块");
             this.grayNum.Value = new decimal(new int[] {
             120,
             0,
@@ -295,7 +293,6 @@
             this.openPicButton.Size = new System.Drawing.Size(85, 117);
             this.openPicButton.TabIndex = 0;
             this.openPicButton.Text = "打开图像";
-            this.otherTip.SetToolTip(this.openPicButton, "点击打开用于手动计算的jpg或者bmp图片");
             this.openPicButton.UseVisualStyleBackColor = true;
             this.openPicButton.Click += new System.EventHandler(this.openPicButton_Click);
             // 
@@ -359,7 +356,6 @@
             this.autoCalButton.Size = new System.Drawing.Size(96, 54);
             this.autoCalButton.TabIndex = 0;
             this.autoCalButton.Text = "自动计算";
-            this.otherTip.SetToolTip(this.autoCalButton, "点击自动计算前请先设置图像路径和计算区域");
             this.autoCalButton.UseVisualStyleBackColor = true;
             this.autoCalButton.Click += new System.EventHandler(this.autoCalButton_Click);
             // 
@@ -381,7 +377,6 @@
             this.timeToCalue.Size = new System.Drawing.Size(43, 23);
             this.timeToCalue.TabIndex = 4;
             this.timeToCalue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.otherTip.SetToolTip(this.timeToCalue, "设计自动计算的时间间隔");
             this.timeToCalue.Value = new decimal(new int[] {
             1,
             0,
@@ -487,6 +482,18 @@
             this.maxIce.TabIndex = 6;
             this.maxIce.Text = "0.0";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 10F);
+            this.label2.ForeColor = System.Drawing.Color.Blue;
+            this.label2.Location = new System.Drawing.Point(32, 583);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(686, 28);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "提示：选择计算参数后，设置图像路径，点击自动计算,则对应文件夹下的图像会自动被计算。打开图像则选择\r\n单张图片进行计算。鼠标置于图片上时显示的参数为(坐标), 灰" +
+    "度值，以便参考设置需要的灰度值";
+            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.panel2);
@@ -512,10 +519,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(739, 589);
+            this.ClientSize = new System.Drawing.Size(739, 622);
             this.Controls.Add(this.panel5);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.picPanel);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "冰密度计算";
             this.picPanel.ResumeLayout(false);
@@ -534,6 +541,7 @@
             this.panel3.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -558,6 +566,7 @@
         private System.Windows.Forms.Label iceNum;
         private System.Windows.Forms.Label iceDensity;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label minIceLabel;
         private System.Windows.Forms.Label maxIceLabel;
         private System.Windows.Forms.Label minIce;
