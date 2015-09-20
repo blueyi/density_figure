@@ -21,12 +21,15 @@ namespace Density_figure
         }
 
 
-        string longName = "";  //文件路径
+        string currentPic = "";  //文件路径
         string shortName = "";
         int sWidth;
         int sHeight;//载入图片的宽度和高度
         Point start;//矩形起点
         Point end;//矩形终点
+
+        Point autoStart;//自动计算的起点
+        Point autoEnd;//自动计算的终点
 
         int[,] board;  //存储图片宽和高
         bool blnDraw;  //鼠标被按下时为真，表示此时区域已经选择，可以重新选择区域
@@ -34,13 +37,10 @@ namespace Density_figure
         Graphics g;  //封装的绘图画面
 
 
-
-
         //Picture deal function
 
         //------Picture cut
 
-        Rectangle selectedRec;
 
         public string picCutFunction(PictureBox picBox, string picName, Point start, Point end)
         {
@@ -349,6 +349,31 @@ namespace Density_figure
         }
 
 
+        public void allPicFunc(PictureBox picBox, string picName, Point start, Point end)
+        {
+            if (picName.Length != 0)
+            {
+                string cuttedPic = "";
+                string grayedPic = "";
+                //                    MessageBox.Show(originalPic.ImageLocation);   //如何获取picturebox中的图像路径
+                cuttedPic = picCutFunction(originalPic, picName, start, end);
+                if (cuttedPic.Length != 0)
+                {
+                    grayedPic = picGrayScale(cuttedPic, Convert.ToInt32(grayNum.Value));
+                    if (grayedPic.Length != 0)
+                    {
+                        picCalculate(grayedPic, Convert.ToInt32(areaLevelNum.Value), Convert.ToInt32(areaSectionMin.Value), Convert.ToInt32(areaSectionMax.Value));
+                    }
+                    else
+                        MessageBox.Show("数据处理未完成!---No grayedPic");
+                }
+                else
+                    MessageBox.Show("数据处理未完成!---No cuttedPic");
+            }
+            else
+                MessageBox.Show("数据处理未完成!---No originalPic");
+        }
+
 
         //----选择图片函数
         public void openPictFunction()
@@ -364,10 +389,10 @@ namespace Density_figure
             {
                 try
                 {
-                    longName = openFileDialog1.FileName;
-                    shortName = Path.GetFileNameWithoutExtension(longName);
-                    //Bitmap pic = new Bitmap(longName);
-                    originalPic.Image = new Bitmap(longName);
+                    currentPic = openFileDialog1.FileName;
+                    shortName = Path.GetFileNameWithoutExtension(currentPic);
+                    //Bitmap pic = new Bitmap(currentPic);
+                    originalPic.Image = new Bitmap(currentPic);
                     originalPic.Refresh();
                     //picBox.SizeMode = PictureBoxSizeMode.StretchImage;
                     // button16.Enabled = true;
@@ -405,7 +430,14 @@ namespace Density_figure
                         picNames[i++] = finf.FullName;
                 }
                 picNum = i;
-                MessageBox.Show("此文件夹中有" + picNum + "张图片。");
+                if (picNum > 0)
+                {
+                    MessageBox.Show("此文件夹中有" + picNum + "张图片！");
+                    originalPic.Image = new Bitmap(picNames[0]);
+                    currentPic = picNames[0];
+                }
+                else
+                    MessageBox.Show("此文件夹中没有图片，请重新设置！");
                 return picNames;
             }
             else
@@ -445,32 +477,27 @@ namespace Density_figure
         //移动并选择计算区域
         private void originalPic_MouseUp(object sender, MouseEventArgs e)
         {
-            string cuttedPic = "";
-            string grayedPic = "";
+
             if (originalPic.Image != null && blnDraw)
             {
                 if (e.X <= (originalPic.Location.X + originalPic.Image.Width) && e.Y <= (originalPic.Location.Y + originalPic.Image.Height))
                     g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, e.X - start.X, e.Y - start.Y);
+                else
+                    g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, end.X - start.X - 1, end.Y - start.Y - 1);
+
 
                 blnDraw = false;  //表示图片不需要重画，可以用于计算
-                if (longName.Length !=0)
+
+                autoStart = start;
+                autoEnd = end;
+                if (picNames != null)
                 {
-                    cuttedPic = picCutFunction(originalPic, longName, start, end);
-                    if (cuttedPic.Length != 0)
-                    {
-                        grayedPic = picGrayScale(cuttedPic, Convert.ToInt32(grayNum.Value));
-                        if (grayedPic.Length != 0)
-                        {
-                            picCalculate(grayedPic, Convert.ToInt32(areaLevelNum.Value), Convert.ToInt32(areaSectionMin.Value), Convert.ToInt32(areaSectionMax.Value));
-                        }
-                        else
-                            MessageBox.Show("数据处理未完成!---No grayedPic");
-                    }
-                    else
-                        MessageBox.Show("数据处理未完成!---No cuttedPic");
+                    startPointText.Text = "(" + autoStart.X.ToString() + "," + autoStart.Y.ToString() + ")";
+                    endPointText.Text = "(" + autoEnd.X.ToString() + "," + autoEnd.Y.ToString() + ")";
+                    startPointText.Refresh();
+                    endPointText.Refresh();
                 }
-                else
-                    MessageBox.Show("数据处理未完成!---No originalPic");
+                allPicFunc(originalPic, currentPic, start, end);
 
                 //----------debug------------
 //                grayedPic = Application.StartupPath + @"\Temp\" + "first1.jpg";
@@ -499,7 +526,11 @@ namespace Density_figure
                 else
                     end.Y = e.Y;
                 //再画
-                g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, end.X - start.X, end.Y - start.Y);
+
+                if (e.X <= (originalPic.Location.X + originalPic.Image.Width) && e.Y <= (originalPic.Location.Y + originalPic.Image.Height))
+                    g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, e.X - start.X, e.Y - start.Y);
+                else
+                    g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, end.X - start.X - 1, end.Y - start.Y - 1 );
             }
         
             if (originalPic.Image != null)
@@ -575,42 +606,67 @@ namespace Density_figure
 
         private void setFileButton_Click(object sender, EventArgs e)
         {
+            originalPic.Enabled = false;
             selectPicFolder();
             autoCalButton.Enabled = true;
-            originalPic.Enabled = false;
+            originalPic.Enabled = true;
         }
 
         bool stopCal = false;
         private void autoCalButton_Click(object sender, EventArgs e)
         {
-            openPicButton.Enabled = false;
-            if (!stopCal)
+            if (startPointText.Text.Length < 6 || endPointText.Text.Length < 6 )
             {
-                timer.Interval = Convert.ToInt32(timeToCalue.Value) * 1000;
-                timer.Start();
-                stopCal = (!stopCal);
+                MessageBox.Show("请先使用鼠标选择计算区域！");
             }
             else
             {
-                timer.Stop();
-                stopCal = (!stopCal);
-                openPicButton.Enabled = true;
-                originalPic.Enabled = true;
+                openPicButton.Enabled = false;
+                if (!stopCal)
+                {
+                    timer.Interval = Convert.ToInt32(timeToCalue.Value) * 1000;
+                    timer.Start();
+                    stopCal = (!stopCal);
+                }
+                else
+                {
+                    timer.Stop();
+                    stopCal = (!stopCal);
+                    openPicButton.Enabled = true;
+                    originalPic.Enabled = true;
+                }
+                if (timer.Enabled)
+                {
+                    autoCalButton.Text = "停止自动计算";
+                    originalPic.Enabled = false;
+                }
+                else
+                {
+                    autoCalButton.Text = "自动计算";
+                    originalPic.Enabled = true;
+                }
             }
-            if (timer.Enabled)
-                autoCalButton.Text = "停止自动计算";
-            else
-                autoCalButton.Text = "自动计算";
         }
 
         int picNumToCyc = 0;
         private void timer_Tick(object sender, EventArgs e)
         {
             if (picNumToCyc < picNum)
-                originalPic.Image = new Bitmap(picNames[picNumToCyc++]);
+            {
+                originalPic.Image = new Bitmap(picNames[picNumToCyc]);
+                currentPic = picNames[picNumToCyc];
+                allPicFunc(originalPic, currentPic, autoStart, autoEnd);
+                picNumToCyc++;
+            }
             else
                 picNumToCyc = 0;
-
+            // -----------debug-------
+//            if (timer.Enabled)
+//            {
+//                g = this.originalPic.CreateGraphics();
+//                g.DrawRectangle(new Pen(Color.Red), autoStart.X, autoStart.Y, autoEnd.X - autoStart.X, autoEnd.Y - autoStart.Y);
+//            }
         }
+
     }
 }
