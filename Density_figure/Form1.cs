@@ -156,11 +156,7 @@ namespace Density_figure
                                 }
                                 else
                                 {
-                                    /*if (rgbvalues[j * width * 3 + i * 3 + 2] > 200 && rgbvalues[j * width * 3 + i * 3 + 1] < 100 && rgbvalues[j * width * 3 + i * 3] < 100)
-                                    {
-                                        board[i, j] = 1;
-                                    }
-                                    else*/
+
                                     board[i, j] = 2;
                                 }
                             }
@@ -197,8 +193,8 @@ namespace Density_figure
             }
         }
 
-        int sumwidth = 0;
-        int sumheight = 0;
+//        int sumwidth = 0;
+//        int sumheight = 0;
         int num = 0;
         int minw;
         int minh;
@@ -208,7 +204,7 @@ namespace Density_figure
         int maxw;
         int maxh;
         // 该方法由于大量使用递归导致处理太大图片时会出现System.StackOverflowException错误
-        bool fill(int i, int j, int nstep)
+        bool fill(int i, int j, int nstep, int[,] board)
         {
             if (i < sWidth && j < sHeight && i >= 0 && j >= 0 && board[i, j] == 3)
             {
@@ -217,13 +213,13 @@ namespace Density_figure
                     maxw = i;
                 if (maxh < j)
                     maxh = j;
-//                fill(i + 1, j, nstep);
-//                fill(i - 1, j, nstep);
-//                fill(i, j + 1, nstep);
-//                fill(i, j - 1, nstep);
+                fill(i + 1, j, nstep, board);
+                fill(i - 1, j, nstep, board);
+                fill(i, j + 1, nstep, board);
+                fill(i, j - 1, nstep, board);
                 num++;
-                sumwidth = sumwidth + i;
-                sumheight = sumheight + j;
+//                sumwidth = sumwidth + i;
+//                sumheight = sumheight + j;
                 return true;
             }
             return false;
@@ -235,7 +231,6 @@ namespace Density_figure
             int cnt = 0;
             double maxice = 0;
             int[] hist;
-            int[,] board1;
             double[] numstep1;
             int nstep = 4;
 
@@ -251,7 +246,6 @@ namespace Density_figure
 
                 sWidth = pic.Width;
                 sHeight = pic.Height;
-                board1 = new int[sWidth, sHeight];
                 board = new int[sWidth, sHeight];
                 // int a = sWidth * sHeight;
 
@@ -275,7 +269,6 @@ namespace Density_figure
                         }
                         else
                             board[i, j] = 2;
-                        board1[i, j] = board[i, j];
                     }
                 }
                 hist = new int[cntlh + 2];
@@ -296,12 +289,12 @@ namespace Density_figure
                 {
                     for (int j = 0; j < sHeight; j++)
                     {
-                        sumheight = 0;
-                        sumwidth = 0;
+//                        sumheight = 0;
+//                        sumwidth = 0;
                         num = 0;
                         minh = j;
                         minw = i;
-                        if (board[i, j] == 3 && fill(i, j, nstep))
+                        if (board[i, j] == 3 && fill(i, j, nstep, board))
                         {
                             if (num >= 5)
                             {
@@ -421,6 +414,7 @@ namespace Density_figure
         FileInfo[] fileInf;
         string[] picNames;
         int picNum = 0;
+        int picNumToCyc = 0; //循环处理的当前图片数
         public string[] selectPicFolder()
         {
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
@@ -443,6 +437,10 @@ namespace Density_figure
                     MessageBox.Show("此文件夹中有" + picNum + "张图片！");
                     originalPic.Image = new Bitmap(picNames[0]);
                     currentPic = picNames[0];
+                    currentAutoPathLabel.Text = folderPath;
+                    currentPicNameLabel.Text = Path.GetFileName(currentPic);
+                    currentPIcNumLabel.Text = picNumToCyc.ToString() + "/" + picNum.ToString();
+                    picNumToCyc = 0;
                 }
                 else
                     MessageBox.Show("此文件夹中没有图片，请重新设置！");
@@ -647,16 +645,18 @@ namespace Density_figure
                 {
                     autoCalButton.Text = "停止自动计算";
                     originalPic.Enabled = false;
+                    setFolderButton.Enabled = false;
                 }
                 else
                 {
                     autoCalButton.Text = "自动计算";
                     originalPic.Enabled = true;
+                    setFolderButton.Enabled = true;
                 }
             }
         }
 
-        int picNumToCyc = 0;
+
         private void timer_Tick(object sender, EventArgs e)
         {
             if (picNumToCyc < picNum)
@@ -664,6 +664,7 @@ namespace Density_figure
                 originalPic.Image = new Bitmap(picNames[picNumToCyc]);
                 currentPic = picNames[picNumToCyc];
                 allPicFunc(originalPic, currentPic, autoStart, autoEnd);
+                currentPIcNumLabel.Text = picNumToCyc.ToString() + "/" + picNum.ToString();
                 picNumToCyc++;
             }
             else

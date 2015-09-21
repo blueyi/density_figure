@@ -66,6 +66,12 @@
             this.picCoordinateTip = new System.Windows.Forms.ToolTip(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.otherTip = new System.Windows.Forms.ToolTip(this.components);
+            this.currentPIcNumLabel = new System.Windows.Forms.Label();
+            this.currentPicNameLabel = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.currentAutoPathLabel = new System.Windows.Forms.Label();
             this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPic)).BeginInit();
             this.panel2.SuspendLayout();
@@ -491,12 +497,18 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.label2);
+            this.panel5.Controls.Add(this.label6);
+            this.panel5.Controls.Add(this.label5);
+            this.panel5.Controls.Add(this.currentPIcNumLabel);
+            this.panel5.Controls.Add(this.currentAutoPathLabel);
+            this.panel5.Controls.Add(this.currentPicNameLabel);
             this.panel5.Controls.Add(this.panel2);
             this.panel5.Controls.Add(this.panel3);
             this.panel5.Controls.Add(this.panel4);
             this.panel5.Location = new System.Drawing.Point(12, 409);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(715, 171);
+            this.panel5.Size = new System.Drawing.Size(715, 200);
             this.panel5.TabIndex = 9;
             // 
             // timer
@@ -510,11 +522,65 @@
             this.otherTip.InitialDelay = 50;
             this.otherTip.ReshowDelay = 100;
             // 
+            // currentPIcNumLabel
+            // 
+            this.currentPIcNumLabel.AutoSize = true;
+            this.currentPIcNumLabel.Location = new System.Drawing.Point(82, 162);
+            this.currentPIcNumLabel.Name = "currentPIcNumLabel";
+            this.currentPIcNumLabel.Size = new System.Drawing.Size(29, 12);
+            this.currentPIcNumLabel.TabIndex = 7;
+            this.currentPIcNumLabel.Text = "None";
+            // 
+            // currentPicNameLabel
+            // 
+            this.currentPicNameLabel.AutoSize = true;
+            this.currentPicNameLabel.Location = new System.Drawing.Point(154, 162);
+            this.currentPicNameLabel.Name = "currentPicNameLabel";
+            this.currentPicNameLabel.Size = new System.Drawing.Size(29, 12);
+            this.currentPicNameLabel.TabIndex = 7;
+            this.currentPicNameLabel.Text = "None";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 162);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 12);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "正在处理:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(82, 181);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "None";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 181);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(119, 12);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "当前自动计算的路径:";
+            // 
+            // currentAutoPathLabel
+            // 
+            this.currentAutoPathLabel.AutoSize = true;
+            this.currentAutoPathLabel.Location = new System.Drawing.Point(134, 181);
+            this.currentAutoPathLabel.Name = "currentAutoPathLabel";
+            this.currentAutoPathLabel.Size = new System.Drawing.Size(29, 12);
+            this.currentAutoPathLabel.TabIndex = 7;
+            this.currentAutoPathLabel.Text = "None";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(739, 589);
+            this.ClientSize = new System.Drawing.Size(739, 611);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.picPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -535,6 +601,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -577,6 +644,12 @@
         private System.Windows.Forms.TextBox endPointText;
         private System.Windows.Forms.TextBox startPointText;
         private System.Windows.Forms.ToolTip otherTip;
+        private System.Windows.Forms.Label currentPIcNumLabel;
+        private System.Windows.Forms.Label currentPicNameLabel;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label currentAutoPathLabel;
 
     }
 }
