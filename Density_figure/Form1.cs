@@ -652,6 +652,8 @@ namespace Density_figure
                     autoCalButton.Text = "自动计算";
                     originalPic.Enabled = true;
                     setFolderButton.Enabled = true;
+                    g = this.originalPic.CreateGraphics();
+                    g.DrawRectangle(new Pen(Color.Red), autoStart.X, autoStart.Y, autoEnd.X - autoStart.X, autoEnd.Y - autoStart.Y);
                 }
             }
         }
@@ -664,7 +666,8 @@ namespace Density_figure
                 originalPic.Image = new Bitmap(picNames[picNumToCyc]);
                 currentPic = picNames[picNumToCyc];
                 allPicFunc(originalPic, currentPic, autoStart, autoEnd);
-                currentPIcNumLabel.Text = picNumToCyc.ToString() + "/" + picNum.ToString();
+                currentPIcNumLabel.Text = (picNumToCyc + 1).ToString() + "/" + picNum.ToString();
+                currentPicNameLabel.Text = Path.GetFileName(currentPic);
                 picNumToCyc++;
             }
             else

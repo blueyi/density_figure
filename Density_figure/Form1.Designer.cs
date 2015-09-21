@@ -63,15 +63,15 @@
             this.minIce = new System.Windows.Forms.Label();
             this.maxIce = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.currentPIcNumLabel = new System.Windows.Forms.Label();
+            this.currentAutoPathLabel = new System.Windows.Forms.Label();
+            this.currentPicNameLabel = new System.Windows.Forms.Label();
             this.picCoordinateTip = new System.Windows.Forms.ToolTip(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.otherTip = new System.Windows.Forms.ToolTip(this.components);
-            this.currentPIcNumLabel = new System.Windows.Forms.Label();
-            this.currentPicNameLabel = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.currentAutoPathLabel = new System.Windows.Forms.Label();
             this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPic)).BeginInit();
             this.panel2.SuspendLayout();
@@ -367,7 +367,7 @@
             this.autoCalButton.Size = new System.Drawing.Size(96, 54);
             this.autoCalButton.TabIndex = 0;
             this.autoCalButton.Text = "自动计算";
-            this.otherTip.SetToolTip(this.autoCalButton, "点击自动计算前请先设置图像路径和计算区域");
+            this.otherTip.SetToolTip(this.autoCalButton, "1. 点击自动计算前请先设置图像路径和计算区域\r\n2. 开始自动计算后可能通过点击停止来暂停自动计算并查看当前选择的自动计算区域");
             this.autoCalButton.UseVisualStyleBackColor = true;
             this.autoCalButton.Click += new System.EventHandler(this.autoCalButton_Click);
             // 
@@ -511,35 +511,6 @@
             this.panel5.Size = new System.Drawing.Size(715, 200);
             this.panel5.TabIndex = 9;
             // 
-            // timer
-            // 
-            this.timer.Interval = 2000;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // otherTip
-            // 
-            this.otherTip.AutoPopDelay = 5000;
-            this.otherTip.InitialDelay = 50;
-            this.otherTip.ReshowDelay = 100;
-            // 
-            // currentPIcNumLabel
-            // 
-            this.currentPIcNumLabel.AutoSize = true;
-            this.currentPIcNumLabel.Location = new System.Drawing.Point(82, 162);
-            this.currentPIcNumLabel.Name = "currentPIcNumLabel";
-            this.currentPIcNumLabel.Size = new System.Drawing.Size(29, 12);
-            this.currentPIcNumLabel.TabIndex = 7;
-            this.currentPIcNumLabel.Text = "None";
-            // 
-            // currentPicNameLabel
-            // 
-            this.currentPicNameLabel.AutoSize = true;
-            this.currentPicNameLabel.Location = new System.Drawing.Point(154, 162);
-            this.currentPicNameLabel.Name = "currentPicNameLabel";
-            this.currentPicNameLabel.Size = new System.Drawing.Size(29, 12);
-            this.currentPicNameLabel.TabIndex = 7;
-            this.currentPicNameLabel.Text = "None";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -548,15 +519,6 @@
             this.label2.Size = new System.Drawing.Size(59, 12);
             this.label2.TabIndex = 7;
             this.label2.Text = "正在处理:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(82, 181);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 12);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "None";
             // 
             // label6
             // 
@@ -567,6 +529,24 @@
             this.label6.TabIndex = 7;
             this.label6.Text = "当前自动计算的路径:";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(82, 181);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "None";
+            // 
+            // currentPIcNumLabel
+            // 
+            this.currentPIcNumLabel.AutoSize = true;
+            this.currentPIcNumLabel.Location = new System.Drawing.Point(82, 162);
+            this.currentPIcNumLabel.Name = "currentPIcNumLabel";
+            this.currentPIcNumLabel.Size = new System.Drawing.Size(29, 12);
+            this.currentPIcNumLabel.TabIndex = 7;
+            this.currentPIcNumLabel.Text = "None";
+            // 
             // currentAutoPathLabel
             // 
             this.currentAutoPathLabel.AutoSize = true;
@@ -575,6 +555,26 @@
             this.currentAutoPathLabel.Size = new System.Drawing.Size(29, 12);
             this.currentAutoPathLabel.TabIndex = 7;
             this.currentAutoPathLabel.Text = "None";
+            // 
+            // currentPicNameLabel
+            // 
+            this.currentPicNameLabel.AutoSize = true;
+            this.currentPicNameLabel.Location = new System.Drawing.Point(154, 162);
+            this.currentPicNameLabel.Name = "currentPicNameLabel";
+            this.currentPicNameLabel.Size = new System.Drawing.Size(29, 12);
+            this.currentPicNameLabel.TabIndex = 7;
+            this.currentPicNameLabel.Text = "None";
+            // 
+            // timer
+            // 
+            this.timer.Interval = 2000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // otherTip
+            // 
+            this.otherTip.AutoPopDelay = 5000;
+            this.otherTip.InitialDelay = 50;
+            this.otherTip.ReshowDelay = 100;
             // 
             // Form1
             // 
