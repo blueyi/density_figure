@@ -55,13 +55,13 @@
             this.timeToCalue = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
-            this.iceNum = new System.Windows.Forms.Label();
-            this.iceDensity = new System.Windows.Forms.Label();
+            this.iceNumText = new System.Windows.Forms.Label();
+            this.iceDensityText = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.minIceLabel = new System.Windows.Forms.Label();
             this.maxIceLabel = new System.Windows.Forms.Label();
-            this.minIce = new System.Windows.Forms.Label();
-            this.maxIce = new System.Windows.Forms.Label();
+            this.minIceText = new System.Windows.Forms.Label();
+            this.maxIceText = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -416,38 +416,38 @@
             this.timeLabel.TabIndex = 3;
             this.timeLabel.Text = "时间间隔:";
             // 
-            // iceNum
+            // iceNumText
             // 
-            this.iceNum.AutoSize = true;
-            this.iceNum.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
-            this.iceNum.ForeColor = System.Drawing.Color.Red;
-            this.iceNum.Location = new System.Drawing.Point(94, 6);
-            this.iceNum.Name = "iceNum";
-            this.iceNum.Size = new System.Drawing.Size(17, 16);
-            this.iceNum.TabIndex = 6;
-            this.iceNum.Text = "0";
+            this.iceNumText.AutoSize = true;
+            this.iceNumText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
+            this.iceNumText.ForeColor = System.Drawing.Color.Red;
+            this.iceNumText.Location = new System.Drawing.Point(94, 6);
+            this.iceNumText.Name = "iceNumText";
+            this.iceNumText.Size = new System.Drawing.Size(17, 16);
+            this.iceNumText.TabIndex = 6;
+            this.iceNumText.Text = "0";
             // 
-            // iceDensity
+            // iceDensityText
             // 
-            this.iceDensity.AutoSize = true;
-            this.iceDensity.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
-            this.iceDensity.ForeColor = System.Drawing.Color.Red;
-            this.iceDensity.Location = new System.Drawing.Point(228, 8);
-            this.iceDensity.Name = "iceDensity";
-            this.iceDensity.Size = new System.Drawing.Size(35, 16);
-            this.iceDensity.TabIndex = 6;
-            this.iceDensity.Text = "0.0";
+            this.iceDensityText.AutoSize = true;
+            this.iceDensityText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
+            this.iceDensityText.ForeColor = System.Drawing.Color.Red;
+            this.iceDensityText.Location = new System.Drawing.Point(228, 8);
+            this.iceDensityText.Name = "iceDensityText";
+            this.iceDensityText.Size = new System.Drawing.Size(35, 16);
+            this.iceDensityText.TabIndex = 6;
+            this.iceDensityText.Text = "0.0";
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.minIceLabel);
             this.panel3.Controls.Add(this.maxIceLabel);
             this.panel3.Controls.Add(this.iceDensityLabel);
-            this.panel3.Controls.Add(this.minIce);
-            this.panel3.Controls.Add(this.maxIce);
-            this.panel3.Controls.Add(this.iceDensity);
+            this.panel3.Controls.Add(this.minIceText);
+            this.panel3.Controls.Add(this.maxIceText);
+            this.panel3.Controls.Add(this.iceDensityText);
             this.panel3.Controls.Add(this.iceNumLabel);
-            this.panel3.Controls.Add(this.iceNum);
+            this.panel3.Controls.Add(this.iceNumText);
             this.panel3.Location = new System.Drawing.Point(0, 3);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(715, 31);
@@ -473,27 +473,27 @@
             this.maxIceLabel.TabIndex = 1;
             this.maxIceLabel.Text = "最大冰块面积：";
             // 
-            // minIce
+            // minIceText
             // 
-            this.minIce.AutoSize = true;
-            this.minIce.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
-            this.minIce.ForeColor = System.Drawing.Color.Red;
-            this.minIce.Location = new System.Drawing.Point(587, 8);
-            this.minIce.Name = "minIce";
-            this.minIce.Size = new System.Drawing.Size(35, 16);
-            this.minIce.TabIndex = 6;
-            this.minIce.Text = "0.0";
+            this.minIceText.AutoSize = true;
+            this.minIceText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
+            this.minIceText.ForeColor = System.Drawing.Color.Red;
+            this.minIceText.Location = new System.Drawing.Point(587, 8);
+            this.minIceText.Name = "minIceText";
+            this.minIceText.Size = new System.Drawing.Size(35, 16);
+            this.minIceText.TabIndex = 6;
+            this.minIceText.Text = "0.0";
             // 
-            // maxIce
+            // maxIceText
             // 
-            this.maxIce.AutoSize = true;
-            this.maxIce.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
-            this.maxIce.ForeColor = System.Drawing.Color.Red;
-            this.maxIce.Location = new System.Drawing.Point(414, 8);
-            this.maxIce.Name = "maxIce";
-            this.maxIce.Size = new System.Drawing.Size(35, 16);
-            this.maxIce.TabIndex = 6;
-            this.maxIce.Text = "0.0";
+            this.maxIceText.AutoSize = true;
+            this.maxIceText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
+            this.maxIceText.ForeColor = System.Drawing.Color.Red;
+            this.maxIceText.Location = new System.Drawing.Point(414, 8);
+            this.maxIceText.Name = "maxIceText";
+            this.maxIceText.Size = new System.Drawing.Size(35, 16);
+            this.maxIceText.TabIndex = 6;
+            this.maxIceText.Text = "0.0";
             // 
             // panel5
             // 
@@ -624,13 +624,13 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button autoCalButton;
-        private System.Windows.Forms.Label iceNum;
-        private System.Windows.Forms.Label iceDensity;
+        private System.Windows.Forms.Label iceNumText;
+        private System.Windows.Forms.Label iceDensityText;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label minIceLabel;
         private System.Windows.Forms.Label maxIceLabel;
-        private System.Windows.Forms.Label minIce;
-        private System.Windows.Forms.Label maxIce;
+        private System.Windows.Forms.Label minIceText;
+        private System.Windows.Forms.Label maxIceText;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.NumericUpDown areaSectionMax;
         private System.Windows.Forms.NumericUpDown areaSectionMin;
