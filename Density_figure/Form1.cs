@@ -290,12 +290,14 @@ namespace Density_figure
             else
                 MessageBox.Show("数据处理未完成!---No originalPic");
 
-            //---debug---
-            //if (File.Exists(cuttedPic))
-            //    File.Delete(cuttedPic);
-            //if (File.Exists(grayedPic))
-            //    File.Delete(grayedPic);
-        }
+            if (!isDeleteTempPic.Checked)
+            {
+                if (File.Exists(cuttedPic))
+                    File.Delete(cuttedPic);
+                if (File.Exists(grayedPic))
+                    File.Delete(grayedPic);
+            }
+       }
 
 
         //----选择图片函数
