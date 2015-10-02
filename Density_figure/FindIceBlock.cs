@@ -10,9 +10,8 @@ namespace Density_figure
     {
 
         //遍历并标记所有冰块,返回冰块数目
-        public int findIce(int[,] resultArr, int[] resultSum, int width, int height, int allIceNum)
+        public static int findIce(int[,] resultArr, int[] resultSum, int width, int height, int allIceNum, ref int maxIce, ref int minIce)
         {
-
             int allIceNumHere = allIceNum;
             //            bool[] isChecked = new bool[allIceNum]; //检查该冰点是否已被标记
             int iceOrder = 1;  //冰块顺序
@@ -75,13 +74,24 @@ namespace Density_figure
                     }
                 }
                 resultSum[iceOrder] = iceOrderSum;
+                if (iceOrder == 2)
+                {
+                    maxIce = minIce = iceOrderSum;
+                }
+                else
+                {
+                    if (maxIce < iceOrderSum)
+                        maxIce = iceOrderSum;
+                    if (minIce > iceOrderSum)
+                        minIce = iceOrderSum;
+                }
             }
 
             return iceOrder;
         }
 
         //标记当前行中所有需要标记的冰块
-        public void markIceLine(int[] arrLine, int iceOrder, ref int iceOrderSum, int lastPoint, int[] currentCheckedIceIdx, int width, ref int allIceNumHere)
+        public static void markIceLine(int[] arrLine, int iceOrder, ref int iceOrderSum, int lastPoint, int[] currentCheckedIceIdx, int width, ref int allIceNumHere)
         {
             int leftX = lastPoint;
             int rightX = lastPoint + 1;
@@ -121,7 +131,7 @@ namespace Density_figure
         }
 
         //每块冰第一次被扫描到时，确定出它的初始位置
-        public void findFirstPoint(ref int lastPoint, int[] arrLine, int arrLength)
+        public static void findFirstPoint(ref int lastPoint, int[] arrLine, int arrLength)
         {
             int i = lastPoint;
             while (i < arrLength)
@@ -134,7 +144,7 @@ namespace Density_figure
         }
 
         //判断是否当前冰块中的所有像素都已经被扫描过, 如果不是，则确定出下一次需要扫描的起点
-        public bool isAllCheckedInCurrentIceBlock(int[] currentCheckedIceIdx, int[] arrLine, ref int currentOrderStart, ref int idxUp, ref int idxDown, int width, int height, int iceOrderSum)
+        public static bool isAllCheckedInCurrentIceBlock(int[] currentCheckedIceIdx, int[] arrLine, ref int currentOrderStart, ref int idxUp, ref int idxDown, int width, int height, int iceOrderSum)
         {
             bool checkDone = true;
             int x, y;
