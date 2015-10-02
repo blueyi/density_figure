@@ -1,6 +1,6 @@
 ﻿namespace Density_figure
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.picPanel = new System.Windows.Forms.Panel();
-            this.originalPic = new System.Windows.Forms.PictureBox();
+            this.originalPicBox = new System.Windows.Forms.PictureBox();
             this.iceNumLabel = new System.Windows.Forms.Label();
             this.iceDensityLabel = new System.Windows.Forms.Label();
             this.setFolderButton = new System.Windows.Forms.Button();
@@ -62,7 +62,7 @@
             this.maxIceLabel = new System.Windows.Forms.Label();
             this.minIceText = new System.Windows.Forms.Label();
             this.maxIceText = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.bottom = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -72,8 +72,9 @@
             this.picCoordinateTip = new System.Windows.Forms.ToolTip(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.otherTip = new System.Windows.Forms.ToolTip(this.components);
+            this.mainPanel = new System.Windows.Forms.Panel();
             this.picPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.originalPic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.areaLevelNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.areaSectionMax)).BeginInit();
@@ -82,32 +83,37 @@
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timeToCalue)).BeginInit();
             this.panel3.SuspendLayout();
-            this.panel5.SuspendLayout();
+            this.bottom.SuspendLayout();
+            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // picPanel
             // 
+            this.picPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.picPanel.AutoScroll = true;
-            this.picPanel.Controls.Add(this.originalPic);
-            this.picPanel.Location = new System.Drawing.Point(12, 12);
+            this.picPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picPanel.Controls.Add(this.originalPicBox);
+            this.picPanel.Location = new System.Drawing.Point(3, 3);
             this.picPanel.Name = "picPanel";
-            this.picPanel.Size = new System.Drawing.Size(715, 391);
+            this.picPanel.Size = new System.Drawing.Size(752, 441);
             this.picPanel.TabIndex = 0;
             // 
-            // originalPic
+            // originalPicBox
             // 
-            this.originalPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.originalPic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.originalPic.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.originalPic.Location = new System.Drawing.Point(35, 7);
-            this.originalPic.Name = "originalPic";
-            this.originalPic.Size = new System.Drawing.Size(629, 360);
-            this.originalPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.originalPic.TabIndex = 0;
-            this.originalPic.TabStop = false;
-            this.originalPic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseDown);
-            this.originalPic.MouseMove += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseMove);
-            this.originalPic.MouseUp += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseUp);
+            this.originalPicBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.originalPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.originalPicBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.originalPicBox.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.originalPicBox.Location = new System.Drawing.Point(25, -1);
+            this.originalPicBox.Name = "originalPicBox";
+            this.originalPicBox.Size = new System.Drawing.Size(700, 435);
+            this.originalPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.originalPicBox.TabIndex = 0;
+            this.originalPicBox.TabStop = false;
+            this.originalPicBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseDown);
+            this.originalPicBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseMove);
+            this.originalPicBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseUp);
             // 
             // iceNumLabel
             // 
@@ -154,7 +160,7 @@
             this.panel2.Controls.Add(this.grayLabel);
             this.panel2.Controls.Add(this.autoNotifyLabel);
             this.panel2.Controls.Add(this.openPicButton);
-            this.panel2.Location = new System.Drawing.Point(280, 42);
+            this.panel2.Location = new System.Drawing.Point(322, 42);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(422, 117);
             this.panel2.TabIndex = 4;
@@ -319,7 +325,7 @@
             this.panel4.Controls.Add(this.timeLabel);
             this.panel4.Location = new System.Drawing.Point(0, 42);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(274, 117);
+            this.panel4.Size = new System.Drawing.Size(315, 117);
             this.panel4.TabIndex = 5;
             // 
             // label4
@@ -448,9 +454,9 @@
             this.panel3.Controls.Add(this.iceDensityText);
             this.panel3.Controls.Add(this.iceNumLabel);
             this.panel3.Controls.Add(this.iceNumText);
-            this.panel3.Location = new System.Drawing.Point(0, 3);
+            this.panel3.Location = new System.Drawing.Point(72, 6);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(715, 31);
+            this.panel3.Size = new System.Drawing.Size(640, 31);
             this.panel3.TabIndex = 7;
             // 
             // minIceLabel
@@ -495,21 +501,23 @@
             this.maxIceText.TabIndex = 6;
             this.maxIceText.Text = "0.0";
             // 
-            // panel5
+            // bottom
             // 
-            this.panel5.Controls.Add(this.label2);
-            this.panel5.Controls.Add(this.label6);
-            this.panel5.Controls.Add(this.label5);
-            this.panel5.Controls.Add(this.currentPIcNumLabel);
-            this.panel5.Controls.Add(this.currentAutoPathLabel);
-            this.panel5.Controls.Add(this.currentPicNameLabel);
-            this.panel5.Controls.Add(this.panel2);
-            this.panel5.Controls.Add(this.panel3);
-            this.panel5.Controls.Add(this.panel4);
-            this.panel5.Location = new System.Drawing.Point(12, 409);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(715, 200);
-            this.panel5.TabIndex = 9;
+            this.bottom.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.bottom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.bottom.Controls.Add(this.label2);
+            this.bottom.Controls.Add(this.label6);
+            this.bottom.Controls.Add(this.label5);
+            this.bottom.Controls.Add(this.currentPIcNumLabel);
+            this.bottom.Controls.Add(this.currentAutoPathLabel);
+            this.bottom.Controls.Add(this.currentPicNameLabel);
+            this.bottom.Controls.Add(this.panel2);
+            this.bottom.Controls.Add(this.panel3);
+            this.bottom.Controls.Add(this.panel4);
+            this.bottom.Location = new System.Drawing.Point(2, 451);
+            this.bottom.Name = "bottom";
+            this.bottom.Size = new System.Drawing.Size(754, 200);
+            this.bottom.TabIndex = 9;
             // 
             // label2
             // 
@@ -576,19 +584,30 @@
             this.otherTip.InitialDelay = 50;
             this.otherTip.ReshowDelay = 100;
             // 
-            // Form1
+            // mainPanel
+            // 
+            this.mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mainPanel.Controls.Add(this.picPanel);
+            this.mainPanel.Controls.Add(this.bottom);
+            this.mainPanel.Location = new System.Drawing.Point(12, 3);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(760, 656);
+            this.mainPanel.TabIndex = 10;
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(739, 611);
-            this.Controls.Add(this.panel5);
-            this.Controls.Add(this.picPanel);
+            this.ClientSize = new System.Drawing.Size(784, 661);
+            this.Controls.Add(this.mainPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "冰密度计算";
             this.picPanel.ResumeLayout(false);
-            this.picPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.originalPic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.areaLevelNum)).EndInit();
@@ -600,8 +619,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.timeToCalue)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            this.bottom.ResumeLayout(false);
+            this.bottom.PerformLayout();
+            this.mainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -609,7 +629,7 @@
         #endregion
 
         private System.Windows.Forms.Panel picPanel;
-        private System.Windows.Forms.PictureBox originalPic;
+        private System.Windows.Forms.PictureBox originalPicBox;
         private System.Windows.Forms.Label iceNumLabel;
         private System.Windows.Forms.Label iceDensityLabel;
         private System.Windows.Forms.Button setFolderButton;
@@ -631,7 +651,7 @@
         private System.Windows.Forms.Label maxIceLabel;
         private System.Windows.Forms.Label minIceText;
         private System.Windows.Forms.Label maxIceText;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel bottom;
         private System.Windows.Forms.NumericUpDown areaSectionMax;
         private System.Windows.Forms.NumericUpDown areaSectionMin;
         private System.Windows.Forms.ToolTip picCoordinateTip;
@@ -650,6 +670,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label currentAutoPathLabel;
+        private System.Windows.Forms.Panel mainPanel;
 
     }
 }
