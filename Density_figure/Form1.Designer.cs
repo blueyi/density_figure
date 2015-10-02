@@ -575,6 +575,11 @@
             this.currentPicNameLabel.TabIndex = 7;
             this.currentPicNameLabel.Text = "None";
             // 
+            // picCoordinateTip
+            // 
+            this.picCoordinateTip.UseAnimation = false;
+            this.picCoordinateTip.UseFading = false;
+            // 
             // timer
             // 
             this.timer.Interval = 2000;
@@ -602,7 +607,7 @@
             // isDeleteTempPic
             // 
             this.isDeleteTempPic.AutoSize = true;
-            this.isDeleteTempPic.Location = new System.Drawing.Point(495, 161);
+            this.isDeleteTempPic.Location = new System.Drawing.Point(624, 165);
             this.isDeleteTempPic.Name = "isDeleteTempPic";
             this.isDeleteTempPic.Size = new System.Drawing.Size(120, 16);
             this.isDeleteTempPic.TabIndex = 8;
