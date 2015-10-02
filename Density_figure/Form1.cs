@@ -19,8 +19,34 @@ namespace Density_figure
         public MainForm()
         {
             InitializeComponent();
+            //创建临时图片存放文件夹
             if (!Directory.Exists(Application.StartupPath + @"\Temp\"))
                 Directory.CreateDirectory(Application.StartupPath + @"\Temp\");
+
+            //创建计算数据存放文件夹
+            if (!Directory.Exists(Application.StartupPath + @"\Datas\"))
+                Directory.CreateDirectory(Application.StartupPath + @"\Datas\");
+
+            //创建手动计算文件
+            FileStream fs;
+            StreamWriter sw;
+            string manualTitle = "计算时间" + "\t" + "冰块数量" + "\t" + "密集度" + "\t"
+                + "最大冰块面积" + "\t" + "最小冰块面积" + "\t" + "图像地址";  
+            fs = new FileStream(Application.StartupPath + @"\Datas\manual.txt", FileMode.Append);
+            sw = new StreamWriter(fs);
+            sw.WriteLine(manualTitle);
+            sw.Flush();
+            sw.Close();
+            fs.Close();
+
+            //创建自动计算文件
+            fs = new FileStream(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt", FileMode.Append);
+            sw = new StreamWriter(fs);
+            sw.WriteLine(manualTitle);
+            sw.Flush();
+            sw.Close();
+            fs.Close();
+
         }
 
 
@@ -91,8 +117,8 @@ namespace Density_figure
                     board = new int[bd.Width, bd.Height];
                     int w;
                     int h;
-                    w = xb - xa + 1;
-                    h = yb - ya + 1;
+                    w = xb - xa;
+                    h = yb - ya;
                     Bitmap pic1 = new Bitmap(w, h);// (Application.StartupPath + @"\11.jpg");
                     Rectangle rec6 = new Rectangle(0, 0, w, h);
                     BitmapData bd6 = pic1.LockBits(rec6, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
@@ -101,9 +127,9 @@ namespace Density_figure
                     byte[] rgbvalues6 = new byte[bytes6];
                     System.Runtime.InteropServices.Marshal.Copy(ptr6, rgbvalues6, 0, bytes6);
 
-                    for (int i = xa; i <= xb; i++)
+                    for (int i = xa; i < xb; i++)
                     {
-                        for (int j = ya; j <= yb; j++)
+                        for (int j = ya; j < yb; j++)
                         {
                             rgbvalues6[(j - ya) * bd6.Stride + (i - xa) * 3] = rgbvalues[j * bd.Stride + i * 3];
                             rgbvalues6[(j - ya) * bd6.Stride + (i - xa) * 3 + 1] = rgbvalues[j * bd.Stride + i * 3 + 1];
@@ -258,6 +284,8 @@ namespace Density_figure
                 minIceText.Text = minIceArea.ToString();
                 panel3.Refresh();
 
+
+
                 pic.Dispose();
             }
             catch (Exception err)
@@ -290,12 +318,14 @@ namespace Density_figure
             else
                 MessageBox.Show("数据处理未完成!---No originalPic");
 
-            //---debug---
-            //if (File.Exists(cuttedPic))
-            //    File.Delete(cuttedPic);
-            //if (File.Exists(grayedPic))
-            //    File.Delete(grayedPic);
-        }
+            if (!isDeleteTempPic.Checked)
+            {
+                if (File.Exists(cuttedPic))
+                    File.Delete(cuttedPic);
+                if (File.Exists(grayedPic))
+                    File.Delete(grayedPic);
+            }
+       }
 
 
         //----选择图片函数
@@ -440,6 +470,16 @@ namespace Density_figure
 
                 allPicFunc(originalPicBox, currentPic, start, end);
 
+                string manualStr = DateTime.Now.ToString() + "\t" + iceNumText.Text + "\t" + iceDensityText.Text + "\t"
+                    + maxIceText.Text + "\t" + minIceText.Text + "\t" + currentPic;
+
+                FileStream fs = new FileStream(Application.StartupPath + @"\Datas\manual.txt", FileMode.Append);
+                StreamWriter sw = new StreamWriter(fs);
+                sw.WriteLine(manualStr);
+                sw.Flush();
+                sw.Close();
+                fs.Close();
+
                 //设置自动计算的坐标
                 if (picNames != null)
                 {
@@ -489,9 +529,9 @@ namespace Density_figure
                     //原图中鼠标的坐标
                     int original_x = Convert.ToInt32((double)zoom_x / rate_Height);
                     int original_y = Convert.ToInt32((double)zoom_y / rate_Height);
-                    if (original_x > originalPicWidth)
+                    if (original_x >= originalPicWidth)
                         original_x = originalPicWidth - 1;
-                    if (original_y > originalPicHeight)
+                    if (original_y >= originalPicHeight)
                         original_y = originalPicHeight - 1;
 
                     Bitmap bm = (Bitmap)originalPicBox.Image;
@@ -568,6 +608,16 @@ namespace Density_figure
                 currentPIcNumLabel.Text = (picNumToCyc + 1).ToString() + "/" + picNum.ToString();
                 currentPicNameLabel.Text = Path.GetFileName(currentPic);
                 picNumToCyc++;
+
+                string autoStr = DateTime.Now.ToString() + "\t" + iceNumText.Text + "\t" + iceDensityText.Text + "\t"
+                    + maxIceText.Text + "\t" + minIceText.Text + "\t" + currentPic;
+                FileStream fs = new FileStream(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt", FileMode.Append);
+                StreamWriter sw = new StreamWriter(fs);
+                sw.WriteLine(autoStr);
+                sw.Flush();
+                sw.Close();
+                fs.Close();
+
             }
             else
                 picNumToCyc = 0;

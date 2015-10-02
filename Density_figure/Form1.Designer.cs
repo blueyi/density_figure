@@ -73,6 +73,7 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.otherTip = new System.Windows.Forms.ToolTip(this.components);
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.isDeleteTempPic = new System.Windows.Forms.CheckBox();
             this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).BeginInit();
             this.panel2.SuspendLayout();
@@ -505,6 +506,7 @@
             // 
             this.bottom.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.bottom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.bottom.Controls.Add(this.isDeleteTempPic);
             this.bottom.Controls.Add(this.label2);
             this.bottom.Controls.Add(this.label6);
             this.bottom.Controls.Add(this.label5);
@@ -573,6 +575,11 @@
             this.currentPicNameLabel.TabIndex = 7;
             this.currentPicNameLabel.Text = "None";
             // 
+            // picCoordinateTip
+            // 
+            this.picCoordinateTip.UseAnimation = false;
+            this.picCoordinateTip.UseFading = false;
+            // 
             // timer
             // 
             this.timer.Interval = 2000;
@@ -596,6 +603,17 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(760, 656);
             this.mainPanel.TabIndex = 10;
+            // 
+            // isDeleteTempPic
+            // 
+            this.isDeleteTempPic.AutoSize = true;
+            this.isDeleteTempPic.Location = new System.Drawing.Point(624, 165);
+            this.isDeleteTempPic.Name = "isDeleteTempPic";
+            this.isDeleteTempPic.Size = new System.Drawing.Size(120, 16);
+            this.isDeleteTempPic.TabIndex = 8;
+            this.isDeleteTempPic.Text = "是否保留临时文件";
+            this.otherTip.SetToolTip(this.isDeleteTempPic, "勾选该选项后可以在程序所在文件夹下Temp文件夹中查看当前所处理图像的中间图像\r\n勾选该选项后会额外占用较多磁盘空间，需要用户手动删除");
+            this.isDeleteTempPic.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -671,6 +689,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label currentAutoPathLabel;
         private System.Windows.Forms.Panel mainPanel;
+        private System.Windows.Forms.CheckBox isDeleteTempPic;
 
     }
 }
