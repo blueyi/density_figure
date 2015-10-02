@@ -25,7 +25,6 @@ namespace Density_figure
 
 
         string currentPic = "";  //文件路径
-        string shortName = "";
         int sWidth;
         int sHeight;//载入图片的宽度和高度
         Point start;//矩形起点
@@ -51,15 +50,37 @@ namespace Density_figure
             //            MessageBox.Show(start.ToString() + "  end:"  + end.ToString());
             try
             {
-                if (start.X <= end.X && start.Y <= end.Y)
+                //原图大小
+                int originalPicWidth = picBox.Image.Width;
+                int originalPicHeight = picBox.Image.Height;
+                //获取图片缩放后的大小
+                PropertyInfo rectangleProperty = picBox.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
+                Rectangle rectangle = (Rectangle)rectangleProperty.GetValue(picBox, null);
+                //图片显示的宽度
+                int picShowWidth = rectangle.Width;
+                int picShowHeight = rectangle.Height;
+                //图片左边或者上边空白的宽度
+                int picLeftWidth = (picShowWidth == picBox.Width) ? 0 : (picBox.Width - picShowWidth) / 2;
+                int picTopHeight = (picShowHeight == picBox.Height) ? 0 : (picBox.Height - picShowHeight) / 2;
+
+                //图片的缩放比例
+                double rate = (double)picShowHeight / (double)originalPicHeight;
+
+                //将显示坐标转换为原图坐标
+                start.X = Convert.ToInt32((double)(start.X - picLeftWidth) / rate);
+                start.Y = Convert.ToInt32((double)(start.Y - picTopHeight) / rate);
+                end.X = Convert.ToInt32((double)(end.X - picLeftWidth) / rate);
+                end.Y = Convert.ToInt32((double)(end.Y - picTopHeight) / rate);
+
+                if (start.X < end.X && start.Y < end.Y)
                 {
                     Bitmap pic = new Bitmap(picName);
                     sWidth = pic.Width;
                     sHeight = pic.Height;
-                    int xa = start.X * sWidth / picBox.Width;
-                    int xb = end.X * sWidth / picBox.Width;
-                    int ya = start.Y * sHeight / picBox.Height;
-                    int yb = end.Y * sHeight / picBox.Height;
+                    int xa = start.X;
+                    int xb = end.X;
+                    int ya = start.Y;
+                    int yb = end.Y;
 
                     Rectangle rec = new Rectangle(0, 0, pic.Width, pic.Height);
                     BitmapData bd = pic.LockBits(rec, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
@@ -71,40 +92,25 @@ namespace Density_figure
                     int w;
                     int h;
                     w = xb - xa + 1;
-                    h = yb - ya;
-                    Bitmap pic1 = new Bitmap(w, h + 1);// (Application.StartupPath + @"\11.jpg");
-                    Rectangle rec6 = new Rectangle(0, 0, w, h + 1);
+                    h = yb - ya + 1;
+                    Bitmap pic1 = new Bitmap(w, h);// (Application.StartupPath + @"\11.jpg");
+                    Rectangle rec6 = new Rectangle(0, 0, w, h);
                     BitmapData bd6 = pic1.LockBits(rec6, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
                     IntPtr ptr6 = bd6.Scan0;
                     int bytes6 = bd6.Stride * bd6.Height;
                     byte[] rgbvalues6 = new byte[bytes6];
                     System.Runtime.InteropServices.Marshal.Copy(ptr6, rgbvalues6, 0, bytes6);
-                    int k = 0;
-                    int t = 0;
 
-                    for (int i = xa; i < xb; i++)
+                    for (int i = xa; i <= xb; i++)
                     {
                         for (int j = ya; j <= yb; j++)
                         {
-                            if (t < h)
-                            {
-                                if (k > w)
-                                    k = w;
-                                rgbvalues6[t * bd6.Stride + k * 3] = rgbvalues[j * bd.Stride + i * 3];
-                                rgbvalues6[t * bd6.Stride + k * 3 + 1] = rgbvalues[j * bd.Stride + i * 3 + 1];
-                                rgbvalues6[t * bd6.Stride + k * 3 + 2] = rgbvalues[j * bd.Stride + i * 3 + 2];
-                                t++;
-                            }
-                            else if ((t == h) & (k <= w))
-                            {
-                                rgbvalues6[t * bd6.Stride + k * 3] = rgbvalues[j * bd.Stride + i * 3];
-                                rgbvalues6[t * bd6.Stride + k * 3 + 1] = rgbvalues[j * bd.Stride + i * 3 + 1];
-                                rgbvalues6[t * bd6.Stride + k * 3 + 2] = rgbvalues[j * bd.Stride + i * 3 + 2];
-                                k++;
-                                t = 0;
-                            }
+                            rgbvalues6[(j - ya) * bd6.Stride + (i - xa) * 3] = rgbvalues[j * bd.Stride + i * 3];
+                            rgbvalues6[(j - ya) * bd6.Stride + (i - xa) * 3 + 1] = rgbvalues[j * bd.Stride + i * 3 + 1];
+                            rgbvalues6[(j - ya) * bd6.Stride + (i - xa) * 3 + 2] = rgbvalues[j * bd.Stride + i * 3 + 2];
                         }
                     }
+
                     System.Runtime.InteropServices.Marshal.Copy(rgbvalues6, 0, ptr6, bytes6);
                     pic1.UnlockBits(bd6);
                     pic1.Save(Application.StartupPath + @"\Temp\" + Path.GetFileNameWithoutExtension(picName) + "_cuted.jpg");  //存储剪切后的图片
@@ -194,8 +200,6 @@ namespace Density_figure
             }
         }
 
-
-
         //grayscale to calculate
         public void picCalculate(string picName, int areaLevel, int areaMin, int areaMax)
         {
@@ -243,29 +247,16 @@ namespace Density_figure
                 int maxIceArea = 0;  //最大冰块
                 int minIceArea = 0;  //最小冰块
 
-                //if (icenum > 1)
-                    iceBlockNum = FindIceBlock.findIce(board, resultIceSum, sWidth, sHeight, icenum, ref maxIceArea, ref minIceArea) - 1;
-                //else
-                //{
-                //    iceBlockNum = 1;
-                //    maxIceArea = minIceArea = 1;
-                //}
-
-
-
+                iceBlockNum = FindIceBlock.findIce(board, resultIceSum, sWidth, sHeight, icenum, ref maxIceArea, ref minIceArea) - 1;
 
                 int icesum = sWidth * sHeight;
                 double mjd = Convert.ToDouble(icenum) / Convert.ToDouble(icesum);
                 double de = Math.Round(mjd, 4);//将小数值舍入到指定精度
                 iceDensityText.Text = de.ToString();
-                //  textBox5.Text = mjd.ToString();
                 iceNumText.Text = iceBlockNum.ToString();
                 maxIceText.Text = maxIceArea.ToString();
                 minIceText.Text = minIceArea.ToString();
                 panel3.Refresh();
-
-                //                    cnt2 = 0;
-
 
                 pic.Dispose();
             }
@@ -282,8 +273,6 @@ namespace Density_figure
             string grayedPic = "";
             if (picName.Length != 0)
             {
-
-                //  MessageBox.Show(originalPic.ImageLocation);   //如何获取picturebox中的图像路径
                 cuttedPic = picCutFunction(originalPicBox, picName, start, end);
                 if (cuttedPic.Length != 0)
                 {
@@ -324,19 +313,13 @@ namespace Density_figure
                 try
                 {
                     currentPic = openFileDialog1.FileName;
-                    shortName = Path.GetFileNameWithoutExtension(currentPic);
-                    //Bitmap pic = new Bitmap(currentPic);
                     originalPicBox.Image = new Bitmap(currentPic);
                     originalPicBox.Refresh();
-                    //picBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                    // button16.Enabled = true;
-                    //                    button22.Enabled = true;
                 }
 
                 catch (Exception err)
                 {
                     MessageBox.Show("系统出错，请重试!---5" + err.Message);
-                    //                    button6.Enabled = false;
                 }
             }
         }
@@ -374,6 +357,7 @@ namespace Density_figure
                     currentPicNameLabel.Text = Path.GetFileName(currentPic);
                     currentPIcNumLabel.Text = picNumToCyc.ToString() + "/" + picNum.ToString();
                     picNumToCyc = 0;
+                    autoCalButton.Enabled = true;
                 }
                 else
                     MessageBox.Show("此文件夹中没有图片，请重新设置！");
@@ -401,9 +385,6 @@ namespace Density_figure
             if (originalPicBox.Image != null)
             {
 
-                //原图大小
-                int originalPicWidth = this.originalPicBox.Image.Width;
-                int originalPicHeight = this.originalPicBox.Image.Height;
                 //获取图片缩放后的大小
                 PropertyInfo rectangleProperty = originalPicBox.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
                 Rectangle rectangle = (Rectangle)rectangleProperty.GetValue(originalPicBox, null);
@@ -414,30 +395,17 @@ namespace Density_figure
                 int picLeftWidth = (picShowWidth == this.originalPicBox.Width) ? 0 : (this.originalPicBox.Width - picShowWidth) / 2;
                 int picTopHeight = (picShowHeight == this.originalPicBox.Height) ? 0 : (this.originalPicBox.Height - picShowHeight) / 2;
 
-                //图片的缩放比例
-                double rate = (double)picShowHeight / (double)originalPicHeight;
-
-                //缩放图中鼠标的坐标
-                int zoom_x = e.X - picLeftWidth;
-                int zoom_y = e.Y - picTopHeight;
-
-                //原图中鼠标的坐标
-                int original_x = Convert.ToInt32((double)zoom_x / rate);
-                int original_y = Convert.ToInt32((double)zoom_y / rate); 
-                
                 if ((e.X > picLeftWidth) && (e.X < picShowWidth + picLeftWidth) && (e.Y > picTopHeight) && (e.Y < picShowHeight + picTopHeight))
                 {
                     mouseInPicPress = true;
                     start = new Point();
                     end = new Point();
-                    //            button7.Enabled = true;  //表示图片已经可以开始通过点击显示来截取
                     g = this.originalPicBox.CreateGraphics();
                     start.X = e.X;
                     start.Y = e.Y;
                     end.X = e.X;
                     end.Y = e.Y;
                     g.DrawLine(new Pen(Color.Red), new Point(start.X, start.Y), new Point(start.X + 2, start.Y));
-                    //g.DrawRectangle(new Pen(Color.Red), e.X,e.Y,e.X ,e.Y );
                     blnDraw = true;
 
                 }
@@ -450,9 +418,6 @@ namespace Density_figure
 
             if (originalPicBox.Image != null && blnDraw)
             {
-                //原图大小
-                int originalPicWidth = this.originalPicBox.Image.Width;
-                int originalPicHeight = this.originalPicBox.Image.Height;
                 //获取图片缩放后的大小
                 PropertyInfo rectangleProperty = originalPicBox.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
                 Rectangle rectangle = (Rectangle)rectangleProperty.GetValue(originalPicBox, null);
@@ -463,28 +428,11 @@ namespace Density_figure
                 int picLeftWidth = (picShowWidth == this.originalPicBox.Width) ? 0 : (this.originalPicBox.Width - picShowWidth) / 2;
                 int picTopHeight = (picShowHeight == this.originalPicBox.Height) ? 0 : (this.originalPicBox.Height - picShowHeight) / 2;
 
-                //图片的缩放比例
-                double rate = (double)picShowHeight / (double)originalPicHeight;
-
-                //缩放图中鼠标的坐标
-                int zoom_x = e.X - picLeftWidth;
-                int zoom_y = e.Y - picTopHeight;
-
-                //原图中鼠标的坐标
-                int original_x = Convert.ToInt32((double)zoom_x / rate);
-                int original_y = Convert.ToInt32((double)zoom_y / rate); 
-
                 if ((e.X > picLeftWidth) && (e.X < picShowWidth + picLeftWidth) && (e.Y > picTopHeight) && (e.Y < picShowHeight + picTopHeight))
                 {
                     g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, e.X - start.X, e.Y - start.Y);
                 }
                 
-                //if (e.X <= (originalPic.Location.X + originalPic.Image.Width) && e.Y <= (originalPic.Location.Y + originalPic.Image.Height))
-                //    g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, e.X - start.X, e.Y - start.Y);
-                //else
-                //    g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, end.X - start.X - 1, end.Y - start.Y - 1);
-
-
                 blnDraw = false;  //表示图片不需要重画，可以用于计算
 
                 autoStart = start;
@@ -495,20 +443,15 @@ namespace Density_figure
                 //设置自动计算的坐标
                 if (picNames != null)
                 {
-                    startPointText.Text = "(" + autoStart.X.ToString() + "," + autoStart.Y.ToString() + ")";
-                    endPointText.Text = "(" + autoEnd.X.ToString() + "," + autoEnd.Y.ToString() + ")";
+                    startPointText.Text = "(" + (autoStart.X - picLeftWidth).ToString() + "," + (autoStart.Y - picTopHeight).ToString() + ")";
+                    endPointText.Text = "(" + (autoEnd.X - picLeftWidth).ToString() + "," + (autoEnd.Y - picTopHeight).ToString() + ")";
                     startPointText.Refresh();
                     endPointText.Refresh();
                 }
-
-                //----------debug------------
-                //                grayedPic = Application.StartupPath + @"\Temp\" + "first1.jpg";
-
             }
         }
         private void originalPic_MouseMove(object sender, MouseEventArgs e)
         {
-            //            Rectangle rectangle = originalPic.RectangleToClient(this.ClientRectangle);
             if (originalPicBox.Image != null)
             {
                 //原图大小
@@ -525,19 +468,13 @@ namespace Density_figure
                 int picTopHeight = (picShowHeight == this.originalPicBox.Height) ? 0 : (this.originalPicBox.Height - picShowHeight) / 2;
 
                 //图片的缩放比例
-                double rate = (double)picShowHeight / (double)originalPicHeight;
-
-                //缩放图中鼠标的坐标
-                int zoom_x = e.X - picLeftWidth;
-                int zoom_y = e.Y - picTopHeight;
-
-                //原图中鼠标的坐标
-                int original_x = Convert.ToInt32((double)zoom_x / rate);
-                int original_y = Convert.ToInt32((double)zoom_y / rate);  
+                double rate_Width = (double)picShowWidth / (double)originalPicWidth;
+                double rate_Height = (double)picShowHeight / (double)originalPicHeight;
+               // picCoordinateTip.Show("（" + rate_Width.ToString() + ";" + rate_Height.ToString() + " ）", this.originalPicBox, new Point(e.X + 100, e.Y));
 
                 if ((e.X > picLeftWidth) && (e.X < picShowWidth + picLeftWidth) && (e.Y > picTopHeight) && (e.Y < picShowHeight + picTopHeight))
                 {
-                    if (blnDraw)
+                    if (blnDraw)  //重画
                     {
                         this.originalPicBox.Refresh();
                         end.X = e.X;
@@ -545,105 +482,24 @@ namespace Density_figure
 
                         g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, e.X - start.X, e.Y - start.Y);
                     }
-                   picCoordinateTip.Show("（" + original_x + ";" + original_y + " ）", this.originalPicBox, new Point(e.X + 100, e.Y));
+                    //缩放图中鼠标的坐标
+                    int zoom_x = e.X - picLeftWidth;
+                    int zoom_y = e.Y - picTopHeight;
 
-                  //  Bitmap bm = (Bitmap)originalPicBox.Image;
-                  //  Color color = bm.GetPixel(e.X, e.Y);
-                  //  int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
-                  //  picCoordinateTip.Show("（" + e.X + ";" + e.Y + " ）" + gray, this.originalPicBox, new Point(e.X + 100, e.Y));
+                    //原图中鼠标的坐标
+                    int original_x = Convert.ToInt32((double)zoom_x / rate_Height);
+                    int original_y = Convert.ToInt32((double)zoom_y / rate_Height);
+                    if (original_x > originalPicWidth)
+                        original_x = originalPicWidth - 1;
+                    if (original_y > originalPicHeight)
+                        original_y = originalPicHeight - 1;
 
-                }
-
-
-                /*
-                if (blnDraw)
-                {
-                    //先擦除
-
-                    //g.DrawRectangle(new Pen(Color.White), start.X, start.Y, end.X - start.X, end.Y - start.Y);
-                    this.originalPicBox.Refresh();
-                    if (mouseInPicPress && (e.X > (originalPicBox.Location.X + originalPicBox.Image.Width)))
-                    {
-                        end.X = originalPicBox.Image.Width;
-                    }
-                    else
-                        end.X = e.X;
-
-                    if (mouseInPicPress && (e.Y > (originalPicBox.Location.Y + originalPicBox.Image.Height)))
-                        end.Y = originalPicBox.Image.Height;
-                    else
-                        end.Y = e.Y;
-                    //再画
-
-                    if (e.X <= (originalPicBox.Location.X + originalPicBox.Image.Width) && e.Y <= (originalPicBox.Location.Y + originalPicBox.Image.Height))
-                        g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, e.X - start.X, e.Y - start.Y);
-                    else
-                        g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, end.X - start.X - 1, end.Y - start.Y - 1);
-                }
-                */
-
-                /*
-                double heigh = originalPicBox.Image.Height;
-                double width = originalPicBox.Image.Width;
-                double h = (double)originalPicBox.Height / heigh;
-                double w = (double)originalPicBox.Width / width;
-                if (h <= w)
-                {
-                    double wid = ((double)originalPicBox.Width - originalPicBox.Image.Width * h) / 2;
-                    if ((int)wid < e.X && e.X < (int)(originalPicBox.Width - wid))
-                    {
-                        int x = (int)(e.X - wid);
-                        Bitmap bm = (Bitmap)originalPicBox.Image;
-                        //label1.Text = string.Format("当前坐标点：（{0}，{1}） 灰度值：{2}", x, e.Y, bm.GetPixel(x, e.Y));
-
-                        int x1 = (int)(x / h);
-                        int y1 = (int)(e.Y / h);
-                        if (x1 < originalPicBox.Image.Width && x1 >= 0)
-                        {
-                            if (y1 >= 0 && y1 < originalPicBox.Image.Height)
-                            {
-                                Color color = bm.GetPixel(x1, y1);
-                                int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
-                                // if (rectangle.Contains(MousePosition))
-                                picCoordinateTip.Show("（" + x + ";" + e.Y + " ）" + gray, this.originalPicBox, new Point(e.X + 100, e.Y));
-                                //  else
-                                //  picCoordinateTip.Hide(originalPic);
-                                //picCoordinateTip.Show("("+x+";"+e.Y+")"+gray);
-                                //textBox19.Text = string.Format("灰度值{0}", gray);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    double hei = ((double)originalPicBox.Height - originalPicBox.Image.Height * w) / 2;
-                    if ((int)hei < e.Y && e.Y < (int)(originalPicBox.Height - hei))
-                    {
-                        int y = (int)(e.Y - hei);
-                        Bitmap bm = (Bitmap)originalPicBox.Image;
-                        //label1.Text = string.Format("当前坐标点：（{0}，{1}） 灰度值：{2}", e.X, y, bm.GetPixel(e.X, y));
-
-                        int x1 = (int)(e.X / w);
-                        int y1 = (int)(y / w);
-                        if (x1 < originalPicBox.Image.Width && x1 >= 0)
-                        {
-                            if (y1 >= 0 && y1 < originalPicBox.Image.Height)
-                            {
-                                Color color = bm.GetPixel(x1, y1);
-                                int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
-                                //textBox19.Text = string.Format("灰度值{0}", gray);
-                                //                                if (rectangle.Contains(MousePosition))
-                                picCoordinateTip.Show("" + e.X + ";" + y + " (" + gray + ")", this.originalPicBox, new Point(e.X + 120, e.Y));
-                                //                                else
-                                //                                    picCoordinateTip.Hide(originalPic);
-
-                            }
-                        }
-                    }
+                    Bitmap bm = (Bitmap)originalPicBox.Image;
+                    Color color = bm.GetPixel(original_x, original_y);
+                    int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
+                    picCoordinateTip.Show("（" + zoom_x + ";" + zoom_y + " ）" + gray, this.originalPicBox, new Point(e.X + 100, e.Y));
 
                 }
-                 */
-
             }
             else
             {
@@ -657,7 +513,7 @@ namespace Density_figure
         {
             originalPicBox.Enabled = false;
             selectPicFolder();
-            autoCalButton.Enabled = true;
+
             originalPicBox.Enabled = true;
         }
 
@@ -715,12 +571,7 @@ namespace Density_figure
             }
             else
                 picNumToCyc = 0;
-            // -----------debug-------
-            //            if (timer.Enabled)
-            //            {
-            //                g = this.originalPic.CreateGraphics();
-            //                g.DrawRectangle(new Pen(Color.Red), autoStart.X, autoStart.Y, autoEnd.X - autoStart.X, autoEnd.Y - autoStart.Y);
-            //            }
+
         }
 
         private void startPointText_Click(object sender, EventArgs e)
