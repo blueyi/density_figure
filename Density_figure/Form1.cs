@@ -392,6 +392,9 @@ namespace Density_figure
                     currentPIcNumLabel.Text = picNumToCyc.ToString() + "/" + picNum.ToString();
                     picNumToCyc = 0;
                     autoCalButton.Enabled = true;
+                    startPointText.Enabled = true;
+                    endPointText.Enabled = true;
+                    timeToCalue.Enabled = true;
                 }
                 else
                     MessageBox.Show("此文件夹中没有图片，请重新设置！");
@@ -677,6 +680,16 @@ namespace Density_figure
         private void endPointText_Click(object sender, EventArgs e)
         {
             MessageBox.Show("请使用鼠标在图片中选择自动计算区域");
+        }
+
+        private void openTempButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", Application.StartupPath + @"\Temp\");
+        }
+
+        private void openDatasButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", Application.StartupPath + @"\Datas\");
         }
 
     }

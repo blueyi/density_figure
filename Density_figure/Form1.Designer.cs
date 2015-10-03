@@ -74,6 +74,8 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.otherTip = new System.Windows.Forms.ToolTip(this.components);
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.openTempButton = new System.Windows.Forms.Button();
+            this.openDatasButton = new System.Windows.Forms.Button();
             this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).BeginInit();
             this.panel2.SuspendLayout();
@@ -160,6 +162,8 @@
             this.panel2.Controls.Add(this.areaLevelLabel);
             this.panel2.Controls.Add(this.grayLabel);
             this.panel2.Controls.Add(this.autoNotifyLabel);
+            this.panel2.Controls.Add(this.openDatasButton);
+            this.panel2.Controls.Add(this.openTempButton);
             this.panel2.Controls.Add(this.openPicButton);
             this.panel2.Location = new System.Drawing.Point(322, 42);
             this.panel2.Name = "panel2";
@@ -305,7 +309,7 @@
             this.openPicButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.openPicButton.Location = new System.Drawing.Point(-2, -2);
             this.openPicButton.Name = "openPicButton";
-            this.openPicButton.Size = new System.Drawing.Size(85, 117);
+            this.openPicButton.Size = new System.Drawing.Size(85, 37);
             this.openPicButton.TabIndex = 0;
             this.openPicButton.Text = "打开图像";
             this.otherTip.SetToolTip(this.openPicButton, "点击打开用于手动计算的jpg或者bmp图片");
@@ -332,32 +336,36 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(145, 75);
+            this.label4.Location = new System.Drawing.Point(123, 78);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 12);
+            this.label4.Size = new System.Drawing.Size(59, 12);
             this.label4.TabIndex = 6;
-            this.label4.Text = "终点:";
+            this.label4.Text = "终点坐标:";
+            this.otherTip.SetToolTip(this.label4, "设置完图片路径后，使用鼠标在图中选择起点和终点");
             // 
             // startLabel
             // 
             this.startLabel.AutoSize = true;
-            this.startLabel.Location = new System.Drawing.Point(144, 44);
+            this.startLabel.Location = new System.Drawing.Point(123, 44);
             this.startLabel.Name = "startLabel";
-            this.startLabel.Size = new System.Drawing.Size(35, 12);
+            this.startLabel.Size = new System.Drawing.Size(59, 12);
             this.startLabel.TabIndex = 6;
-            this.startLabel.Text = "起点:";
+            this.startLabel.Text = "起点坐标:";
+            this.otherTip.SetToolTip(this.startLabel, "设置完图片路径后，使用鼠标在图中选择起点和终点");
             // 
             // endPointText
             // 
-            this.endPointText.Location = new System.Drawing.Point(186, 72);
+            this.endPointText.Enabled = false;
+            this.endPointText.Location = new System.Drawing.Point(185, 69);
             this.endPointText.Name = "endPointText";
             this.endPointText.Size = new System.Drawing.Size(78, 21);
             this.endPointText.TabIndex = 5;
-            this.otherTip.SetToolTip(this.endPointText, "设置完图片路径后使用鼠标在图中选择起点和终点");
+            this.otherTip.SetToolTip(this.endPointText, "设置完图片路径后，使用鼠标在图中选择起点和终点");
             this.endPointText.Click += new System.EventHandler(this.endPointText_Click);
             // 
             // startPointText
             // 
+            this.startPointText.Enabled = false;
             this.startPointText.Location = new System.Drawing.Point(185, 36);
             this.startPointText.Name = "startPointText";
             this.startPointText.Size = new System.Drawing.Size(78, 21);
@@ -380,6 +388,7 @@
             // 
             // timeToCalue
             // 
+            this.timeToCalue.Enabled = false;
             this.timeToCalue.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.timeToCalue.Location = new System.Drawing.Point(186, 3);
             this.timeToCalue.Maximum = new decimal(new int[] {
@@ -396,7 +405,7 @@
             this.timeToCalue.Size = new System.Drawing.Size(43, 23);
             this.timeToCalue.TabIndex = 4;
             this.timeToCalue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.otherTip.SetToolTip(this.timeToCalue, "设计自动计算的时间间隔");
+            this.otherTip.SetToolTip(this.timeToCalue, "设置完图像路径后，设置自动计算的时间间隔\r\n");
             this.timeToCalue.Value = new decimal(new int[] {
             1,
             0,
@@ -422,6 +431,7 @@
             this.timeLabel.Size = new System.Drawing.Size(59, 12);
             this.timeLabel.TabIndex = 3;
             this.timeLabel.Text = "时间间隔:";
+            this.otherTip.SetToolTip(this.timeLabel, "设置完图像路径后，设置自动计算的时间间隔");
             // 
             // iceNumText
             // 
@@ -616,6 +626,30 @@
             this.mainPanel.Size = new System.Drawing.Size(760, 656);
             this.mainPanel.TabIndex = 10;
             // 
+            // openTempButton
+            // 
+            this.openTempButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.openTempButton.Location = new System.Drawing.Point(-2, 38);
+            this.openTempButton.Name = "openTempButton";
+            this.openTempButton.Size = new System.Drawing.Size(85, 37);
+            this.openTempButton.TabIndex = 0;
+            this.openTempButton.Text = "打开临时文件夹";
+            this.otherTip.SetToolTip(this.openTempButton, "打开用于存放中间图片的文件夹");
+            this.openTempButton.UseVisualStyleBackColor = true;
+            this.openTempButton.Click += new System.EventHandler(this.openTempButton_Click);
+            // 
+            // openDatasButton
+            // 
+            this.openDatasButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.openDatasButton.Location = new System.Drawing.Point(-2, 79);
+            this.openDatasButton.Name = "openDatasButton";
+            this.openDatasButton.Size = new System.Drawing.Size(85, 37);
+            this.openDatasButton.TabIndex = 0;
+            this.openDatasButton.Text = "打开数据文件夹";
+            this.otherTip.SetToolTip(this.openDatasButton, "打开存放有历史计算数据的文件夹，手动计算历史数据存放在manual.txt中\r\n自动计算的历史数据存放在以计算日期为文件名的txt文件中");
+            this.openDatasButton.UseVisualStyleBackColor = true;
+            this.openDatasButton.Click += new System.EventHandler(this.openDatasButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -691,6 +725,8 @@
         private System.Windows.Forms.Label currentAutoPathLabel;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.CheckBox isDeleteTempPic;
+        private System.Windows.Forms.Button openDatasButton;
+        private System.Windows.Forms.Button openTempButton;
 
     }
 }
