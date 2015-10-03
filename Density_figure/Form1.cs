@@ -286,7 +286,7 @@ namespace Density_figure
                 iceNumText.Text = iceBlockNum.ToString();
                 maxIceText.Text = maxIceArea.ToString();
                 minIceText.Text = minIceArea.ToString();
-                calculateResultPanel.Refresh();
+                panel3.Refresh();
 
 
 

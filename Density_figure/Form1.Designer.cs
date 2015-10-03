@@ -59,12 +59,12 @@
             this.timeLabel = new System.Windows.Forms.Label();
             this.iceNumText = new System.Windows.Forms.Label();
             this.iceDensityText = new System.Windows.Forms.Label();
-            this.calculateResultPanel = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.minIceLabel = new System.Windows.Forms.Label();
             this.maxIceLabel = new System.Windows.Forms.Label();
             this.minIceText = new System.Windows.Forms.Label();
             this.maxIceText = new System.Windows.Forms.Label();
-            this.menuPanel = new System.Windows.Forms.Panel();
+            this.bottom = new System.Windows.Forms.Panel();
             this.isDeleteTempPic = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -76,6 +76,7 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.otherTip = new System.Windows.Forms.ToolTip(this.components);
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.versionLabel = new System.Windows.Forms.Label();
             this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).BeginInit();
             this.manualButtonPanel.SuspendLayout();
@@ -85,8 +86,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.grayNum)).BeginInit();
             this.autoButtonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timeToCalue)).BeginInit();
-            this.calculateResultPanel.SuspendLayout();
-            this.menuPanel.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.bottom.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,6 +97,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picPanel.AutoScroll = true;
+            this.picPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picPanel.Controls.Add(this.originalPicBox);
             this.picPanel.Location = new System.Drawing.Point(3, 3);
             this.picPanel.Name = "picPanel";
@@ -109,7 +111,7 @@
             this.originalPicBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.originalPicBox.Location = new System.Drawing.Point(0, 0);
             this.originalPicBox.Name = "originalPicBox";
-            this.originalPicBox.Size = new System.Drawing.Size(776, 441);
+            this.originalPicBox.Size = new System.Drawing.Size(774, 439);
             this.originalPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.originalPicBox.TabIndex = 0;
             this.originalPicBox.TabStop = false;
@@ -478,20 +480,20 @@
             this.iceDensityText.TabIndex = 6;
             this.iceDensityText.Text = "0.0";
             // 
-            // calculateResultPanel
+            // panel3
             // 
-            this.calculateResultPanel.Controls.Add(this.minIceLabel);
-            this.calculateResultPanel.Controls.Add(this.maxIceLabel);
-            this.calculateResultPanel.Controls.Add(this.iceDensityLabel);
-            this.calculateResultPanel.Controls.Add(this.minIceText);
-            this.calculateResultPanel.Controls.Add(this.maxIceText);
-            this.calculateResultPanel.Controls.Add(this.iceDensityText);
-            this.calculateResultPanel.Controls.Add(this.iceNumLabel);
-            this.calculateResultPanel.Controls.Add(this.iceNumText);
-            this.calculateResultPanel.Location = new System.Drawing.Point(72, 6);
-            this.calculateResultPanel.Name = "calculateResultPanel";
-            this.calculateResultPanel.Size = new System.Drawing.Size(640, 31);
-            this.calculateResultPanel.TabIndex = 7;
+            this.panel3.Controls.Add(this.minIceLabel);
+            this.panel3.Controls.Add(this.maxIceLabel);
+            this.panel3.Controls.Add(this.iceDensityLabel);
+            this.panel3.Controls.Add(this.minIceText);
+            this.panel3.Controls.Add(this.maxIceText);
+            this.panel3.Controls.Add(this.iceDensityText);
+            this.panel3.Controls.Add(this.iceNumLabel);
+            this.panel3.Controls.Add(this.iceNumText);
+            this.panel3.Location = new System.Drawing.Point(72, 6);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(640, 31);
+            this.panel3.TabIndex = 7;
             // 
             // minIceLabel
             // 
@@ -535,28 +537,30 @@
             this.maxIceText.TabIndex = 6;
             this.maxIceText.Text = "0.0";
             // 
-            // menuPanel
+            // bottom
             // 
-            this.menuPanel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.menuPanel.Controls.Add(this.isDeleteTempPic);
-            this.menuPanel.Controls.Add(this.label2);
-            this.menuPanel.Controls.Add(this.label6);
-            this.menuPanel.Controls.Add(this.label5);
-            this.menuPanel.Controls.Add(this.currentPIcNumLabel);
-            this.menuPanel.Controls.Add(this.currentAutoPathLabel);
-            this.menuPanel.Controls.Add(this.currentPicNameLabel);
-            this.menuPanel.Controls.Add(this.manualButtonPanel);
-            this.menuPanel.Controls.Add(this.calculateResultPanel);
-            this.menuPanel.Controls.Add(this.autoButtonPanel);
-            this.menuPanel.Location = new System.Drawing.Point(2, 451);
-            this.menuPanel.Name = "menuPanel";
-            this.menuPanel.Size = new System.Drawing.Size(778, 200);
-            this.menuPanel.TabIndex = 9;
+            this.bottom.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.bottom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.bottom.Controls.Add(this.isDeleteTempPic);
+            this.bottom.Controls.Add(this.label2);
+            this.bottom.Controls.Add(this.label6);
+            this.bottom.Controls.Add(this.label5);
+            this.bottom.Controls.Add(this.currentPIcNumLabel);
+            this.bottom.Controls.Add(this.versionLabel);
+            this.bottom.Controls.Add(this.currentAutoPathLabel);
+            this.bottom.Controls.Add(this.currentPicNameLabel);
+            this.bottom.Controls.Add(this.manualButtonPanel);
+            this.bottom.Controls.Add(this.panel3);
+            this.bottom.Controls.Add(this.autoButtonPanel);
+            this.bottom.Location = new System.Drawing.Point(2, 451);
+            this.bottom.Name = "bottom";
+            this.bottom.Size = new System.Drawing.Size(778, 200);
+            this.bottom.TabIndex = 9;
             // 
             // isDeleteTempPic
             // 
             this.isDeleteTempPic.AutoSize = true;
-            this.isDeleteTempPic.Location = new System.Drawing.Point(624, 165);
+            this.isDeleteTempPic.Location = new System.Drawing.Point(646, 165);
             this.isDeleteTempPic.Name = "isDeleteTempPic";
             this.isDeleteTempPic.Size = new System.Drawing.Size(120, 16);
             this.isDeleteTempPic.TabIndex = 8;
@@ -642,12 +646,21 @@
             this.mainPanel.AutoScroll = true;
             this.mainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mainPanel.Controls.Add(this.picPanel);
-            this.mainPanel.Controls.Add(this.menuPanel);
+            this.mainPanel.Controls.Add(this.bottom);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 0);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(784, 662);
             this.mainPanel.TabIndex = 10;
+            // 
+            // versionLabel
+            // 
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.Location = new System.Drawing.Point(643, 181);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(125, 12);
+            this.versionLabel.TabIndex = 7;
+            this.versionLabel.Text = "当前程序版本: V1.0.0";
             // 
             // MainForm
             // 
@@ -658,7 +671,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(800, 400);
             this.Name = "MainForm";
-            this.Text = "冰密度计算";
+            this.Text = "冰密集度计算";
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.picPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).EndInit();
@@ -671,10 +684,10 @@
             this.autoButtonPanel.ResumeLayout(false);
             this.autoButtonPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timeToCalue)).EndInit();
-            this.calculateResultPanel.ResumeLayout(false);
-            this.calculateResultPanel.PerformLayout();
-            this.menuPanel.ResumeLayout(false);
-            this.menuPanel.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.bottom.ResumeLayout(false);
+            this.bottom.PerformLayout();
             this.mainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -700,12 +713,12 @@
         private System.Windows.Forms.Button autoCalButton;
         private System.Windows.Forms.Label iceNumText;
         private System.Windows.Forms.Label iceDensityText;
-        private System.Windows.Forms.Panel calculateResultPanel;
+        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label minIceLabel;
         private System.Windows.Forms.Label maxIceLabel;
         private System.Windows.Forms.Label minIceText;
         private System.Windows.Forms.Label maxIceText;
-        private System.Windows.Forms.Panel menuPanel;
+        private System.Windows.Forms.Panel bottom;
         private System.Windows.Forms.NumericUpDown areaSectionMax;
         private System.Windows.Forms.NumericUpDown areaSectionMin;
         private System.Windows.Forms.ToolTip picCoordinateTip;
@@ -728,6 +741,7 @@
         private System.Windows.Forms.CheckBox isDeleteTempPic;
         private System.Windows.Forms.Button openDatasButton;
         private System.Windows.Forms.Button openTempButton;
+        private System.Windows.Forms.Label versionLabel;
 
     }
 }
