@@ -686,12 +686,22 @@ namespace Density_figure
 
         private void openTempButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("explorer.exe", Application.StartupPath + @"\Temp\");
+            string path = Application.StartupPath; 
+            if (path.EndsWith(@"\"))
+                path = Application.StartupPath + @"Temp";
+            else
+                path = Application.StartupPath + @"\Temp";
+            System.Diagnostics.Process.Start("explorer.exe", path);
         }
 
         private void openDatasButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("explorer.exe", Application.StartupPath + @"\Datas\");
+            string path = Application.StartupPath;
+            if (path.EndsWith(@"\"))
+                path = Application.StartupPath + @"Datas";
+            else
+                path = Application.StartupPath + @"\Datas";
+            System.Diagnostics.Process.Start("explorer.exe", path);
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
