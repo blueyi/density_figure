@@ -96,7 +96,7 @@ namespace Density_figure
 
                 //图片的缩放比例
                 double rate = (double)picShowHeight / (double)originalPicHeight;
-                
+
                 //将显示坐标转换为原图坐标
                 start.X = Convert.ToInt32((double)(start.X - picLeftWidth) / rate);
                 start.Y = Convert.ToInt32((double)(start.Y - picTopHeight) / rate);
@@ -286,7 +286,7 @@ namespace Density_figure
                 iceNumText.Text = iceBlockNum.ToString();
                 maxIceText.Text = maxIceArea.ToString();
                 minIceText.Text = minIceArea.ToString();
-                panel3.Refresh();
+                calculateResultPanel.Refresh();
 
 
 
@@ -329,7 +329,7 @@ namespace Density_figure
                 if (File.Exists(grayedPic))
                     File.Delete(grayedPic);
             }
-       }
+        }
 
 
         //----选择图片函数
@@ -535,12 +535,12 @@ namespace Density_figure
             {
                 //原图大小
                 int originalPicWidth = this.originalPicBox.Image.Width;
-                int originalPicHeight = this.originalPicBox.Image.Height; 
+                int originalPicHeight = this.originalPicBox.Image.Height;
                 //获取图片缩放后的大小
                 PropertyInfo rectangleProperty = originalPicBox.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
                 Rectangle rectangle = (Rectangle)rectangleProperty.GetValue(originalPicBox, null);
                 //图片显示的宽度
-                int picShowWidth = rectangle.Width;  
+                int picShowWidth = rectangle.Width;
                 int picShowHeight = rectangle.Height;
                 //图片左边或者上边空白的宽度
                 int picLeftWidth = (picShowWidth == this.originalPicBox.Width) ? 0 : (this.originalPicBox.Width - picShowWidth) / 2;
@@ -549,10 +549,12 @@ namespace Density_figure
                 //图片的缩放比例
                 double rate_Width = (double)picShowWidth / (double)originalPicWidth;
                 double rate_Height = (double)picShowHeight / (double)originalPicHeight;
-               // picCoordinateTip.Show("（" + rate_Width.ToString() + ";" + rate_Height.ToString() + " ）", this.originalPicBox, new Point(e.X + 100, e.Y));
 
+                //if (rectangle.Contains(e.Location))  //这是一个更好的解决方式
                 if ((e.X > picLeftWidth) && (e.X < picShowWidth + picLeftWidth) && (e.Y > picTopHeight) && (e.Y < picShowHeight + picTopHeight))
                 {
+
+                    picCoordinateTip.Active = true;
                     if (mouseInPicPress)  //重画
                     {
                         this.originalPicBox.Refresh();
@@ -585,9 +587,9 @@ namespace Density_figure
                     Bitmap bm = (Bitmap)originalPicBox.Image;
                     Color color = bm.GetPixel(original_x, original_y);
                     int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
-                    picCoordinateTip.Show("（" + zoom_x + ";" + zoom_y + " ）" + gray, this.originalPicBox, new Point(e.X + 100, e.Y));
-
+                    picCoordinateTip.Show("（" + zoom_x + "," + zoom_y + "）" + gray, this.originalPicBox, new Point(e.X + 60, e.Y));
                 }
+                picCoordinateTip.Active = false;
             }
             else
             {
@@ -690,6 +692,11 @@ namespace Density_figure
         private void openDatasButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("explorer.exe", Application.StartupPath + @"\Datas\");
+        }
+
+        private void MainForm_SizeChanged(object sender, EventArgs e)
+        {
+            this.originalPicBox.Refresh();
         }
 
     }
