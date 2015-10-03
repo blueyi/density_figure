@@ -144,7 +144,7 @@
             this.setFolderButton.Location = new System.Drawing.Point(0, 3);
             this.setFolderButton.Name = "setFolderButton";
             this.setFolderButton.Size = new System.Drawing.Size(96, 54);
-            this.setFolderButton.TabIndex = 0;
+            this.setFolderButton.TabIndex = 1;
             this.setFolderButton.Text = "设置图像路径";
             this.otherTip.SetToolTip(this.setFolderButton, "点击选择用于自动计算的文件夹，文件夹内需要是jpg或者bmp图片");
             this.setFolderButton.UseVisualStyleBackColor = true;
@@ -380,7 +380,7 @@
             this.autoCalButton.Location = new System.Drawing.Point(0, 60);
             this.autoCalButton.Name = "autoCalButton";
             this.autoCalButton.Size = new System.Drawing.Size(96, 54);
-            this.autoCalButton.TabIndex = 0;
+            this.autoCalButton.TabIndex = 4;
             this.autoCalButton.Text = "自动计算";
             this.otherTip.SetToolTip(this.autoCalButton, "1. 点击自动计算前请先设置图像路径和计算区域\r\n2. 开始自动计算后可能通过点击停止来暂停自动计算并查看当前选择的自动计算区域");
             this.autoCalButton.UseVisualStyleBackColor = true;
@@ -632,7 +632,7 @@
             this.openTempButton.Location = new System.Drawing.Point(-2, 38);
             this.openTempButton.Name = "openTempButton";
             this.openTempButton.Size = new System.Drawing.Size(85, 37);
-            this.openTempButton.TabIndex = 0;
+            this.openTempButton.TabIndex = 2;
             this.openTempButton.Text = "打开临时文件夹";
             this.otherTip.SetToolTip(this.openTempButton, "打开用于存放中间图片的文件夹");
             this.openTempButton.UseVisualStyleBackColor = true;
@@ -644,7 +644,7 @@
             this.openDatasButton.Location = new System.Drawing.Point(-2, 79);
             this.openDatasButton.Name = "openDatasButton";
             this.openDatasButton.Size = new System.Drawing.Size(85, 37);
-            this.openDatasButton.TabIndex = 0;
+            this.openDatasButton.TabIndex = 3;
             this.openDatasButton.Text = "打开数据文件夹";
             this.otherTip.SetToolTip(this.openDatasButton, "打开存放有历史计算数据的文件夹，手动计算历史数据存放在manual.txt中\r\n自动计算的历史数据存放在以计算日期为文件名的txt文件中");
             this.openDatasButton.UseVisualStyleBackColor = true;
