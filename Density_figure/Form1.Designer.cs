@@ -63,6 +63,7 @@
             this.minIceText = new System.Windows.Forms.Label();
             this.maxIceText = new System.Windows.Forms.Label();
             this.bottom = new System.Windows.Forms.Panel();
+            this.isDeleteTempPic = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -73,7 +74,6 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.otherTip = new System.Windows.Forms.ToolTip(this.components);
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.isDeleteTempPic = new System.Windows.Forms.CheckBox();
             this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).BeginInit();
             this.panel2.SuspendLayout();
@@ -521,6 +521,17 @@
             this.bottom.Size = new System.Drawing.Size(754, 200);
             this.bottom.TabIndex = 9;
             // 
+            // isDeleteTempPic
+            // 
+            this.isDeleteTempPic.AutoSize = true;
+            this.isDeleteTempPic.Location = new System.Drawing.Point(624, 165);
+            this.isDeleteTempPic.Name = "isDeleteTempPic";
+            this.isDeleteTempPic.Size = new System.Drawing.Size(120, 16);
+            this.isDeleteTempPic.TabIndex = 8;
+            this.isDeleteTempPic.Text = "是否保留临时文件";
+            this.otherTip.SetToolTip(this.isDeleteTempPic, "勾选该选项后可以在程序所在文件夹下Temp文件夹中查看当前所处理图像的中间图像\r\n勾选该选项后会额外占用较多磁盘空间，需要用户手动删除");
+            this.isDeleteTempPic.UseVisualStyleBackColor = true;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -596,6 +607,7 @@
             this.mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.mainPanel.AutoScroll = true;
             this.mainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mainPanel.Controls.Add(this.picPanel);
             this.mainPanel.Controls.Add(this.bottom);
@@ -603,17 +615,6 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(760, 656);
             this.mainPanel.TabIndex = 10;
-            // 
-            // isDeleteTempPic
-            // 
-            this.isDeleteTempPic.AutoSize = true;
-            this.isDeleteTempPic.Location = new System.Drawing.Point(624, 165);
-            this.isDeleteTempPic.Name = "isDeleteTempPic";
-            this.isDeleteTempPic.Size = new System.Drawing.Size(120, 16);
-            this.isDeleteTempPic.TabIndex = 8;
-            this.isDeleteTempPic.Text = "是否保留临时文件";
-            this.otherTip.SetToolTip(this.isDeleteTempPic, "勾选该选项后可以在程序所在文件夹下Temp文件夹中查看当前所处理图像的中间图像\r\n勾选该选项后会额外占用较多磁盘空间，需要用户手动删除");
-            this.isDeleteTempPic.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 

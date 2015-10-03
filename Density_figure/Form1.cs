@@ -31,24 +31,30 @@ namespace Density_figure
             FileStream fs;
             StreamWriter sw;
             string manualTitle = "计算时间" + "\t" + "冰块数量" + "\t" + "密集度" + "\t"
-                + "最大冰块面积" + "\t" + "最小冰块面积" + "\t" + "图像地址";  
-            fs = new FileStream(Application.StartupPath + @"\Datas\manual.txt", FileMode.Append);
-            sw = new StreamWriter(fs);
-            sw.WriteLine(manualTitle);
-            sw.Flush();
-            sw.Close();
-            fs.Close();
+                + "最大冰块面积" + "\t" + "最小冰块面积" + "\t" + "图像地址";
+            if (!File.Exists(Application.StartupPath + @"\Datas\manual.txt"))
+            {
+                fs = new FileStream(Application.StartupPath + @"\Datas\manual.txt", FileMode.Append);
+                sw = new StreamWriter(fs);
+                sw.WriteLine(manualTitle);
+                sw.Flush();
+                fs.Flush();
+                sw.Close();
+                fs.Close();
+            }
 
             //创建自动计算文件
-            fs = new FileStream(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt", FileMode.Append);
-            sw = new StreamWriter(fs);
-            sw.WriteLine(manualTitle);
-            sw.Flush();
-            sw.Close();
-            fs.Close();
-
+            if (!File.Exists(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt"))
+            {
+                fs = new FileStream(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt", FileMode.Append);
+                sw = new StreamWriter(fs);
+                sw.WriteLine(manualTitle);
+                sw.Flush();
+                fs.Flush();
+                sw.Close();
+                fs.Close();
+            }
         }
-
 
         string currentPic = "";  //文件路径
         int sWidth;
@@ -60,7 +66,6 @@ namespace Density_figure
         Point autoEnd;//自动计算的终点
 
         int[,] board;  //存储图片宽和高
-        bool blnDraw;  //鼠标被按下时为真，表示此时区域已经选择，可以重新选择区域
 
         Graphics g;  //封装的绘图画面
 
@@ -91,7 +96,7 @@ namespace Density_figure
 
                 //图片的缩放比例
                 double rate = (double)picShowHeight / (double)originalPicHeight;
-
+                
                 //将显示坐标转换为原图坐标
                 start.X = Convert.ToInt32((double)(start.X - picLeftWidth) / rate);
                 start.Y = Convert.ToInt32((double)(start.Y - picTopHeight) / rate);
@@ -144,7 +149,6 @@ namespace Density_figure
 
                     return Application.StartupPath + @"\Temp\" + Path.GetFileNameWithoutExtension(picName) + "_cuted.jpg";
                 }
-
                 else
                 {
                     MessageBox.Show("划线未完成，请重新划线！");
@@ -154,7 +158,7 @@ namespace Density_figure
             }
             catch (Exception err)
             {
-                MessageBox.Show("系统出错，请重试!---1" + err.Message);
+                MessageBox.Show("系统出错，请重试!---1 " + err.Message);
                 return "";
             }
         }
@@ -400,6 +404,23 @@ namespace Density_figure
             }
         }
 
+        //修正矩形的起点和终点
+        public void revisePoint(ref Point start, ref Point end)
+        {
+            int temp;
+            if (start.X > end.X)
+            {
+                temp = start.X;
+                start.X = end.X;
+                end.X = temp;
+            }
+            if (start.Y > end.Y)
+            {
+                temp = start.Y;
+                start.Y = end.Y;
+                end.Y = temp;
+            }
+        }
         private void openPicButton_Click(object sender, EventArgs e)
         {
             openPictFunction();
@@ -407,9 +428,11 @@ namespace Density_figure
 
         //----选择图片区域
 
-        //画出起点
+        bool mouseInPicPress = false;  //表示鼠标被按下
 
-        bool mouseInPicPress = false;
+        Point mouseMoveBorderStart;  //由mouseMove确定的边界起点，以用于当鼠标移出图像时的start
+        Point mouseMoveBorderEnd;  //由mouseMove确定的边界终点，以用于当鼠标移出图像时的end
+        //画出起点
         private void originalPic_MouseDown(object sender, MouseEventArgs e)
         {
             if (originalPicBox.Image != null)
@@ -436,7 +459,6 @@ namespace Density_figure
                     end.X = e.X;
                     end.Y = e.Y;
                     g.DrawLine(new Pen(Color.Red), new Point(start.X, start.Y), new Point(start.X + 2, start.Y));
-                    blnDraw = true;
 
                 }
             }
@@ -446,8 +468,10 @@ namespace Density_figure
         private void originalPic_MouseUp(object sender, MouseEventArgs e)
         {
 
-            if (originalPicBox.Image != null && blnDraw)
+            if (originalPicBox.Image != null && mouseInPicPress)
             {
+
+                mouseInPicPress = false;  //表示图片不需要重画，可以用于计算
                 //获取图片缩放后的大小
                 PropertyInfo rectangleProperty = originalPicBox.GetType().GetProperty("ImageRectangle", BindingFlags.Instance | BindingFlags.NonPublic);
                 Rectangle rectangle = (Rectangle)rectangleProperty.GetValue(originalPicBox, null);
@@ -460,10 +484,21 @@ namespace Density_figure
 
                 if ((e.X > picLeftWidth) && (e.X < picShowWidth + picLeftWidth) && (e.Y > picTopHeight) && (e.Y < picShowHeight + picTopHeight))
                 {
-                    g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, e.X - start.X, e.Y - start.Y);
+                    end.X = e.X;
+                    end.Y = e.Y;
                 }
-                
-                blnDraw = false;  //表示图片不需要重画，可以用于计算
+                else
+                {
+                    start.X = mouseMoveBorderStart.X;
+                    start.Y = mouseMoveBorderStart.Y;
+
+                    end.X = mouseMoveBorderEnd.X;
+                    end.Y = mouseMoveBorderEnd.Y;
+                }
+
+                //修正矩形的起点和终点
+                revisePoint(ref start, ref end);
+                g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, end.X - start.X, end.Y - start.Y);
 
                 autoStart = start;
                 autoEnd = end;
@@ -490,6 +525,7 @@ namespace Density_figure
                 }
             }
         }
+
         private void originalPic_MouseMove(object sender, MouseEventArgs e)
         {
             if (originalPicBox.Image != null)
@@ -514,13 +550,22 @@ namespace Density_figure
 
                 if ((e.X > picLeftWidth) && (e.X < picShowWidth + picLeftWidth) && (e.Y > picTopHeight) && (e.Y < picShowHeight + picTopHeight))
                 {
-                    if (blnDraw)  //重画
+                    if (mouseInPicPress)  //重画
                     {
                         this.originalPicBox.Refresh();
                         end.X = e.X;
                         end.Y = e.Y;
 
-                        g.DrawRectangle(new Pen(Color.Red), start.X, start.Y, e.X - start.X, e.Y - start.Y);
+                        Point tempStart = start;
+
+                        //修正矩形的起点和终点
+                        revisePoint(ref tempStart, ref end);
+                        g.DrawRectangle(new Pen(Color.Red), tempStart.X, tempStart.Y, end.X - tempStart.X, end.Y - tempStart.Y);
+
+                        mouseMoveBorderStart.X = tempStart.X;
+                        mouseMoveBorderStart.Y = tempStart.Y;
+                        mouseMoveBorderEnd.X = end.X;
+                        mouseMoveBorderEnd.Y = end.Y;
                     }
                     //缩放图中鼠标的坐标
                     int zoom_x = e.X - picLeftWidth;
