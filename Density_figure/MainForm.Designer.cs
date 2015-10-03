@@ -59,7 +59,7 @@
             this.timeLabel = new System.Windows.Forms.Label();
             this.iceNumText = new System.Windows.Forms.Label();
             this.iceDensityText = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.resultPanel = new System.Windows.Forms.Panel();
             this.minIceLabel = new System.Windows.Forms.Label();
             this.maxIceLabel = new System.Windows.Forms.Label();
             this.minIceText = new System.Windows.Forms.Label();
@@ -70,13 +70,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.currentPIcNumLabel = new System.Windows.Forms.Label();
+            this.versionLabel = new System.Windows.Forms.Label();
             this.currentAutoPathLabel = new System.Windows.Forms.Label();
             this.currentPicNameLabel = new System.Windows.Forms.Label();
             this.picCoordinateTip = new System.Windows.Forms.ToolTip(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.otherTip = new System.Windows.Forms.ToolTip(this.components);
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.versionLabel = new System.Windows.Forms.Label();
             this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).BeginInit();
             this.manualButtonPanel.SuspendLayout();
@@ -86,7 +86,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.grayNum)).BeginInit();
             this.autoButtonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timeToCalue)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.resultPanel.SuspendLayout();
             this.bottom.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -480,20 +480,20 @@
             this.iceDensityText.TabIndex = 6;
             this.iceDensityText.Text = "0.0";
             // 
-            // panel3
+            // resultPanel
             // 
-            this.panel3.Controls.Add(this.minIceLabel);
-            this.panel3.Controls.Add(this.maxIceLabel);
-            this.panel3.Controls.Add(this.iceDensityLabel);
-            this.panel3.Controls.Add(this.minIceText);
-            this.panel3.Controls.Add(this.maxIceText);
-            this.panel3.Controls.Add(this.iceDensityText);
-            this.panel3.Controls.Add(this.iceNumLabel);
-            this.panel3.Controls.Add(this.iceNumText);
-            this.panel3.Location = new System.Drawing.Point(72, 6);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(640, 31);
-            this.panel3.TabIndex = 7;
+            this.resultPanel.Controls.Add(this.minIceLabel);
+            this.resultPanel.Controls.Add(this.maxIceLabel);
+            this.resultPanel.Controls.Add(this.iceDensityLabel);
+            this.resultPanel.Controls.Add(this.minIceText);
+            this.resultPanel.Controls.Add(this.maxIceText);
+            this.resultPanel.Controls.Add(this.iceDensityText);
+            this.resultPanel.Controls.Add(this.iceNumLabel);
+            this.resultPanel.Controls.Add(this.iceNumText);
+            this.resultPanel.Location = new System.Drawing.Point(72, 6);
+            this.resultPanel.Name = "resultPanel";
+            this.resultPanel.Size = new System.Drawing.Size(640, 31);
+            this.resultPanel.TabIndex = 7;
             // 
             // minIceLabel
             // 
@@ -550,7 +550,7 @@
             this.bottom.Controls.Add(this.currentAutoPathLabel);
             this.bottom.Controls.Add(this.currentPicNameLabel);
             this.bottom.Controls.Add(this.manualButtonPanel);
-            this.bottom.Controls.Add(this.panel3);
+            this.bottom.Controls.Add(this.resultPanel);
             this.bottom.Controls.Add(this.autoButtonPanel);
             this.bottom.Location = new System.Drawing.Point(2, 451);
             this.bottom.Name = "bottom";
@@ -604,6 +604,15 @@
             this.currentPIcNumLabel.TabIndex = 7;
             this.currentPIcNumLabel.Text = "None";
             // 
+            // versionLabel
+            // 
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.Location = new System.Drawing.Point(643, 181);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(125, 12);
+            this.versionLabel.TabIndex = 7;
+            this.versionLabel.Text = "当前程序版本: V1.0.0";
+            // 
             // currentAutoPathLabel
             // 
             this.currentAutoPathLabel.AutoSize = true;
@@ -653,15 +662,6 @@
             this.mainPanel.Size = new System.Drawing.Size(784, 662);
             this.mainPanel.TabIndex = 10;
             // 
-            // versionLabel
-            // 
-            this.versionLabel.AutoSize = true;
-            this.versionLabel.Location = new System.Drawing.Point(643, 181);
-            this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(125, 12);
-            this.versionLabel.TabIndex = 7;
-            this.versionLabel.Text = "当前程序版本: V1.0.0";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -684,8 +684,8 @@
             this.autoButtonPanel.ResumeLayout(false);
             this.autoButtonPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timeToCalue)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.resultPanel.ResumeLayout(false);
+            this.resultPanel.PerformLayout();
             this.bottom.ResumeLayout(false);
             this.bottom.PerformLayout();
             this.mainPanel.ResumeLayout(false);
@@ -713,7 +713,7 @@
         private System.Windows.Forms.Button autoCalButton;
         private System.Windows.Forms.Label iceNumText;
         private System.Windows.Forms.Label iceDensityText;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel resultPanel;
         private System.Windows.Forms.Label minIceLabel;
         private System.Windows.Forms.Label maxIceLabel;
         private System.Windows.Forms.Label minIceText;
