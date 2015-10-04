@@ -100,7 +100,7 @@ namespace Density_figure
             }
             catch (Exception err)
             {
-                MessageBox.Show("系统出错，请重试!---1 " + err.Message);
+                MessageBox.Show("系统出错，请重试!---1 " + err.Message + "\n当前处理图片： " + picName);
                 return "";
             }
         }

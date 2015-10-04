@@ -49,6 +49,7 @@
             this.openTempButton = new System.Windows.Forms.Button();
             this.openPicButton = new System.Windows.Forms.Button();
             this.autoButtonPanel = new System.Windows.Forms.Panel();
+            this.isCycleCalculate = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.startLabel = new System.Windows.Forms.Label();
             this.endPointText = new System.Windows.Forms.TextBox();
@@ -77,7 +78,7 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.otherTip = new System.Windows.Forms.ToolTip(this.components);
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.isCycleCalculate = new System.Windows.Forms.CheckBox();
+            this.isRecursionCheckBox = new System.Windows.Forms.CheckBox();
             this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).BeginInit();
             this.manualButtonPanel.SuspendLayout();
@@ -148,7 +149,7 @@
             this.setFolderButton.Size = new System.Drawing.Size(96, 54);
             this.setFolderButton.TabIndex = 1;
             this.setFolderButton.Text = "设置图像路径";
-            this.otherTip.SetToolTip(this.setFolderButton, "点击选择用于自动计算的文件夹，文件夹内需要是jpg或者bmp图片");
+            this.otherTip.SetToolTip(this.setFolderButton, "点击选择用于自动计算的文件夹，文件夹内需要是jpg、bmp或者png图片\r\n可以自动识别文件名称中的数字序号，并按照数字序号进行计算");
             this.setFolderButton.UseVisualStyleBackColor = true;
             this.setFolderButton.Click += new System.EventHandler(this.setFileButton_Click);
             // 
@@ -345,6 +346,7 @@
             // autoButtonPanel
             // 
             this.autoButtonPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.autoButtonPanel.Controls.Add(this.isRecursionCheckBox);
             this.autoButtonPanel.Controls.Add(this.isCycleCalculate);
             this.autoButtonPanel.Controls.Add(this.label4);
             this.autoButtonPanel.Controls.Add(this.startLabel);
@@ -360,10 +362,21 @@
             this.autoButtonPanel.Size = new System.Drawing.Size(315, 117);
             this.autoButtonPanel.TabIndex = 5;
             // 
+            // isCycleCalculate
+            // 
+            this.isCycleCalculate.AutoSize = true;
+            this.isCycleCalculate.Enabled = false;
+            this.isCycleCalculate.Location = new System.Drawing.Point(126, 96);
+            this.isCycleCalculate.Name = "isCycleCalculate";
+            this.isCycleCalculate.Size = new System.Drawing.Size(144, 16);
+            this.isCycleCalculate.TabIndex = 8;
+            this.isCycleCalculate.Text = "是否循环计算该文件夹";
+            this.isCycleCalculate.UseVisualStyleBackColor = true;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(123, 78);
+            this.label4.Location = new System.Drawing.Point(123, 59);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 12);
             this.label4.TabIndex = 6;
@@ -373,7 +386,7 @@
             // startLabel
             // 
             this.startLabel.AutoSize = true;
-            this.startLabel.Location = new System.Drawing.Point(123, 44);
+            this.startLabel.Location = new System.Drawing.Point(123, 37);
             this.startLabel.Name = "startLabel";
             this.startLabel.Size = new System.Drawing.Size(59, 12);
             this.startLabel.TabIndex = 6;
@@ -383,7 +396,7 @@
             // endPointText
             // 
             this.endPointText.Enabled = false;
-            this.endPointText.Location = new System.Drawing.Point(185, 69);
+            this.endPointText.Location = new System.Drawing.Point(185, 54);
             this.endPointText.Name = "endPointText";
             this.endPointText.Size = new System.Drawing.Size(78, 21);
             this.endPointText.TabIndex = 5;
@@ -393,7 +406,7 @@
             // startPointText
             // 
             this.startPointText.Enabled = false;
-            this.startPointText.Location = new System.Drawing.Point(185, 36);
+            this.startPointText.Location = new System.Drawing.Point(185, 29);
             this.startPointText.Name = "startPointText";
             this.startPointText.Size = new System.Drawing.Size(78, 21);
             this.startPointText.TabIndex = 5;
@@ -664,16 +677,15 @@
             this.mainPanel.Size = new System.Drawing.Size(784, 662);
             this.mainPanel.TabIndex = 10;
             // 
-            // isCycleCalculate
+            // isRecursionCheckBox
             // 
-            this.isCycleCalculate.AutoSize = true;
-            this.isCycleCalculate.Enabled = false;
-            this.isCycleCalculate.Location = new System.Drawing.Point(126, 96);
-            this.isCycleCalculate.Name = "isCycleCalculate";
-            this.isCycleCalculate.Size = new System.Drawing.Size(144, 16);
-            this.isCycleCalculate.TabIndex = 8;
-            this.isCycleCalculate.Text = "是否循环计算该文件夹";
-            this.isCycleCalculate.UseVisualStyleBackColor = true;
+            this.isRecursionCheckBox.AutoSize = true;
+            this.isRecursionCheckBox.Location = new System.Drawing.Point(126, 77);
+            this.isRecursionCheckBox.Name = "isRecursionCheckBox";
+            this.isRecursionCheckBox.Size = new System.Drawing.Size(120, 16);
+            this.isRecursionCheckBox.TabIndex = 8;
+            this.isRecursionCheckBox.Text = "是否包括子文件夹";
+            this.isRecursionCheckBox.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -756,6 +768,7 @@
         private System.Windows.Forms.Button openTempButton;
         private System.Windows.Forms.Label versionLabel;
         private System.Windows.Forms.CheckBox isCycleCalculate;
+        private System.Windows.Forms.CheckBox isRecursionCheckBox;
 
     }
 }
