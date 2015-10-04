@@ -28,31 +28,18 @@ namespace Density_figure
                 Directory.CreateDirectory(Application.StartupPath + @"\Datas\");
 
             //创建手动计算文件
-            FileStream fs;
-            StreamWriter sw;
-            string manualTitle = "计算时间" + "\t" + "冰块数量" + "\t" + "密集度" + "\t"
-                + "最大冰块面积" + "\t" + "最小冰块面积" + "\t" + "图像地址";
-            if (!File.Exists(Application.StartupPath + @"\Datas\manual.txt"))
+;
+            string manualTitle = "计算时间" + "," + "冰块数量" + "," + "密集度" + ","
+                + "最大冰块面积" + "," + "最小冰块面积" + "," + "图像地址";
+            if (!File.Exists(Application.StartupPath + @"\Datas\manual.csv"))
             {
-                fs = new FileStream(Application.StartupPath + @"\Datas\manual.txt", FileMode.Append);
-                sw = new StreamWriter(fs);
-                sw.WriteLine(manualTitle);
-                sw.Flush();
-                fs.Flush();
-                sw.Close();
-                fs.Close();
+                DataToFile.strToFile(Application.StartupPath + @"\Datas\manual.csv", manualTitle);
             }
 
             //创建自动计算文件
-            if (!File.Exists(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt"))
+            if (!File.Exists(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".csv"))
             {
-                fs = new FileStream(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt", FileMode.Append);
-                sw = new StreamWriter(fs);
-                sw.WriteLine(manualTitle);
-                sw.Flush();
-                fs.Flush();
-                sw.Close();
-                fs.Close();
+                DataToFile.strToFile(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".csv", manualTitle);
             }
         }
 
@@ -117,7 +104,7 @@ namespace Density_figure
         public string[] selectPicFolder()
         {
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
-            folderDialog.Description = "请选择含有图片的文件夹";
+            folderDialog.Description = "请选择含有图像的文件夹";
             if (folderDialog.ShowDialog() == DialogResult.OK)
             {
                 folderPath = folderDialog.SelectedPath;
@@ -127,7 +114,7 @@ namespace Density_figure
                 int i = 0;
                 foreach (FileInfo finf in fileInf)
                 {
-                    if (finf.Extension.Equals(".jpg") || finf.Extension.Equals(".JPG") || finf.Extension.Equals(".bmp") || finf.Extension.Equals(".BMP"))
+                    if (finf.Extension.Equals(".jpg") || finf.Extension.Equals(".JPG") || finf.Extension.Equals(".bmp") || finf.Extension.Equals(".BMP") || finf.Extension.Equals(".PNG") || finf.Extension.Equals(".PNG"))
                         picNames[i++] = finf.FullName;
                 }
                 picNum = i;
@@ -144,6 +131,7 @@ namespace Density_figure
                     startPointText.Enabled = true;
                     endPointText.Enabled = true;
                     timeToCalue.Enabled = true;
+                    isCycleCalculate.Enabled = true;
                 }
                 else
                 {
@@ -263,15 +251,9 @@ namespace Density_figure
 
                 allPicFunc(originalPicBox, currentPic, start, end);
 
-                string manualStr = DateTime.Now.ToString() + "\t" + iceNumText.Text + "\t" + iceDensityText.Text + "\t"
-                    + maxIceText.Text + "\t" + minIceText.Text + "\t" + currentPic;
-
-                FileStream fs = new FileStream(Application.StartupPath + @"\Datas\manual.txt", FileMode.Append);
-                StreamWriter sw = new StreamWriter(fs);
-                sw.WriteLine(manualStr);
-                sw.Flush();
-                sw.Close();
-                fs.Close();
+                string manualStr = DateTime.Now.ToString() + "," + iceNumText.Text + "," + iceDensityText.Text + ","
+                    + maxIceText.Text + "," + minIceText.Text + "," + currentPic;
+                DataToFile.strToFile(Application.StartupPath + @"\Datas\manual.csv", manualStr);
 
                 //设置自动计算的坐标
                 if (picNames != null)
@@ -350,9 +332,16 @@ namespace Density_figure
                 currentPic = PicFunction.openPictFunction();
                 if (currentPic != "")
                 {
-                    originalPicBox.Image = new Bitmap(currentPic);
-                    originalPicBox.Refresh(); ;
-                }
+                    try
+                    {
+                        originalPicBox.Image = new Bitmap(currentPic);
+                        originalPicBox.Refresh(); ;
+                    }
+                    catch(Exception err)
+                    {
+                        MessageBox.Show("错误信息： " + err.Message + "\n该图像已损坏：" + currentPic + "\n点击\"确定\"重新选择图像!");
+                    }
+               }
             }
         }
 
@@ -409,25 +398,43 @@ namespace Density_figure
         {
             if (picNumToCyc < picNum)
             {
-                originalPicBox.Image = new Bitmap(picNames[picNumToCyc]);
-                currentPic = picNames[picNumToCyc];
-                allPicFunc(originalPicBox, currentPic, autoStart, autoEnd);
-                currentPIcNumLabel.Text = (picNumToCyc + 1).ToString() + "/" + picNum.ToString();
-                currentPicNameLabel.Text = Path.GetFileName(currentPic);
-                picNumToCyc++;
+                try
+                {
+                    originalPicBox.Image = new Bitmap(picNames[picNumToCyc]);
+                    currentPic = picNames[picNumToCyc];
+                    allPicFunc(originalPicBox, currentPic, autoStart, autoEnd);
+                    currentPIcNumLabel.Text = (picNumToCyc + 1).ToString() + "/" + picNum.ToString();
+                    currentPicNameLabel.Text = Path.GetFileName(currentPic);
+                    picNumToCyc++;
 
-                string autoStr = DateTime.Now.ToString() + "\t" + iceNumText.Text + "\t" + iceDensityText.Text + "\t"
-                    + maxIceText.Text + "\t" + minIceText.Text + "\t" + currentPic;
-                FileStream fs = new FileStream(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt", FileMode.Append);
-                StreamWriter sw = new StreamWriter(fs);
-                sw.WriteLine(autoStr);
-                sw.Flush();
-                sw.Close();
-                fs.Close();
-
+                    string autoStr = DateTime.Now.ToString() + "," + iceNumText.Text + "," + iceDensityText.Text + ","
+                    + maxIceText.Text + "," + minIceText.Text + "," + currentPic;
+                    DataToFile.strToFile(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".csv", autoStr);
+                }
+                catch(Exception err)
+                {
+                    timer.Stop();
+                    MessageBox.Show("错误信息： " + err.Message + "\n该图像已损坏, 请删除：" + picNames[picNumToCyc] + "\n点击\"确定\"继续开始计算下一张图像!");
+                    picNumToCyc++;
+                    timer.Start();
+                }
             }
             else
+            {
                 picNumToCyc = 0;
+                if (!isCycleCalculate.Checked)
+                {
+                    timer.Stop();
+                    stopCal = false;
+                    openPicButton.Enabled = true;
+                    autoCalButton.Text = "自动计算";
+                    originalPicBox.Enabled = true;
+                    setFolderButton.Enabled = true;
+                    openPicButton.Enabled = true;
+                    g = this.originalPicBox.CreateGraphics();
+                    g.DrawRectangle(new Pen(Color.Red), autoStart.X, autoStart.Y, autoEnd.X - autoStart.X, autoEnd.Y - autoStart.Y);
+                }
+            }
 
         }
 

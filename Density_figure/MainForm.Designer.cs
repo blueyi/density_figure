@@ -77,6 +77,7 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.otherTip = new System.Windows.Forms.ToolTip(this.components);
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.isCycleCalculate = new System.Windows.Forms.CheckBox();
             this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).BeginInit();
             this.manualButtonPanel.SuspendLayout();
@@ -344,6 +345,7 @@
             // autoButtonPanel
             // 
             this.autoButtonPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.autoButtonPanel.Controls.Add(this.isCycleCalculate);
             this.autoButtonPanel.Controls.Add(this.label4);
             this.autoButtonPanel.Controls.Add(this.startLabel);
             this.autoButtonPanel.Controls.Add(this.endPointText);
@@ -611,7 +613,7 @@
             this.versionLabel.Name = "versionLabel";
             this.versionLabel.Size = new System.Drawing.Size(125, 12);
             this.versionLabel.TabIndex = 7;
-            this.versionLabel.Text = "当前程序版本: V1.0.0";
+            this.versionLabel.Text = "当前程序版本: V1.1.0";
             // 
             // currentAutoPathLabel
             // 
@@ -661,6 +663,17 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(784, 662);
             this.mainPanel.TabIndex = 10;
+            // 
+            // isCycleCalculate
+            // 
+            this.isCycleCalculate.AutoSize = true;
+            this.isCycleCalculate.Enabled = false;
+            this.isCycleCalculate.Location = new System.Drawing.Point(126, 96);
+            this.isCycleCalculate.Name = "isCycleCalculate";
+            this.isCycleCalculate.Size = new System.Drawing.Size(144, 16);
+            this.isCycleCalculate.TabIndex = 8;
+            this.isCycleCalculate.Text = "是否循环计算该文件夹";
+            this.isCycleCalculate.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -742,6 +755,7 @@
         private System.Windows.Forms.Button openDatasButton;
         private System.Windows.Forms.Button openTempButton;
         private System.Windows.Forms.Label versionLabel;
+        private System.Windows.Forms.CheckBox isCycleCalculate;
 
     }
 }

@@ -226,7 +226,7 @@ namespace Density_figure
             openFileDialog1.Title = "请选择图片";
             openFileDialog1.DefaultExt = "*.jpg";
             openFileDialog1.FileName = "";
-            openFileDialog1.Filter = "JPG files(*.jpg)|*.jpg|BMP files(*.bmp)|*.bmp";
+            openFileDialog1.Filter = "JPG files(*.jpg)|*.jpg|BMP files(*.bmp)|*.bmp|PNG files(*.png)|*.png";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try
