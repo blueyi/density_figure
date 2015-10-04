@@ -49,6 +49,7 @@
             this.openTempButton = new System.Windows.Forms.Button();
             this.openPicButton = new System.Windows.Forms.Button();
             this.autoButtonPanel = new System.Windows.Forms.Panel();
+            this.isRecursionCheckBox = new System.Windows.Forms.CheckBox();
             this.isCycleCalculate = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.startLabel = new System.Windows.Forms.Label();
@@ -78,7 +79,6 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.otherTip = new System.Windows.Forms.ToolTip(this.components);
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.isRecursionCheckBox = new System.Windows.Forms.CheckBox();
             this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).BeginInit();
             this.manualButtonPanel.SuspendLayout();
@@ -315,7 +315,8 @@
             this.openDatasButton.Size = new System.Drawing.Size(85, 37);
             this.openDatasButton.TabIndex = 3;
             this.openDatasButton.Text = "打开数据文件夹";
-            this.otherTip.SetToolTip(this.openDatasButton, "打开存放有历史计算数据的文件夹，手动计算历史数据存放在manual.txt中\r\n自动计算的历史数据存放在以计算日期为文件名的txt文件中");
+            this.otherTip.SetToolTip(this.openDatasButton, "打开存放有历史计算数据的文件夹，手动计算历史数据存放在manual.csv中\r\n自动计算的历史数据存放在以计算日期为文件名的csv文件中，该csv文件可以\r\n直接" +
+        "使用excel打开并进行数据分析");
             this.openDatasButton.UseVisualStyleBackColor = true;
             this.openDatasButton.Click += new System.EventHandler(this.openDatasButton_Click);
             // 
@@ -361,6 +362,16 @@
             this.autoButtonPanel.Name = "autoButtonPanel";
             this.autoButtonPanel.Size = new System.Drawing.Size(315, 117);
             this.autoButtonPanel.TabIndex = 5;
+            // 
+            // isRecursionCheckBox
+            // 
+            this.isRecursionCheckBox.AutoSize = true;
+            this.isRecursionCheckBox.Location = new System.Drawing.Point(126, 77);
+            this.isRecursionCheckBox.Name = "isRecursionCheckBox";
+            this.isRecursionCheckBox.Size = new System.Drawing.Size(120, 16);
+            this.isRecursionCheckBox.TabIndex = 8;
+            this.isRecursionCheckBox.Text = "是否包括子文件夹";
+            this.isRecursionCheckBox.UseVisualStyleBackColor = true;
             // 
             // isCycleCalculate
             // 
@@ -676,16 +687,6 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(784, 662);
             this.mainPanel.TabIndex = 10;
-            // 
-            // isRecursionCheckBox
-            // 
-            this.isRecursionCheckBox.AutoSize = true;
-            this.isRecursionCheckBox.Location = new System.Drawing.Point(126, 77);
-            this.isRecursionCheckBox.Name = "isRecursionCheckBox";
-            this.isRecursionCheckBox.Size = new System.Drawing.Size(120, 16);
-            this.isRecursionCheckBox.TabIndex = 8;
-            this.isRecursionCheckBox.Text = "是否包括子文件夹";
-            this.isRecursionCheckBox.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
