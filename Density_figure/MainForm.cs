@@ -10,7 +10,8 @@ using System.Windows.Forms;
 
 using System.IO;  //文件，openPictButton_Click
 using System.Drawing.Imaging;  //图形 picCut
-using System.Reflection; //可以使用PropertyInfo
+using System.Reflection;
+using System.Text.RegularExpressions; //可以使用PropertyInfo
 
 namespace Density_figure
 {
@@ -109,14 +110,21 @@ namespace Density_figure
             {
                 folderPath = folderDialog.SelectedPath;
                 dir = new DirectoryInfo(folderPath);
-                fileInf = dir.GetFiles();
+                if (isRecursionCheckBox.Checked)
+                    fileInf = dir.GetFiles("*", SearchOption.AllDirectories);
+                else
+                    fileInf = dir.GetFiles("*", SearchOption.TopDirectoryOnly);
+
                 picNames = new string[fileInf.Length];
                 int i = 0;
                 foreach (FileInfo finf in fileInf)
                 {
-                    if (finf.Extension.Equals(".jpg") || finf.Extension.Equals(".JPG") || finf.Extension.Equals(".bmp") || finf.Extension.Equals(".BMP") || finf.Extension.Equals(".PNG") || finf.Extension.Equals(".PNG"))
+                    if (finf.Extension.Equals(".jpg") || finf.Extension.Equals(".JPG") || finf.Extension.Equals(".bmp") || finf.Extension.Equals(".BMP") || finf.Extension.Equals(".png") || finf.Extension.Equals(".PNG"))
                         picNames[i++] = finf.FullName;
                 }
+                //Array.Sort<string>(picNames, delegate(string str1, string str2) { return int.Parse(Regex.Match(str1, @"\d+").Value) - int.Parse(Regex.Match(str2, @"\d+").Value); });
+                //对图片按字母进行排序
+                picNames = picNames.OrderBy(s => int.Parse(Regex.Match(s, @"\d+(?=.jpg)").Value)).ToArray();
                 picNum = i;
                 if (picNum > 0)
                 {
