@@ -24,7 +24,7 @@ namespace Density_figure
 
             int allIceNumHere = allIceNum;
             //            bool[] isChecked = new bool[allIceNum]; //检查该冰点是否已被标记
-            int iceOrder = 1;  //冰块顺序
+            int iceOrder = 3;  //冰块顺序
             int iceOrderSum = 0;   //当前冰块序号对应的冰块大小
             int[] currentCheckedIceIdx;   //用于存放当前检查过的像素索引
             int arrLength = width * height;
@@ -77,7 +77,7 @@ namespace Density_figure
                     }
                 }
                 resultSum[iceOrder] = iceOrderSum;
-                if (iceOrder == 2)
+                if (iceOrder == 4)
                 {
                     maxIce = minIce = iceOrderSum;
                 }
@@ -88,6 +88,16 @@ namespace Density_figure
                     if (minIce > iceOrderSum)
                         minIce = iceOrderSum;
                 }
+            }
+
+            //将修改后的结果写入到原数组
+            int idxX = 0;
+            int idxY = 0;
+            for (int idx = 0; idx < arrLength; idx++)
+            {
+                idxX = idx % width;
+                idxY = idx / width;
+                resultArr[idxX, idxY] = arrLine[idx];
             }
 
             return iceOrder;

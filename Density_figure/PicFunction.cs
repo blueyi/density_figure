@@ -202,7 +202,8 @@ namespace Density_figure
                 }
                 int[] resultIceSum = new int[icenum + 2];  //存放所有冰块的大小
 
-                iceBlockNum = FindIceBlock.findIce(board, resultIceSum, sWidth, sHeight, icenum, ref maxIceArea, ref minIceArea) - 1;
+                //board 等于原来里面的board，iceBlockNum等于原来的nstep，resultIceSum等于numstep1
+                iceBlockNum = FindIceBlock.findIce(board, resultIceSum, sWidth, sHeight, icenum, ref maxIceArea, ref minIceArea) - 3;
 
                 iceDensity = Math.Round(Convert.ToDouble(icenum) / Convert.ToDouble(sWidth * sHeight), 4);//将小数值舍入到指定精度
 
