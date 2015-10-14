@@ -47,7 +47,7 @@ namespace Density_figure
                 start.Y = Convert.ToInt32((double)(start.Y - picTopHeight) / rate);
                 end.X = Convert.ToInt32((double)(end.X - picLeftWidth) / rate);
                 end.Y = Convert.ToInt32((double)(end.Y - picTopHeight) / rate);
-
+                
                 if (start.X < end.X && start.Y < end.Y)
                 {
                     Bitmap pic = new Bitmap(picName);
@@ -93,9 +93,8 @@ namespace Density_figure
                 }
                 else
                 {
-                    MessageBox.Show("划线未完成，请重新划线！");
+//                    MessageBox.Show("划线未完成，请重新划线！");
                     return "";
-
                 }
             }
             catch (Exception err)
@@ -168,7 +167,7 @@ namespace Density_figure
         /// <param name="iceDensity">密集度</param>
         /// <param name="maxIceArea">最大连通区域面积</param>
         /// <param name="minIceArea">最小连通区域面积</param>
-        public static void picCalculate(string picName, ref int iceBlockNum, ref double iceDensity, ref int maxIceArea, ref int minIceArea)
+        public static void picCalculate(string picName, ref int iceBlockNum, ref double iceDensity, ref int maxIceArea, ref int minIceArea, ref int pixelSquare)
         {
             try
             {
@@ -177,6 +176,7 @@ namespace Density_figure
 
                 int sWidth = pic.Width;
                 int sHeight = pic.Height;
+                pixelSquare = sWidth * sHeight;
                 int[,] board = new int[sWidth, sHeight]; //存储图片宽和高
 
                 Rectangle rec = new Rectangle(0, 0, sWidth, sHeight);
@@ -187,9 +187,9 @@ namespace Density_figure
                 Trgbvalues = new byte[bytes];
                 System.Runtime.InteropServices.Marshal.Copy(ptr, Trgbvalues, 0, bytes);
 
-                for (int i = 0; i < sWidth; i++)
+                for (int j = 0; j < sHeight; j++)
                 {
-                    for (int j = 0; j < sHeight; j++)
+                    for (int i = 0; i < sWidth; i++)
                     {
                         if (Trgbvalues[j * bd.Stride + i * 3] == 255 && Trgbvalues[j * bd.Stride + i * 3 + 1] == 255 && Trgbvalues[j * bd.Stride + i * 3 + 2] == 255)
                         {
@@ -200,7 +200,7 @@ namespace Density_figure
                             board[i, j] = 0;
                     }
                 }
-                int[] resultIceSum = new int[icenum + 2];  //存放所有冰块的大小
+                int[] resultIceSum = new int[icenum + 4];  //存放所有冰块的大小
 
                 //board 等于原来里面的board，iceBlockNum等于原来的nstep，resultIceSum等于numstep1
                 iceBlockNum = FindIceBlock.findIce(board, resultIceSum, sWidth, sHeight, icenum, ref maxIceArea, ref minIceArea) - 3;

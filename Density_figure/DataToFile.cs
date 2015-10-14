@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Density_figure
 {
@@ -27,15 +28,35 @@ namespace Density_figure
                 sw.Close();
                 fs.Close();
             }
-            catch(System.IO.IOException)
+            catch (System.IO.IOException)
             {
                 System.Windows.Forms.MessageBox.Show("请先关闭正在打开的以下文件: " + fileName + "\n才能正常写入历史记录数据!");
 
             }
-            catch(Exception err)
+            catch (Exception err)
             {
                 System.Windows.Forms.MessageBox.Show("错误信息： " + err.Message);
             }
-       }
+        }
+
+
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr _lopen(string lpPathName, int iReadWrite);
+        [DllImport("kernel32.dll")]
+        public static extern bool CloseHandle(IntPtr hObject);
+        public const int OF_READWRITE = 2;
+        public const int OF_SHARE_DENY_NONE = 0x40;
+        public static readonly IntPtr HFILE_ERROR = new IntPtr(-1);
+
+        public static bool isFileInUsed(string fileName)
+        {
+            IntPtr vHandle = _lopen(fileName, OF_READWRITE | OF_SHARE_DENY_NONE);
+            if (vHandle == HFILE_ERROR)
+            {
+                return true;
+            }
+            CloseHandle(vHandle);
+            return false;
+        }
     }
 }
