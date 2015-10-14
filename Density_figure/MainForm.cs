@@ -69,28 +69,33 @@ namespace Density_figure
                         int maxIceArea = 0;  //最大冰块
                         int minIceArea = 0;  //最小冰块
                         double iceDensity = 0.0;  //密集度
+                        int pixelSquare = 0; //所计算图像的像素大小
 
-                        PicFunction.picCalculate(grayedPic, ref iceBlockNum, ref iceDensity, ref maxIceArea, ref minIceArea);
+                        PicFunction.picCalculate(grayedPic, ref iceBlockNum, ref iceDensity, ref maxIceArea, ref minIceArea, ref pixelSquare);
+
+                        double areaRatio = Convert.ToDouble(realAreaTextBox.Text) / pixelSquare;
+                        if (!isCalRealAreaCheckBox.Checked)
+                            areaRatio = 1.0;
 
                         iceDensityText.Text = iceDensity.ToString();
                         iceNumText.Text = iceBlockNum.ToString();
-                        maxIceText.Text = maxIceArea.ToString();
-                        minIceText.Text = minIceArea.ToString();
+                        maxIceText.Text = (Math.Round(Convert.ToDouble(maxIceArea) * areaRatio, 4)).ToString();
+                        minIceText.Text = (Math.Round(Convert.ToDouble(minIceArea) * areaRatio, 4)).ToString();
                         resultPanel.Refresh();
                     }
                     else
                         MessageBox.Show("数据处理未完成!---No grayedPic");
                 }
-                else
-                    MessageBox.Show("数据处理未完成!---No cuttedPic");
+//                else
+//                    MessageBox.Show("数据处理未完成!---No cuttedPic");
             }
             else
                 MessageBox.Show("数据处理未完成!---No originalPic");
             if (!isDeleteTempPic.Checked)
             {
-                if (File.Exists(cuttedPic))
+                if (File.Exists(cuttedPic) && !DataToFile.isFileInUsed(cuttedPic))
                     File.Delete(cuttedPic);
-                if (File.Exists(grayedPic))
+                if (File.Exists(grayedPic) && !DataToFile.isFileInUsed(grayedPic))
                     File.Delete(grayedPic);
             }
         }
@@ -257,7 +262,8 @@ namespace Density_figure
                 autoStart = start;
                 autoEnd = end;
 
-                allPicFunc(originalPicBox, currentPic, start, end);
+                if (start.X != end.X && start.Y != end.Y)
+                    allPicFunc(originalPicBox, currentPic, start, end);
 
                 string manualStr = DateTime.Now.ToString() + "," + iceNumText.Text + "," + iceDensityText.Text + ","
                     + maxIceText.Text + "," + minIceText.Text + "," + currentPic;
@@ -479,6 +485,22 @@ namespace Density_figure
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
             this.originalPicBox.Refresh();
+        }
+
+        private void isCalRealAreaCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (isCalRealAreaCheckBox.Checked)
+            {
+                realAreaLabel.Enabled = true;
+                realAreaTextBox.Enabled = true;
+                squareCentLabel.Enabled = true;
+            }
+            else
+            {
+                realAreaLabel.Enabled = false;
+                realAreaTextBox.Enabled = false;
+                squareCentLabel.Enabled = false;
+            }
         }
 
     }

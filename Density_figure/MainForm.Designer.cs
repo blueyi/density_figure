@@ -36,13 +36,7 @@
             this.iceDensityLabel = new System.Windows.Forms.Label();
             this.setFolderButton = new System.Windows.Forms.Button();
             this.manualButtonPanel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.areaLevelNum = new System.Windows.Forms.NumericUpDown();
-            this.areaSectionMax = new System.Windows.Forms.NumericUpDown();
-            this.areaSectionMin = new System.Windows.Forms.NumericUpDown();
             this.grayNum = new System.Windows.Forms.NumericUpDown();
-            this.areaSection = new System.Windows.Forms.Label();
-            this.areaLevelLabel = new System.Windows.Forms.Label();
             this.grayLabel = new System.Windows.Forms.Label();
             this.autoNotifyLabel = new System.Windows.Forms.Label();
             this.openDatasButton = new System.Windows.Forms.Button();
@@ -79,18 +73,27 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.otherTip = new System.Windows.Forms.ToolTip(this.components);
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.logoPanel = new System.Windows.Forms.Panel();
+            this.PRICPicBox = new System.Windows.Forms.PictureBox();
+            this.NMEFCPicBox = new System.Windows.Forms.PictureBox();
+            this.dlutPicBox = new System.Windows.Forms.PictureBox();
+            this.isCalRealAreaCheckBox = new System.Windows.Forms.CheckBox();
+            this.realAreaTextBox = new System.Windows.Forms.TextBox();
+            this.realAreaLabel = new System.Windows.Forms.Label();
+            this.squareCentLabel = new System.Windows.Forms.Label();
             this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).BeginInit();
             this.manualButtonPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.areaLevelNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.areaSectionMax)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.areaSectionMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grayNum)).BeginInit();
             this.autoButtonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timeToCalue)).BeginInit();
             this.resultPanel.SuspendLayout();
             this.bottom.SuspendLayout();
             this.mainPanel.SuspendLayout();
+            this.logoPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PRICPicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NMEFCPicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dlutPicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // picPanel
@@ -101,9 +104,9 @@
             this.picPanel.AutoScroll = true;
             this.picPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picPanel.Controls.Add(this.originalPicBox);
-            this.picPanel.Location = new System.Drawing.Point(3, 3);
+            this.picPanel.Location = new System.Drawing.Point(150, 3);
             this.picPanel.Name = "picPanel";
-            this.picPanel.Size = new System.Drawing.Size(776, 441);
+            this.picPanel.Size = new System.Drawing.Size(629, 449);
             this.picPanel.TabIndex = 0;
             // 
             // originalPicBox
@@ -113,7 +116,7 @@
             this.originalPicBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.originalPicBox.Location = new System.Drawing.Point(0, 0);
             this.originalPicBox.Name = "originalPicBox";
-            this.originalPicBox.Size = new System.Drawing.Size(774, 439);
+            this.originalPicBox.Size = new System.Drawing.Size(627, 447);
             this.originalPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.originalPicBox.TabIndex = 0;
             this.originalPicBox.TabStop = false;
@@ -137,9 +140,9 @@
             this.iceDensityLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.iceDensityLabel.Location = new System.Drawing.Point(153, 8);
             this.iceDensityLabel.Name = "iceDensityLabel";
-            this.iceDensityLabel.Size = new System.Drawing.Size(76, 16);
+            this.iceDensityLabel.Size = new System.Drawing.Size(68, 16);
             this.iceDensityLabel.TabIndex = 1;
-            this.iceDensityLabel.Text = "密集度：";
+            this.iceDensityLabel.Text = "密集度:";
             // 
             // setFolderButton
             // 
@@ -156,100 +159,25 @@
             // manualButtonPanel
             // 
             this.manualButtonPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.manualButtonPanel.Controls.Add(this.label1);
-            this.manualButtonPanel.Controls.Add(this.areaLevelNum);
-            this.manualButtonPanel.Controls.Add(this.areaSectionMax);
-            this.manualButtonPanel.Controls.Add(this.areaSectionMin);
+            this.manualButtonPanel.Controls.Add(this.isCalRealAreaCheckBox);
             this.manualButtonPanel.Controls.Add(this.grayNum);
-            this.manualButtonPanel.Controls.Add(this.areaSection);
-            this.manualButtonPanel.Controls.Add(this.areaLevelLabel);
             this.manualButtonPanel.Controls.Add(this.grayLabel);
+            this.manualButtonPanel.Controls.Add(this.realAreaLabel);
             this.manualButtonPanel.Controls.Add(this.autoNotifyLabel);
             this.manualButtonPanel.Controls.Add(this.openDatasButton);
+            this.manualButtonPanel.Controls.Add(this.realAreaTextBox);
             this.manualButtonPanel.Controls.Add(this.openTempButton);
             this.manualButtonPanel.Controls.Add(this.openPicButton);
+            this.manualButtonPanel.Controls.Add(this.squareCentLabel);
             this.manualButtonPanel.Location = new System.Drawing.Point(348, 42);
             this.manualButtonPanel.Name = "manualButtonPanel";
             this.manualButtonPanel.Size = new System.Drawing.Size(422, 117);
             this.manualButtonPanel.TabIndex = 4;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(245, 83);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(11, 12);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "-";
-            // 
-            // areaLevelNum
-            // 
-            this.areaLevelNum.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.areaLevelNum.Location = new System.Drawing.Point(343, 38);
-            this.areaLevelNum.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.areaLevelNum.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.areaLevelNum.Name = "areaLevelNum";
-            this.areaLevelNum.Size = new System.Drawing.Size(51, 26);
-            this.areaLevelNum.TabIndex = 4;
-            this.areaLevelNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.areaLevelNum.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            // 
-            // areaSectionMax
-            // 
-            this.areaSectionMax.DecimalPlaces = 1;
-            this.areaSectionMax.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.areaSectionMax.Location = new System.Drawing.Point(262, 74);
-            this.areaSectionMax.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.areaSectionMax.Name = "areaSectionMax";
-            this.areaSectionMax.Size = new System.Drawing.Size(67, 26);
-            this.areaSectionMax.TabIndex = 4;
-            this.areaSectionMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.areaSectionMax.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            65536});
-            // 
-            // areaSectionMin
-            // 
-            this.areaSectionMin.DecimalPlaces = 1;
-            this.areaSectionMin.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.areaSectionMin.Location = new System.Drawing.Point(172, 74);
-            this.areaSectionMin.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.areaSectionMin.Name = "areaSectionMin";
-            this.areaSectionMin.Size = new System.Drawing.Size(67, 26);
-            this.areaSectionMin.TabIndex = 4;
-            this.areaSectionMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.areaSectionMin.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            65536});
-            // 
             // grayNum
             // 
             this.grayNum.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.grayNum.Location = new System.Drawing.Point(158, 38);
+            this.grayNum.Location = new System.Drawing.Point(171, 28);
             this.grayNum.Maximum = new decimal(new int[] {
             255,
             0,
@@ -266,42 +194,22 @@
             0,
             0});
             // 
-            // areaSection
-            // 
-            this.areaSection.AutoSize = true;
-            this.areaSection.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
-            this.areaSection.Location = new System.Drawing.Point(97, 79);
-            this.areaSection.Name = "areaSection";
-            this.areaSection.Size = new System.Drawing.Size(76, 16);
-            this.areaSection.TabIndex = 3;
-            this.areaSection.Text = "面积区间";
-            // 
-            // areaLevelLabel
-            // 
-            this.areaLevelLabel.AutoSize = true;
-            this.areaLevelLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
-            this.areaLevelLabel.Location = new System.Drawing.Point(229, 43);
-            this.areaLevelLabel.Name = "areaLevelLabel";
-            this.areaLevelLabel.Size = new System.Drawing.Size(110, 16);
-            this.areaLevelLabel.TabIndex = 3;
-            this.areaLevelLabel.Text = "冰块面积分级";
-            // 
             // grayLabel
             // 
             this.grayLabel.AutoSize = true;
-            this.grayLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.grayLabel.Location = new System.Drawing.Point(97, 42);
+            this.grayLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.grayLabel.Location = new System.Drawing.Point(110, 32);
             this.grayLabel.Name = "grayLabel";
-            this.grayLabel.Size = new System.Drawing.Size(59, 16);
+            this.grayLabel.Size = new System.Drawing.Size(64, 16);
             this.grayLabel.TabIndex = 3;
-            this.grayLabel.Text = "灰度值";
+            this.grayLabel.Text = "灰度值:";
             // 
             // autoNotifyLabel
             // 
             this.autoNotifyLabel.AutoSize = true;
             this.autoNotifyLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.autoNotifyLabel.ForeColor = System.Drawing.Color.Red;
-            this.autoNotifyLabel.Location = new System.Drawing.Point(165, 3);
+            this.autoNotifyLabel.Location = new System.Drawing.Point(205, 3);
             this.autoNotifyLabel.Name = "autoNotifyLabel";
             this.autoNotifyLabel.Size = new System.Drawing.Size(83, 12);
             this.autoNotifyLabel.TabIndex = 2;
@@ -477,7 +385,7 @@
             // 
             this.timeLabel.AutoSize = true;
             this.timeLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.timeLabel.Location = new System.Drawing.Point(121, 10);
+            this.timeLabel.Location = new System.Drawing.Point(125, 10);
             this.timeLabel.Name = "timeLabel";
             this.timeLabel.Size = new System.Drawing.Size(59, 12);
             this.timeLabel.TabIndex = 3;
@@ -500,7 +408,7 @@
             this.iceDensityText.AutoSize = true;
             this.iceDensityText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
             this.iceDensityText.ForeColor = System.Drawing.Color.Red;
-            this.iceDensityText.Location = new System.Drawing.Point(228, 8);
+            this.iceDensityText.Location = new System.Drawing.Point(220, 8);
             this.iceDensityText.Name = "iceDensityText";
             this.iceDensityText.Size = new System.Drawing.Size(35, 16);
             this.iceDensityText.TabIndex = 6;
@@ -516,37 +424,37 @@
             this.resultPanel.Controls.Add(this.iceDensityText);
             this.resultPanel.Controls.Add(this.iceNumLabel);
             this.resultPanel.Controls.Add(this.iceNumText);
-            this.resultPanel.Location = new System.Drawing.Point(72, 6);
+            this.resultPanel.Location = new System.Drawing.Point(1, 6);
             this.resultPanel.Name = "resultPanel";
-            this.resultPanel.Size = new System.Drawing.Size(640, 31);
+            this.resultPanel.Size = new System.Drawing.Size(769, 31);
             this.resultPanel.TabIndex = 7;
             // 
             // minIceLabel
             // 
             this.minIceLabel.AutoSize = true;
             this.minIceLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.minIceLabel.Location = new System.Drawing.Point(462, 8);
+            this.minIceLabel.Location = new System.Drawing.Point(501, 8);
             this.minIceLabel.Name = "minIceLabel";
-            this.minIceLabel.Size = new System.Drawing.Size(127, 16);
+            this.minIceLabel.Size = new System.Drawing.Size(119, 16);
             this.minIceLabel.TabIndex = 1;
-            this.minIceLabel.Text = "最小冰块面积：";
+            this.minIceLabel.Text = "最小冰块面积:";
             // 
             // maxIceLabel
             // 
             this.maxIceLabel.AutoSize = true;
             this.maxIceLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.maxIceLabel.Location = new System.Drawing.Point(288, 8);
+            this.maxIceLabel.Location = new System.Drawing.Point(300, 8);
             this.maxIceLabel.Name = "maxIceLabel";
-            this.maxIceLabel.Size = new System.Drawing.Size(127, 16);
+            this.maxIceLabel.Size = new System.Drawing.Size(119, 16);
             this.maxIceLabel.TabIndex = 1;
-            this.maxIceLabel.Text = "最大冰块面积：";
+            this.maxIceLabel.Text = "最大冰块面积:";
             // 
             // minIceText
             // 
             this.minIceText.AutoSize = true;
             this.minIceText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
             this.minIceText.ForeColor = System.Drawing.Color.Red;
-            this.minIceText.Location = new System.Drawing.Point(587, 8);
+            this.minIceText.Location = new System.Drawing.Point(618, 8);
             this.minIceText.Name = "minIceText";
             this.minIceText.Size = new System.Drawing.Size(35, 16);
             this.minIceText.TabIndex = 6;
@@ -557,7 +465,7 @@
             this.maxIceText.AutoSize = true;
             this.maxIceText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
             this.maxIceText.ForeColor = System.Drawing.Color.Red;
-            this.maxIceText.Location = new System.Drawing.Point(414, 8);
+            this.maxIceText.Location = new System.Drawing.Point(417, 8);
             this.maxIceText.Name = "maxIceText";
             this.maxIceText.Size = new System.Drawing.Size(35, 16);
             this.maxIceText.TabIndex = 6;
@@ -565,7 +473,8 @@
             // 
             // bottom
             // 
-            this.bottom.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.bottom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.bottom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.bottom.Controls.Add(this.isDeleteTempPic);
             this.bottom.Controls.Add(this.label2);
@@ -578,9 +487,9 @@
             this.bottom.Controls.Add(this.manualButtonPanel);
             this.bottom.Controls.Add(this.resultPanel);
             this.bottom.Controls.Add(this.autoButtonPanel);
-            this.bottom.Location = new System.Drawing.Point(2, 451);
+            this.bottom.Location = new System.Drawing.Point(2, 458);
             this.bottom.Name = "bottom";
-            this.bottom.Size = new System.Drawing.Size(778, 200);
+            this.bottom.Size = new System.Drawing.Size(778, 199);
             this.bottom.TabIndex = 9;
             // 
             // isDeleteTempPic
@@ -680,6 +589,7 @@
             // 
             this.mainPanel.AutoScroll = true;
             this.mainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mainPanel.Controls.Add(this.logoPanel);
             this.mainPanel.Controls.Add(this.picPanel);
             this.mainPanel.Controls.Add(this.bottom);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -687,6 +597,97 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(784, 662);
             this.mainPanel.TabIndex = 10;
+            // 
+            // logoPanel
+            // 
+            this.logoPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.logoPanel.Controls.Add(this.PRICPicBox);
+            this.logoPanel.Controls.Add(this.NMEFCPicBox);
+            this.logoPanel.Controls.Add(this.dlutPicBox);
+            this.logoPanel.Location = new System.Drawing.Point(-1, -1);
+            this.logoPanel.Name = "logoPanel";
+            this.logoPanel.Size = new System.Drawing.Size(150, 453);
+            this.logoPanel.TabIndex = 10;
+            // 
+            // PRICPicBox
+            // 
+            this.PRICPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PRICPicBox.Image = global::Density_figure.Properties.Resources.PRIC_logo;
+            this.PRICPicBox.Location = new System.Drawing.Point(2, 301);
+            this.PRICPicBox.Name = "PRICPicBox";
+            this.PRICPicBox.Size = new System.Drawing.Size(145, 145);
+            this.PRICPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PRICPicBox.TabIndex = 0;
+            this.PRICPicBox.TabStop = false;
+            // 
+            // NMEFCPicBox
+            // 
+            this.NMEFCPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NMEFCPicBox.Image = global::Density_figure.Properties.Resources.NFMC_logo;
+            this.NMEFCPicBox.Location = new System.Drawing.Point(0, 151);
+            this.NMEFCPicBox.Name = "NMEFCPicBox";
+            this.NMEFCPicBox.Size = new System.Drawing.Size(145, 145);
+            this.NMEFCPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.NMEFCPicBox.TabIndex = 0;
+            this.NMEFCPicBox.TabStop = false;
+            // 
+            // dlutPicBox
+            // 
+            this.dlutPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dlutPicBox.Image = global::Density_figure.Properties.Resources.dlut_logo;
+            this.dlutPicBox.Location = new System.Drawing.Point(0, 0);
+            this.dlutPicBox.Name = "dlutPicBox";
+            this.dlutPicBox.Size = new System.Drawing.Size(145, 145);
+            this.dlutPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.dlutPicBox.TabIndex = 0;
+            this.dlutPicBox.TabStop = false;
+            // 
+            // isCalRealAreaCheckBox
+            // 
+            this.isCalRealAreaCheckBox.AutoSize = true;
+            this.isCalRealAreaCheckBox.Location = new System.Drawing.Point(113, 63);
+            this.isCalRealAreaCheckBox.Name = "isCalRealAreaCheckBox";
+            this.isCalRealAreaCheckBox.Size = new System.Drawing.Size(120, 16);
+            this.isCalRealAreaCheckBox.TabIndex = 8;
+            this.isCalRealAreaCheckBox.Text = "是否启用比例换算";
+            this.otherTip.SetToolTip(this.isCalRealAreaCheckBox, "如果启用该选项，则必须输入所截取区域的真实面积！");
+            this.isCalRealAreaCheckBox.UseVisualStyleBackColor = true;
+            this.isCalRealAreaCheckBox.CheckedChanged += new System.EventHandler(this.isCalRealAreaCheckBox_CheckedChanged);
+            // 
+            // realAreaTextBox
+            // 
+            this.realAreaTextBox.Enabled = false;
+            this.realAreaTextBox.Location = new System.Drawing.Point(174, 86);
+            this.realAreaTextBox.Name = "realAreaTextBox";
+            this.realAreaTextBox.Size = new System.Drawing.Size(99, 21);
+            this.realAreaTextBox.TabIndex = 5;
+            this.realAreaTextBox.Text = "0.0";
+            this.realAreaTextBox.Click += new System.EventHandler(this.startPointText_Click);
+            // 
+            // realAreaLabel
+            // 
+            this.realAreaLabel.AutoSize = true;
+            this.realAreaLabel.Enabled = false;
+            this.realAreaLabel.Location = new System.Drawing.Point(112, 94);
+            this.realAreaLabel.Name = "realAreaLabel";
+            this.realAreaLabel.Size = new System.Drawing.Size(59, 12);
+            this.realAreaLabel.TabIndex = 6;
+            this.realAreaLabel.Text = "真实面积:";
+            // 
+            // squareCentLabel
+            // 
+            this.squareCentLabel.AutoSize = true;
+            this.squareCentLabel.Enabled = false;
+            this.squareCentLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.squareCentLabel.Location = new System.Drawing.Point(274, 87);
+            this.squareCentLabel.Name = "squareCentLabel";
+            this.squareCentLabel.Size = new System.Drawing.Size(72, 16);
+            this.squareCentLabel.TabIndex = 3;
+            this.squareCentLabel.Text = "平方厘米";
             // 
             // MainForm
             // 
@@ -703,9 +704,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).EndInit();
             this.manualButtonPanel.ResumeLayout(false);
             this.manualButtonPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.areaLevelNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.areaSectionMax)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.areaSectionMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grayNum)).EndInit();
             this.autoButtonPanel.ResumeLayout(false);
             this.autoButtonPanel.PerformLayout();
@@ -715,6 +713,10 @@
             this.bottom.ResumeLayout(false);
             this.bottom.PerformLayout();
             this.mainPanel.ResumeLayout(false);
+            this.logoPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PRICPicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NMEFCPicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dlutPicBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -731,11 +733,7 @@
         private System.Windows.Forms.Label grayLabel;
         private System.Windows.Forms.Label autoNotifyLabel;
         private System.Windows.Forms.Button openPicButton;
-        private System.Windows.Forms.NumericUpDown areaLevelNum;
-        private System.Windows.Forms.Label areaLevelLabel;
-        private System.Windows.Forms.Label areaSection;
         private System.Windows.Forms.Panel autoButtonPanel;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button autoCalButton;
         private System.Windows.Forms.Label iceNumText;
         private System.Windows.Forms.Label iceDensityText;
@@ -745,8 +743,6 @@
         private System.Windows.Forms.Label minIceText;
         private System.Windows.Forms.Label maxIceText;
         private System.Windows.Forms.Panel bottom;
-        private System.Windows.Forms.NumericUpDown areaSectionMax;
-        private System.Windows.Forms.NumericUpDown areaSectionMin;
         private System.Windows.Forms.ToolTip picCoordinateTip;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.NumericUpDown timeToCalue;
@@ -770,6 +766,14 @@
         private System.Windows.Forms.Label versionLabel;
         private System.Windows.Forms.CheckBox isCycleCalculate;
         private System.Windows.Forms.CheckBox isRecursionCheckBox;
+        private System.Windows.Forms.Panel logoPanel;
+        private System.Windows.Forms.PictureBox PRICPicBox;
+        private System.Windows.Forms.PictureBox NMEFCPicBox;
+        private System.Windows.Forms.PictureBox dlutPicBox;
+        private System.Windows.Forms.CheckBox isCalRealAreaCheckBox;
+        private System.Windows.Forms.Label realAreaLabel;
+        private System.Windows.Forms.TextBox realAreaTextBox;
+        private System.Windows.Forms.Label squareCentLabel;
 
     }
 }
