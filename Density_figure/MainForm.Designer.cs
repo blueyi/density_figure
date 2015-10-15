@@ -36,12 +36,16 @@
             this.iceDensityLabel = new System.Windows.Forms.Label();
             this.setFolderButton = new System.Windows.Forms.Button();
             this.manualButtonPanel = new System.Windows.Forms.Panel();
+            this.isCalRealAreaCheckBox = new System.Windows.Forms.CheckBox();
             this.grayNum = new System.Windows.Forms.NumericUpDown();
             this.grayLabel = new System.Windows.Forms.Label();
+            this.realAreaLabel = new System.Windows.Forms.Label();
             this.autoNotifyLabel = new System.Windows.Forms.Label();
             this.openDatasButton = new System.Windows.Forms.Button();
+            this.realAreaTextBox = new System.Windows.Forms.TextBox();
             this.openTempButton = new System.Windows.Forms.Button();
             this.openPicButton = new System.Windows.Forms.Button();
+            this.squareCentLabel = new System.Windows.Forms.Label();
             this.autoButtonPanel = new System.Windows.Forms.Panel();
             this.isRecursionCheckBox = new System.Windows.Forms.CheckBox();
             this.isCycleCalculate = new System.Windows.Forms.CheckBox();
@@ -55,12 +59,12 @@
             this.timeLabel = new System.Windows.Forms.Label();
             this.iceNumText = new System.Windows.Forms.Label();
             this.iceDensityText = new System.Windows.Forms.Label();
-            this.resultPanel = new System.Windows.Forms.Panel();
             this.minIceLabel = new System.Windows.Forms.Label();
             this.maxIceLabel = new System.Windows.Forms.Label();
             this.minIceText = new System.Windows.Forms.Label();
             this.maxIceText = new System.Windows.Forms.Label();
             this.bottom = new System.Windows.Forms.Panel();
+            this.resultPanel = new System.Windows.Forms.TableLayoutPanel();
             this.isDeleteTempPic = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -77,18 +81,14 @@
             this.PRICPicBox = new System.Windows.Forms.PictureBox();
             this.NMEFCPicBox = new System.Windows.Forms.PictureBox();
             this.dlutPicBox = new System.Windows.Forms.PictureBox();
-            this.isCalRealAreaCheckBox = new System.Windows.Forms.CheckBox();
-            this.realAreaTextBox = new System.Windows.Forms.TextBox();
-            this.realAreaLabel = new System.Windows.Forms.Label();
-            this.squareCentLabel = new System.Windows.Forms.Label();
             this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).BeginInit();
             this.manualButtonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grayNum)).BeginInit();
             this.autoButtonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timeToCalue)).BeginInit();
-            this.resultPanel.SuspendLayout();
             this.bottom.SuspendLayout();
+            this.resultPanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.logoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PRICPicBox)).BeginInit();
@@ -127,22 +127,26 @@
             // iceNumLabel
             // 
             this.iceNumLabel.AutoSize = true;
+            this.iceNumLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iceNumLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.iceNumLabel.Location = new System.Drawing.Point(3, 6);
+            this.iceNumLabel.Location = new System.Drawing.Point(4, 1);
             this.iceNumLabel.Name = "iceNumLabel";
-            this.iceNumLabel.Size = new System.Drawing.Size(93, 16);
+            this.iceNumLabel.Size = new System.Drawing.Size(85, 35);
             this.iceNumLabel.TabIndex = 1;
-            this.iceNumLabel.Text = "冰块数目：";
+            this.iceNumLabel.Text = "冰块数目:";
+            this.iceNumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // iceDensityLabel
             // 
             this.iceDensityLabel.AutoSize = true;
+            this.iceDensityLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iceDensityLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.iceDensityLabel.Location = new System.Drawing.Point(153, 8);
+            this.iceDensityLabel.Location = new System.Drawing.Point(141, 1);
             this.iceDensityLabel.Name = "iceDensityLabel";
-            this.iceDensityLabel.Size = new System.Drawing.Size(68, 16);
+            this.iceDensityLabel.Size = new System.Drawing.Size(68, 35);
             this.iceDensityLabel.TabIndex = 1;
             this.iceDensityLabel.Text = "密集度:";
+            this.iceDensityLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // setFolderButton
             // 
@@ -174,6 +178,18 @@
             this.manualButtonPanel.Size = new System.Drawing.Size(422, 117);
             this.manualButtonPanel.TabIndex = 4;
             // 
+            // isCalRealAreaCheckBox
+            // 
+            this.isCalRealAreaCheckBox.AutoSize = true;
+            this.isCalRealAreaCheckBox.Location = new System.Drawing.Point(113, 63);
+            this.isCalRealAreaCheckBox.Name = "isCalRealAreaCheckBox";
+            this.isCalRealAreaCheckBox.Size = new System.Drawing.Size(120, 16);
+            this.isCalRealAreaCheckBox.TabIndex = 8;
+            this.isCalRealAreaCheckBox.Text = "是否启用比例换算";
+            this.otherTip.SetToolTip(this.isCalRealAreaCheckBox, "如果启用该选项，则必须输入所截取区域的真实面积！");
+            this.isCalRealAreaCheckBox.UseVisualStyleBackColor = true;
+            this.isCalRealAreaCheckBox.CheckedChanged += new System.EventHandler(this.isCalRealAreaCheckBox_CheckedChanged);
+            // 
             // grayNum
             // 
             this.grayNum.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -204,6 +220,16 @@
             this.grayLabel.TabIndex = 3;
             this.grayLabel.Text = "灰度值:";
             // 
+            // realAreaLabel
+            // 
+            this.realAreaLabel.AutoSize = true;
+            this.realAreaLabel.Enabled = false;
+            this.realAreaLabel.Location = new System.Drawing.Point(112, 94);
+            this.realAreaLabel.Name = "realAreaLabel";
+            this.realAreaLabel.Size = new System.Drawing.Size(59, 12);
+            this.realAreaLabel.TabIndex = 6;
+            this.realAreaLabel.Text = "真实面积:";
+            // 
             // autoNotifyLabel
             // 
             this.autoNotifyLabel.AutoSize = true;
@@ -228,6 +254,15 @@
             this.openDatasButton.UseVisualStyleBackColor = true;
             this.openDatasButton.Click += new System.EventHandler(this.openDatasButton_Click);
             // 
+            // realAreaTextBox
+            // 
+            this.realAreaTextBox.Enabled = false;
+            this.realAreaTextBox.Location = new System.Drawing.Point(174, 86);
+            this.realAreaTextBox.Name = "realAreaTextBox";
+            this.realAreaTextBox.Size = new System.Drawing.Size(99, 21);
+            this.realAreaTextBox.TabIndex = 5;
+            this.realAreaTextBox.Text = "0.0";
+            // 
             // openTempButton
             // 
             this.openTempButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -251,6 +286,17 @@
             this.otherTip.SetToolTip(this.openPicButton, "点击打开用于手动计算的jpg或者bmp图片");
             this.openPicButton.UseVisualStyleBackColor = true;
             this.openPicButton.Click += new System.EventHandler(this.openPicButton_Click);
+            // 
+            // squareCentLabel
+            // 
+            this.squareCentLabel.AutoSize = true;
+            this.squareCentLabel.Enabled = false;
+            this.squareCentLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.squareCentLabel.Location = new System.Drawing.Point(274, 87);
+            this.squareCentLabel.Name = "squareCentLabel";
+            this.squareCentLabel.Size = new System.Drawing.Size(72, 16);
+            this.squareCentLabel.TabIndex = 3;
+            this.squareCentLabel.Text = "平方厘米";
             // 
             // autoButtonPanel
             // 
@@ -395,87 +441,85 @@
             // iceNumText
             // 
             this.iceNumText.AutoSize = true;
+            this.iceNumText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iceNumText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
             this.iceNumText.ForeColor = System.Drawing.Color.Red;
-            this.iceNumText.Location = new System.Drawing.Point(94, 6);
+            this.iceNumText.Location = new System.Drawing.Point(96, 1);
             this.iceNumText.Name = "iceNumText";
-            this.iceNumText.Size = new System.Drawing.Size(17, 16);
+            this.iceNumText.Size = new System.Drawing.Size(17, 35);
             this.iceNumText.TabIndex = 6;
             this.iceNumText.Text = "0";
+            this.iceNumText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // iceDensityText
             // 
             this.iceDensityText.AutoSize = true;
+            this.iceDensityText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iceDensityText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
             this.iceDensityText.ForeColor = System.Drawing.Color.Red;
-            this.iceDensityText.Location = new System.Drawing.Point(220, 8);
+            this.iceDensityText.Location = new System.Drawing.Point(216, 1);
             this.iceDensityText.Name = "iceDensityText";
-            this.iceDensityText.Size = new System.Drawing.Size(35, 16);
+            this.iceDensityText.Size = new System.Drawing.Size(35, 35);
             this.iceDensityText.TabIndex = 6;
             this.iceDensityText.Text = "0.0";
-            // 
-            // resultPanel
-            // 
-            this.resultPanel.Controls.Add(this.minIceLabel);
-            this.resultPanel.Controls.Add(this.maxIceLabel);
-            this.resultPanel.Controls.Add(this.iceDensityLabel);
-            this.resultPanel.Controls.Add(this.minIceText);
-            this.resultPanel.Controls.Add(this.maxIceText);
-            this.resultPanel.Controls.Add(this.iceDensityText);
-            this.resultPanel.Controls.Add(this.iceNumLabel);
-            this.resultPanel.Controls.Add(this.iceNumText);
-            this.resultPanel.Location = new System.Drawing.Point(1, 6);
-            this.resultPanel.Name = "resultPanel";
-            this.resultPanel.Size = new System.Drawing.Size(769, 31);
-            this.resultPanel.TabIndex = 7;
+            this.iceDensityText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // minIceLabel
             // 
             this.minIceLabel.AutoSize = true;
+            this.minIceLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.minIceLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.minIceLabel.Location = new System.Drawing.Point(501, 8);
+            this.minIceLabel.Location = new System.Drawing.Point(468, 1);
             this.minIceLabel.Name = "minIceLabel";
-            this.minIceLabel.Size = new System.Drawing.Size(119, 16);
+            this.minIceLabel.Size = new System.Drawing.Size(119, 35);
             this.minIceLabel.TabIndex = 1;
             this.minIceLabel.Text = "最小冰块面积:";
+            this.minIceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // maxIceLabel
             // 
             this.maxIceLabel.AutoSize = true;
+            this.maxIceLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.maxIceLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.maxIceLabel.Location = new System.Drawing.Point(300, 8);
+            this.maxIceLabel.Location = new System.Drawing.Point(279, 1);
             this.maxIceLabel.Name = "maxIceLabel";
-            this.maxIceLabel.Size = new System.Drawing.Size(119, 16);
+            this.maxIceLabel.Size = new System.Drawing.Size(119, 35);
             this.maxIceLabel.TabIndex = 1;
             this.maxIceLabel.Text = "最大冰块面积:";
+            this.maxIceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // minIceText
             // 
             this.minIceText.AutoSize = true;
+            this.minIceText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.minIceText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
             this.minIceText.ForeColor = System.Drawing.Color.Red;
-            this.minIceText.Location = new System.Drawing.Point(618, 8);
+            this.minIceText.Location = new System.Drawing.Point(594, 1);
             this.minIceText.Name = "minIceText";
-            this.minIceText.Size = new System.Drawing.Size(35, 16);
+            this.minIceText.Size = new System.Drawing.Size(171, 35);
             this.minIceText.TabIndex = 6;
             this.minIceText.Text = "0.0";
+            this.minIceText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // maxIceText
             // 
             this.maxIceText.AutoSize = true;
+            this.maxIceText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.maxIceText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
             this.maxIceText.ForeColor = System.Drawing.Color.Red;
-            this.maxIceText.Location = new System.Drawing.Point(417, 8);
+            this.maxIceText.Location = new System.Drawing.Point(405, 1);
             this.maxIceText.Name = "maxIceText";
-            this.maxIceText.Size = new System.Drawing.Size(35, 16);
+            this.maxIceText.Size = new System.Drawing.Size(35, 35);
             this.maxIceText.TabIndex = 6;
             this.maxIceText.Text = "0.0";
+            this.maxIceText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // bottom
             // 
             this.bottom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.bottom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.bottom.Controls.Add(this.resultPanel);
             this.bottom.Controls.Add(this.isDeleteTempPic);
             this.bottom.Controls.Add(this.label2);
             this.bottom.Controls.Add(this.label6);
@@ -485,12 +529,44 @@
             this.bottom.Controls.Add(this.currentAutoPathLabel);
             this.bottom.Controls.Add(this.currentPicNameLabel);
             this.bottom.Controls.Add(this.manualButtonPanel);
-            this.bottom.Controls.Add(this.resultPanel);
             this.bottom.Controls.Add(this.autoButtonPanel);
             this.bottom.Location = new System.Drawing.Point(2, 458);
             this.bottom.Name = "bottom";
             this.bottom.Size = new System.Drawing.Size(778, 199);
             this.bottom.TabIndex = 9;
+            // 
+            // resultPanel
+            // 
+            this.resultPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.resultPanel.AutoSize = true;
+            this.resultPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.resultPanel.ColumnCount = 11;
+            this.resultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.resultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.resultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.resultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.resultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.resultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.resultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.resultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.resultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.resultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.resultPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.resultPanel.Controls.Add(this.iceNumLabel, 0, 0);
+            this.resultPanel.Controls.Add(this.iceDensityLabel, 3, 0);
+            this.resultPanel.Controls.Add(this.iceNumText, 1, 0);
+            this.resultPanel.Controls.Add(this.maxIceLabel, 6, 0);
+            this.resultPanel.Controls.Add(this.iceDensityText, 4, 0);
+            this.resultPanel.Controls.Add(this.maxIceText, 7, 0);
+            this.resultPanel.Controls.Add(this.minIceText, 10, 0);
+            this.resultPanel.Controls.Add(this.minIceLabel, 9, 0);
+            this.resultPanel.Location = new System.Drawing.Point(1, 3);
+            this.resultPanel.Name = "resultPanel";
+            this.resultPanel.RowCount = 1;
+            this.resultPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.resultPanel.Size = new System.Drawing.Size(769, 37);
+            this.resultPanel.TabIndex = 9;
             // 
             // isDeleteTempPic
             // 
@@ -605,7 +681,7 @@
             this.logoPanel.Controls.Add(this.PRICPicBox);
             this.logoPanel.Controls.Add(this.NMEFCPicBox);
             this.logoPanel.Controls.Add(this.dlutPicBox);
-            this.logoPanel.Location = new System.Drawing.Point(-1, -1);
+            this.logoPanel.Location = new System.Drawing.Point(0, 0);
             this.logoPanel.Name = "logoPanel";
             this.logoPanel.Size = new System.Drawing.Size(150, 453);
             this.logoPanel.TabIndex = 10;
@@ -646,49 +722,6 @@
             this.dlutPicBox.TabIndex = 0;
             this.dlutPicBox.TabStop = false;
             // 
-            // isCalRealAreaCheckBox
-            // 
-            this.isCalRealAreaCheckBox.AutoSize = true;
-            this.isCalRealAreaCheckBox.Location = new System.Drawing.Point(113, 63);
-            this.isCalRealAreaCheckBox.Name = "isCalRealAreaCheckBox";
-            this.isCalRealAreaCheckBox.Size = new System.Drawing.Size(120, 16);
-            this.isCalRealAreaCheckBox.TabIndex = 8;
-            this.isCalRealAreaCheckBox.Text = "是否启用比例换算";
-            this.otherTip.SetToolTip(this.isCalRealAreaCheckBox, "如果启用该选项，则必须输入所截取区域的真实面积！");
-            this.isCalRealAreaCheckBox.UseVisualStyleBackColor = true;
-            this.isCalRealAreaCheckBox.CheckedChanged += new System.EventHandler(this.isCalRealAreaCheckBox_CheckedChanged);
-            // 
-            // realAreaTextBox
-            // 
-            this.realAreaTextBox.Enabled = false;
-            this.realAreaTextBox.Location = new System.Drawing.Point(174, 86);
-            this.realAreaTextBox.Name = "realAreaTextBox";
-            this.realAreaTextBox.Size = new System.Drawing.Size(99, 21);
-            this.realAreaTextBox.TabIndex = 5;
-            this.realAreaTextBox.Text = "0.0";
-            this.realAreaTextBox.Click += new System.EventHandler(this.startPointText_Click);
-            // 
-            // realAreaLabel
-            // 
-            this.realAreaLabel.AutoSize = true;
-            this.realAreaLabel.Enabled = false;
-            this.realAreaLabel.Location = new System.Drawing.Point(112, 94);
-            this.realAreaLabel.Name = "realAreaLabel";
-            this.realAreaLabel.Size = new System.Drawing.Size(59, 12);
-            this.realAreaLabel.TabIndex = 6;
-            this.realAreaLabel.Text = "真实面积:";
-            // 
-            // squareCentLabel
-            // 
-            this.squareCentLabel.AutoSize = true;
-            this.squareCentLabel.Enabled = false;
-            this.squareCentLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.squareCentLabel.Location = new System.Drawing.Point(274, 87);
-            this.squareCentLabel.Name = "squareCentLabel";
-            this.squareCentLabel.Size = new System.Drawing.Size(72, 16);
-            this.squareCentLabel.TabIndex = 3;
-            this.squareCentLabel.Text = "平方厘米";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -708,10 +741,10 @@
             this.autoButtonPanel.ResumeLayout(false);
             this.autoButtonPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timeToCalue)).EndInit();
-            this.resultPanel.ResumeLayout(false);
-            this.resultPanel.PerformLayout();
             this.bottom.ResumeLayout(false);
             this.bottom.PerformLayout();
+            this.resultPanel.ResumeLayout(false);
+            this.resultPanel.PerformLayout();
             this.mainPanel.ResumeLayout(false);
             this.logoPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PRICPicBox)).EndInit();
@@ -737,7 +770,6 @@
         private System.Windows.Forms.Button autoCalButton;
         private System.Windows.Forms.Label iceNumText;
         private System.Windows.Forms.Label iceDensityText;
-        private System.Windows.Forms.Panel resultPanel;
         private System.Windows.Forms.Label minIceLabel;
         private System.Windows.Forms.Label maxIceLabel;
         private System.Windows.Forms.Label minIceText;
@@ -774,6 +806,7 @@
         private System.Windows.Forms.Label realAreaLabel;
         private System.Windows.Forms.TextBox realAreaTextBox;
         private System.Windows.Forms.Label squareCentLabel;
+        private System.Windows.Forms.TableLayoutPanel resultPanel;
 
     }
 }
