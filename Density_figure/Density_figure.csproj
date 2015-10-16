@@ -165,9 +165,6 @@
     <None Include="Resources\PRIC_logo.png" />
     <None Include="Resources\NFMC_logo.png" />
     <None Include="Resources\dlut_logo.png" />
-    <None Include="Resources\03_国家海洋环境预报中心1.png" />
-    <None Include="Resources\02_中国极地研究中心.png" />
-    <None Include="Resources\01_DUT 校徽1.PNG" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

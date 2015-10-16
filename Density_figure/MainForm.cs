@@ -81,7 +81,7 @@ namespace Density_figure
                         iceNumText.Text = iceBlockNum.ToString();
                         maxIceText.Text = (Math.Round(Convert.ToDouble(maxIceArea) * areaRatio, 4)).ToString();
                         minIceText.Text = (Math.Round(Convert.ToDouble(minIceArea) * areaRatio, 4)).ToString();
-                        resultPanel.Refresh();
+                        resultTablePanel.Refresh();
                     }
                     else
                         MessageBox.Show("数据处理未完成!---No grayedPic");
@@ -128,8 +128,18 @@ namespace Density_figure
                         picNames[i++] = finf.FullName;
                 }
                 //Array.Sort<string>(picNames, delegate(string str1, string str2) { return int.Parse(Regex.Match(str1, @"\d+").Value) - int.Parse(Regex.Match(str2, @"\d+").Value); });
-                //对图片按字母进行排序
-                picNames = picNames.OrderBy(s => int.Parse(Regex.Match(s, @"\d+(?=.jpg)").Value)).ToArray();
+                //对图片按数字顺序进行排序
+                bool isHaveNum = true; //判断文件名中是否有数字
+                Regex pattern = new Regex(@"\d+(?=[\.jpg\.JPG\.bmp\.BMP\.png\.PNG])");
+                foreach (string picName in picNames)
+                {
+                    if (!pattern.IsMatch(picName))
+                    {
+                        isHaveNum = false;
+                    }
+                }
+                if (isHaveNum)
+                    picNames = picNames.OrderBy(s => int.Parse(Regex.Match(s, @"\d+(?=[\.jpg\.JPG\.bmp\.BMP\.png\.PNG])").Value)).ToArray();
                 picNum = i;
                 if (picNum > 0)
                 {
@@ -484,7 +494,7 @@ namespace Density_figure
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
-            this.originalPicBox.Refresh();
+            this.mainPanel.Refresh();
         }
 
         private void isCalRealAreaCheckBox_CheckedChanged(object sender, EventArgs e)
