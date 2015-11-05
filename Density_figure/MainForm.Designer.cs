@@ -41,11 +41,11 @@
             this.grayLabel = new System.Windows.Forms.Label();
             this.realAreaLabel = new System.Windows.Forms.Label();
             this.autoNotifyLabel = new System.Windows.Forms.Label();
-            this.openDatasButton = new System.Windows.Forms.Button();
             this.realAreaTextBox = new System.Windows.Forms.TextBox();
+            this.squareCentLabel = new System.Windows.Forms.Label();
+            this.openDatasButton = new System.Windows.Forms.Button();
             this.openTempButton = new System.Windows.Forms.Button();
             this.openPicButton = new System.Windows.Forms.Button();
-            this.squareCentLabel = new System.Windows.Forms.Label();
             this.autoButtonPanel = new System.Windows.Forms.Panel();
             this.isRecursionCheckBox = new System.Windows.Forms.CheckBox();
             this.isCycleCalculate = new System.Windows.Forms.CheckBox();
@@ -53,10 +53,10 @@
             this.startLabel = new System.Windows.Forms.Label();
             this.endPointText = new System.Windows.Forms.TextBox();
             this.startPointText = new System.Windows.Forms.TextBox();
-            this.autoCalButton = new System.Windows.Forms.Button();
             this.timeToCalue = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
+            this.autoCalButton = new System.Windows.Forms.Button();
             this.iceNumText = new System.Windows.Forms.Label();
             this.iceDensityText = new System.Windows.Forms.Label();
             this.minIceLabel = new System.Windows.Forms.Label();
@@ -64,14 +64,19 @@
             this.minIceText = new System.Windows.Forms.Label();
             this.maxIceText = new System.Windows.Forms.Label();
             this.bottomAllPanel = new System.Windows.Forms.Panel();
-            this.resultTablePanel = new System.Windows.Forms.TableLayoutPanel();
-            this.isDeleteTempPic = new System.Windows.Forms.CheckBox();
+            this.optionButtonTablePanel = new System.Windows.Forms.TableLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.currentPicNameLabel = new System.Windows.Forms.Label();
+            this.currentAutoPathLabel = new System.Windows.Forms.Label();
+            this.currentPIcNumLabel = new System.Windows.Forms.Label();
             this.currentDealLabel = new System.Windows.Forms.Label();
             this.currentAutoCalPathLabel = new System.Windows.Forms.Label();
-            this.currentPIcNumLabel = new System.Windows.Forms.Label();
+            this.RBPanel = new System.Windows.Forms.Panel();
+            this.isDeleteTempPic = new System.Windows.Forms.CheckBox();
             this.versionLabel = new System.Windows.Forms.Label();
-            this.currentAutoPathLabel = new System.Windows.Forms.Label();
-            this.currentPicNameLabel = new System.Windows.Forms.Label();
+            this.resultTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.picCoordinateTip = new System.Windows.Forms.ToolTip(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.otherTip = new System.Windows.Forms.ToolTip(this.components);
@@ -80,11 +85,6 @@
             this.PRICPicBox = new System.Windows.Forms.PictureBox();
             this.NMEFCPicBox = new System.Windows.Forms.PictureBox();
             this.dlutPicBox = new System.Windows.Forms.PictureBox();
-            this.RBPanel = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.optionButtonTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.picPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).BeginInit();
             this.manualButtonPanel.SuspendLayout();
@@ -92,17 +92,17 @@
             this.autoButtonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.timeToCalue)).BeginInit();
             this.bottomAllPanel.SuspendLayout();
+            this.optionButtonTablePanel.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.RBPanel.SuspendLayout();
             this.resultTablePanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.logoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PRICPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NMEFCPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dlutPicBox)).BeginInit();
-            this.RBPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.optionButtonTablePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // picPanel
@@ -137,9 +137,9 @@
             this.iceNumLabel.AutoSize = true;
             this.iceNumLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iceNumLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.iceNumLabel.Location = new System.Drawing.Point(4, 1);
+            this.iceNumLabel.Location = new System.Drawing.Point(3, 0);
             this.iceNumLabel.Name = "iceNumLabel";
-            this.iceNumLabel.Size = new System.Drawing.Size(85, 35);
+            this.iceNumLabel.Size = new System.Drawing.Size(85, 37);
             this.iceNumLabel.TabIndex = 1;
             this.iceNumLabel.Text = "冰块数目:";
             this.iceNumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -149,9 +149,9 @@
             this.iceDensityLabel.AutoSize = true;
             this.iceDensityLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iceDensityLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.iceDensityLabel.Location = new System.Drawing.Point(141, 1);
+            this.iceDensityLabel.Location = new System.Drawing.Point(137, 0);
             this.iceDensityLabel.Name = "iceDensityLabel";
-            this.iceDensityLabel.Size = new System.Drawing.Size(68, 35);
+            this.iceDensityLabel.Size = new System.Drawing.Size(68, 37);
             this.iceDensityLabel.TabIndex = 1;
             this.iceDensityLabel.Text = "密集度:";
             this.iceDensityLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -180,7 +180,7 @@
             this.manualButtonPanel.Controls.Add(this.autoNotifyLabel);
             this.manualButtonPanel.Controls.Add(this.realAreaTextBox);
             this.manualButtonPanel.Controls.Add(this.squareCentLabel);
-            this.manualButtonPanel.Location = new System.Drawing.Point(480, 3);
+            this.manualButtonPanel.Location = new System.Drawing.Point(478, 3);
             this.manualButtonPanel.Name = "manualButtonPanel";
             this.manualButtonPanel.Size = new System.Drawing.Size(264, 112);
             this.manualButtonPanel.TabIndex = 4;
@@ -249,6 +249,26 @@
             this.autoNotifyLabel.TabIndex = 2;
             this.autoNotifyLabel.Text = "选择计算参数";
             // 
+            // realAreaTextBox
+            // 
+            this.realAreaTextBox.Enabled = false;
+            this.realAreaTextBox.Location = new System.Drawing.Point(66, 87);
+            this.realAreaTextBox.Name = "realAreaTextBox";
+            this.realAreaTextBox.Size = new System.Drawing.Size(99, 21);
+            this.realAreaTextBox.TabIndex = 5;
+            this.realAreaTextBox.Text = "0.0";
+            // 
+            // squareCentLabel
+            // 
+            this.squareCentLabel.AutoSize = true;
+            this.squareCentLabel.Enabled = false;
+            this.squareCentLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.squareCentLabel.Location = new System.Drawing.Point(166, 92);
+            this.squareCentLabel.Name = "squareCentLabel";
+            this.squareCentLabel.Size = new System.Drawing.Size(53, 12);
+            this.squareCentLabel.TabIndex = 3;
+            this.squareCentLabel.Text = "平方厘米";
+            // 
             // openDatasButton
             // 
             this.openDatasButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -261,15 +281,6 @@
         "使用excel打开并进行数据分析");
             this.openDatasButton.UseVisualStyleBackColor = true;
             this.openDatasButton.Click += new System.EventHandler(this.openDatasButton_Click);
-            // 
-            // realAreaTextBox
-            // 
-            this.realAreaTextBox.Enabled = false;
-            this.realAreaTextBox.Location = new System.Drawing.Point(66, 87);
-            this.realAreaTextBox.Name = "realAreaTextBox";
-            this.realAreaTextBox.Size = new System.Drawing.Size(99, 21);
-            this.realAreaTextBox.TabIndex = 5;
-            this.realAreaTextBox.Text = "0.0";
             // 
             // openTempButton
             // 
@@ -295,17 +306,6 @@
             this.openPicButton.UseVisualStyleBackColor = true;
             this.openPicButton.Click += new System.EventHandler(this.openPicButton_Click);
             // 
-            // squareCentLabel
-            // 
-            this.squareCentLabel.AutoSize = true;
-            this.squareCentLabel.Enabled = false;
-            this.squareCentLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.squareCentLabel.Location = new System.Drawing.Point(166, 92);
-            this.squareCentLabel.Name = "squareCentLabel";
-            this.squareCentLabel.Size = new System.Drawing.Size(53, 12);
-            this.squareCentLabel.TabIndex = 3;
-            this.squareCentLabel.Text = "平方厘米";
-            // 
             // autoButtonPanel
             // 
             this.autoButtonPanel.Controls.Add(this.isRecursionCheckBox);
@@ -318,9 +318,9 @@
             this.autoButtonPanel.Controls.Add(this.label3);
             this.autoButtonPanel.Controls.Add(this.timeLabel);
             this.autoButtonPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.autoButtonPanel.Location = new System.Drawing.Point(203, 3);
+            this.autoButtonPanel.Location = new System.Drawing.Point(202, 3);
             this.autoButtonPanel.Name = "autoButtonPanel";
-            this.autoButtonPanel.Size = new System.Drawing.Size(174, 112);
+            this.autoButtonPanel.Size = new System.Drawing.Size(173, 112);
             this.autoButtonPanel.TabIndex = 5;
             // 
             // isRecursionCheckBox
@@ -384,19 +384,6 @@
             this.otherTip.SetToolTip(this.startPointText, "设置完图片路径后使用鼠标在图中选择起点和终点");
             this.startPointText.Click += new System.EventHandler(this.startPointText_Click);
             // 
-            // autoCalButton
-            // 
-            this.autoCalButton.Enabled = false;
-            this.autoCalButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.autoCalButton.Location = new System.Drawing.Point(2, 63);
-            this.autoCalButton.Name = "autoCalButton";
-            this.autoCalButton.Size = new System.Drawing.Size(96, 43);
-            this.autoCalButton.TabIndex = 4;
-            this.autoCalButton.Text = "自动计算";
-            this.otherTip.SetToolTip(this.autoCalButton, "1. 点击自动计算前请先设置图像路径和计算区域\r\n2. 开始自动计算后可能通过点击停止来暂停自动计算并查看当前选择的自动计算区域");
-            this.autoCalButton.UseVisualStyleBackColor = true;
-            this.autoCalButton.Click += new System.EventHandler(this.autoCalButton_Click);
-            // 
             // timeToCalue
             // 
             this.timeToCalue.Enabled = false;
@@ -444,15 +431,28 @@
             this.timeLabel.Text = "时间间隔:";
             this.otherTip.SetToolTip(this.timeLabel, "设置完图像路径后，设置自动计算的时间间隔");
             // 
+            // autoCalButton
+            // 
+            this.autoCalButton.Enabled = false;
+            this.autoCalButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.autoCalButton.Location = new System.Drawing.Point(2, 63);
+            this.autoCalButton.Name = "autoCalButton";
+            this.autoCalButton.Size = new System.Drawing.Size(96, 43);
+            this.autoCalButton.TabIndex = 4;
+            this.autoCalButton.Text = "自动计算";
+            this.otherTip.SetToolTip(this.autoCalButton, "1. 点击自动计算前请先设置图像路径和计算区域\r\n2. 开始自动计算后可能通过点击停止来暂停自动计算并查看当前选择的自动计算区域");
+            this.autoCalButton.UseVisualStyleBackColor = true;
+            this.autoCalButton.Click += new System.EventHandler(this.autoCalButton_Click);
+            // 
             // iceNumText
             // 
             this.iceNumText.AutoSize = true;
             this.iceNumText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iceNumText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
             this.iceNumText.ForeColor = System.Drawing.Color.Red;
-            this.iceNumText.Location = new System.Drawing.Point(96, 1);
+            this.iceNumText.Location = new System.Drawing.Point(94, 0);
             this.iceNumText.Name = "iceNumText";
-            this.iceNumText.Size = new System.Drawing.Size(17, 35);
+            this.iceNumText.Size = new System.Drawing.Size(17, 37);
             this.iceNumText.TabIndex = 6;
             this.iceNumText.Text = "0";
             this.iceNumText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -463,9 +463,9 @@
             this.iceDensityText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.iceDensityText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
             this.iceDensityText.ForeColor = System.Drawing.Color.Red;
-            this.iceDensityText.Location = new System.Drawing.Point(216, 1);
+            this.iceDensityText.Location = new System.Drawing.Point(211, 0);
             this.iceDensityText.Name = "iceDensityText";
-            this.iceDensityText.Size = new System.Drawing.Size(35, 35);
+            this.iceDensityText.Size = new System.Drawing.Size(35, 37);
             this.iceDensityText.TabIndex = 6;
             this.iceDensityText.Text = "0.0";
             this.iceDensityText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -475,9 +475,9 @@
             this.minIceLabel.AutoSize = true;
             this.minIceLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.minIceLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.minIceLabel.Location = new System.Drawing.Point(468, 1);
+            this.minIceLabel.Location = new System.Drawing.Point(458, 0);
             this.minIceLabel.Name = "minIceLabel";
-            this.minIceLabel.Size = new System.Drawing.Size(119, 35);
+            this.minIceLabel.Size = new System.Drawing.Size(119, 37);
             this.minIceLabel.TabIndex = 1;
             this.minIceLabel.Text = "最小冰块面积:";
             this.minIceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -487,9 +487,9 @@
             this.maxIceLabel.AutoSize = true;
             this.maxIceLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.maxIceLabel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.maxIceLabel.Location = new System.Drawing.Point(279, 1);
+            this.maxIceLabel.Location = new System.Drawing.Point(272, 0);
             this.maxIceLabel.Name = "maxIceLabel";
-            this.maxIceLabel.Size = new System.Drawing.Size(119, 35);
+            this.maxIceLabel.Size = new System.Drawing.Size(119, 37);
             this.maxIceLabel.TabIndex = 1;
             this.maxIceLabel.Text = "最大冰块面积:";
             this.maxIceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -500,9 +500,9 @@
             this.minIceText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.minIceText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
             this.minIceText.ForeColor = System.Drawing.Color.Red;
-            this.minIceText.Location = new System.Drawing.Point(594, 1);
+            this.minIceText.Location = new System.Drawing.Point(583, 0);
             this.minIceText.Name = "minIceText";
-            this.minIceText.Size = new System.Drawing.Size(171, 35);
+            this.minIceText.Size = new System.Drawing.Size(183, 37);
             this.minIceText.TabIndex = 6;
             this.minIceText.Text = "0.0";
             this.minIceText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -513,9 +513,9 @@
             this.maxIceText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.maxIceText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold);
             this.maxIceText.ForeColor = System.Drawing.Color.Red;
-            this.maxIceText.Location = new System.Drawing.Point(405, 1);
+            this.maxIceText.Location = new System.Drawing.Point(397, 0);
             this.maxIceText.Name = "maxIceText";
-            this.maxIceText.Size = new System.Drawing.Size(35, 35);
+            this.maxIceText.Size = new System.Drawing.Size(35, 37);
             this.maxIceText.TabIndex = 6;
             this.maxIceText.Text = "0.0";
             this.maxIceText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -532,6 +532,137 @@
             this.bottomAllPanel.Name = "bottomAllPanel";
             this.bottomAllPanel.Size = new System.Drawing.Size(778, 199);
             this.bottomAllPanel.TabIndex = 9;
+            // 
+            // optionButtonTablePanel
+            // 
+            this.optionButtonTablePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.optionButtonTablePanel.ColumnCount = 6;
+            this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
+            this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
+            this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.85715F));
+            this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.optionButtonTablePanel.Controls.Add(this.panel2, 1, 0);
+            this.optionButtonTablePanel.Controls.Add(this.panel3, 3, 0);
+            this.optionButtonTablePanel.Controls.Add(this.autoButtonPanel, 2, 0);
+            this.optionButtonTablePanel.Controls.Add(this.manualButtonPanel, 4, 0);
+            this.optionButtonTablePanel.Location = new System.Drawing.Point(3, 43);
+            this.optionButtonTablePanel.Name = "optionButtonTablePanel";
+            this.optionButtonTablePanel.RowCount = 1;
+            this.optionButtonTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.optionButtonTablePanel.Size = new System.Drawing.Size(768, 118);
+            this.optionButtonTablePanel.TabIndex = 10;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.panel2.Controls.Add(this.setFolderButton);
+            this.panel2.Controls.Add(this.autoCalButton);
+            this.panel2.Location = new System.Drawing.Point(95, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(101, 112);
+            this.panel2.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.openTempButton);
+            this.panel3.Controls.Add(this.openPicButton);
+            this.panel3.Controls.Add(this.openDatasButton);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(381, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(91, 112);
+            this.panel3.TabIndex = 6;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.currentPicNameLabel);
+            this.panel1.Controls.Add(this.currentAutoPathLabel);
+            this.panel1.Controls.Add(this.currentPIcNumLabel);
+            this.panel1.Controls.Add(this.currentDealLabel);
+            this.panel1.Controls.Add(this.currentAutoCalPathLabel);
+            this.panel1.Location = new System.Drawing.Point(3, 160);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(599, 36);
+            this.panel1.TabIndex = 1;
+            // 
+            // currentPicNameLabel
+            // 
+            this.currentPicNameLabel.AutoSize = true;
+            this.currentPicNameLabel.Location = new System.Drawing.Point(150, 4);
+            this.currentPicNameLabel.Name = "currentPicNameLabel";
+            this.currentPicNameLabel.Size = new System.Drawing.Size(29, 12);
+            this.currentPicNameLabel.TabIndex = 7;
+            this.currentPicNameLabel.Text = "None";
+            // 
+            // currentAutoPathLabel
+            // 
+            this.currentAutoPathLabel.AutoSize = true;
+            this.currentAutoPathLabel.Location = new System.Drawing.Point(130, 21);
+            this.currentAutoPathLabel.Name = "currentAutoPathLabel";
+            this.currentAutoPathLabel.Size = new System.Drawing.Size(29, 12);
+            this.currentAutoPathLabel.TabIndex = 7;
+            this.currentAutoPathLabel.Text = "None";
+            // 
+            // currentPIcNumLabel
+            // 
+            this.currentPIcNumLabel.AutoSize = true;
+            this.currentPIcNumLabel.Location = new System.Drawing.Point(78, 4);
+            this.currentPIcNumLabel.Name = "currentPIcNumLabel";
+            this.currentPIcNumLabel.Size = new System.Drawing.Size(29, 12);
+            this.currentPIcNumLabel.TabIndex = 7;
+            this.currentPIcNumLabel.Text = "None";
+            // 
+            // currentDealLabel
+            // 
+            this.currentDealLabel.AutoSize = true;
+            this.currentDealLabel.Location = new System.Drawing.Point(5, 4);
+            this.currentDealLabel.Name = "currentDealLabel";
+            this.currentDealLabel.Size = new System.Drawing.Size(59, 12);
+            this.currentDealLabel.TabIndex = 7;
+            this.currentDealLabel.Text = "正在处理:";
+            // 
+            // currentAutoCalPathLabel
+            // 
+            this.currentAutoCalPathLabel.AutoSize = true;
+            this.currentAutoCalPathLabel.Location = new System.Drawing.Point(5, 21);
+            this.currentAutoCalPathLabel.Name = "currentAutoCalPathLabel";
+            this.currentAutoCalPathLabel.Size = new System.Drawing.Size(119, 12);
+            this.currentAutoCalPathLabel.TabIndex = 7;
+            this.currentAutoCalPathLabel.Text = "当前自动计算的路径:";
+            // 
+            // RBPanel
+            // 
+            this.RBPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RBPanel.Controls.Add(this.isDeleteTempPic);
+            this.RBPanel.Controls.Add(this.versionLabel);
+            this.RBPanel.Location = new System.Drawing.Point(618, 161);
+            this.RBPanel.Name = "RBPanel";
+            this.RBPanel.Size = new System.Drawing.Size(155, 37);
+            this.RBPanel.TabIndex = 1;
+            // 
+            // isDeleteTempPic
+            // 
+            this.isDeleteTempPic.AutoSize = true;
+            this.isDeleteTempPic.Location = new System.Drawing.Point(7, 3);
+            this.isDeleteTempPic.Name = "isDeleteTempPic";
+            this.isDeleteTempPic.Size = new System.Drawing.Size(120, 16);
+            this.isDeleteTempPic.TabIndex = 8;
+            this.isDeleteTempPic.Text = "是否保留临时文件";
+            this.otherTip.SetToolTip(this.isDeleteTempPic, "勾选该选项后可以在程序所在文件夹下Temp文件夹中查看当前所处理图像的中间图像\r\n勾选该选项后会额外占用较多磁盘空间，需要用户手动删除");
+            this.isDeleteTempPic.UseVisualStyleBackColor = true;
+            // 
+            // versionLabel
+            // 
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.Location = new System.Drawing.Point(5, 19);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(125, 12);
+            this.versionLabel.TabIndex = 7;
+            this.versionLabel.Text = "当前程序版本: V1.2.0";
             // 
             // resultTablePanel
             // 
@@ -563,71 +694,6 @@
             this.resultTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.resultTablePanel.Size = new System.Drawing.Size(769, 37);
             this.resultTablePanel.TabIndex = 9;
-            // 
-            // isDeleteTempPic
-            // 
-            this.isDeleteTempPic.AutoSize = true;
-            this.isDeleteTempPic.Location = new System.Drawing.Point(7, 3);
-            this.isDeleteTempPic.Name = "isDeleteTempPic";
-            this.isDeleteTempPic.Size = new System.Drawing.Size(120, 16);
-            this.isDeleteTempPic.TabIndex = 8;
-            this.isDeleteTempPic.Text = "是否保留临时文件";
-            this.otherTip.SetToolTip(this.isDeleteTempPic, "勾选该选项后可以在程序所在文件夹下Temp文件夹中查看当前所处理图像的中间图像\r\n勾选该选项后会额外占用较多磁盘空间，需要用户手动删除");
-            this.isDeleteTempPic.UseVisualStyleBackColor = true;
-            // 
-            // currentDealLabel
-            // 
-            this.currentDealLabel.AutoSize = true;
-            this.currentDealLabel.Location = new System.Drawing.Point(5, 4);
-            this.currentDealLabel.Name = "currentDealLabel";
-            this.currentDealLabel.Size = new System.Drawing.Size(59, 12);
-            this.currentDealLabel.TabIndex = 7;
-            this.currentDealLabel.Text = "正在处理:";
-            // 
-            // currentAutoCalPathLabel
-            // 
-            this.currentAutoCalPathLabel.AutoSize = true;
-            this.currentAutoCalPathLabel.Location = new System.Drawing.Point(5, 21);
-            this.currentAutoCalPathLabel.Name = "currentAutoCalPathLabel";
-            this.currentAutoCalPathLabel.Size = new System.Drawing.Size(119, 12);
-            this.currentAutoCalPathLabel.TabIndex = 7;
-            this.currentAutoCalPathLabel.Text = "当前自动计算的路径:";
-            // 
-            // currentPIcNumLabel
-            // 
-            this.currentPIcNumLabel.AutoSize = true;
-            this.currentPIcNumLabel.Location = new System.Drawing.Point(78, 4);
-            this.currentPIcNumLabel.Name = "currentPIcNumLabel";
-            this.currentPIcNumLabel.Size = new System.Drawing.Size(29, 12);
-            this.currentPIcNumLabel.TabIndex = 7;
-            this.currentPIcNumLabel.Text = "None";
-            // 
-            // versionLabel
-            // 
-            this.versionLabel.AutoSize = true;
-            this.versionLabel.Location = new System.Drawing.Point(5, 19);
-            this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(125, 12);
-            this.versionLabel.TabIndex = 7;
-            this.versionLabel.Text = "当前程序版本: V1.2.0";
-            // 
-            // currentAutoPathLabel
-            // 
-            this.currentAutoPathLabel.AutoSize = true;
-            this.currentAutoPathLabel.Location = new System.Drawing.Point(130, 21);
-            this.currentAutoPathLabel.Name = "currentAutoPathLabel";
-            this.currentAutoPathLabel.Size = new System.Drawing.Size(29, 12);
-            this.currentAutoPathLabel.TabIndex = 7;
-            this.currentAutoPathLabel.Text = "None";
-            // 
-            // currentPicNameLabel
-            // 
-            this.currentPicNameLabel.AutoSize = true;
-            this.currentPicNameLabel.Location = new System.Drawing.Point(150, 4);
-            this.currentPicNameLabel.Name = "currentPicNameLabel";
-            this.currentPicNameLabel.Size = new System.Drawing.Size(29, 12);
-            this.currentPicNameLabel.TabIndex = 7;
-            this.currentPicNameLabel.Text = "None";
             // 
             // picCoordinateTip
             // 
@@ -709,72 +775,6 @@
             this.dlutPicBox.TabIndex = 0;
             this.dlutPicBox.TabStop = false;
             // 
-            // RBPanel
-            // 
-            this.RBPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RBPanel.Controls.Add(this.isDeleteTempPic);
-            this.RBPanel.Controls.Add(this.versionLabel);
-            this.RBPanel.Location = new System.Drawing.Point(618, 161);
-            this.RBPanel.Name = "RBPanel";
-            this.RBPanel.Size = new System.Drawing.Size(155, 37);
-            this.RBPanel.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.currentPicNameLabel);
-            this.panel1.Controls.Add(this.currentAutoPathLabel);
-            this.panel1.Controls.Add(this.currentPIcNumLabel);
-            this.panel1.Controls.Add(this.currentDealLabel);
-            this.panel1.Controls.Add(this.currentAutoCalPathLabel);
-            this.panel1.Location = new System.Drawing.Point(3, 160);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(599, 36);
-            this.panel1.TabIndex = 1;
-            // 
-            // panel2
-            // 
-            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.panel2.Controls.Add(this.setFolderButton);
-            this.panel2.Controls.Add(this.autoCalButton);
-            this.panel2.Location = new System.Drawing.Point(96, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(101, 112);
-            this.panel2.TabIndex = 1;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.openTempButton);
-            this.panel3.Controls.Add(this.openPicButton);
-            this.panel3.Controls.Add(this.openDatasButton);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(383, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(91, 112);
-            this.panel3.TabIndex = 6;
-            // 
-            // optionButtonTablePanel
-            // 
-            this.optionButtonTablePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.optionButtonTablePanel.ColumnCount = 6;
-            this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
-            this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
-            this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.85715F));
-            this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.optionButtonTablePanel.Controls.Add(this.panel2, 1, 0);
-            this.optionButtonTablePanel.Controls.Add(this.panel3, 3, 0);
-            this.optionButtonTablePanel.Controls.Add(this.autoButtonPanel, 2, 0);
-            this.optionButtonTablePanel.Controls.Add(this.manualButtonPanel, 4, 0);
-            this.optionButtonTablePanel.Location = new System.Drawing.Point(3, 43);
-            this.optionButtonTablePanel.Name = "optionButtonTablePanel";
-            this.optionButtonTablePanel.RowCount = 1;
-            this.optionButtonTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.optionButtonTablePanel.Size = new System.Drawing.Size(768, 118);
-            this.optionButtonTablePanel.TabIndex = 10;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -796,6 +796,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.timeToCalue)).EndInit();
             this.bottomAllPanel.ResumeLayout(false);
             this.bottomAllPanel.PerformLayout();
+            this.optionButtonTablePanel.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.RBPanel.ResumeLayout(false);
+            this.RBPanel.PerformLayout();
             this.resultTablePanel.ResumeLayout(false);
             this.resultTablePanel.PerformLayout();
             this.mainPanel.ResumeLayout(false);
@@ -803,13 +810,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.PRICPicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NMEFCPicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dlutPicBox)).EndInit();
-            this.RBPanel.ResumeLayout(false);
-            this.RBPanel.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.optionButtonTablePanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
