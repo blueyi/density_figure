@@ -7,8 +7,8 @@
     <ProjectGuid>{50741518-4444-4AAF-8196-95ADBCF9C872}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Density_figure</RootNamespace>
-    <AssemblyName>Density_figure</AssemblyName>
+    <RootNamespace>Ice_Concentration</RootNamespace>
+    <AssemblyName>IceConcentration</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -162,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ice.ico" />
+    <None Include="Resources\Ice_Front.jpg" />
     <None Include="Resources\PRIC_logo.png" />
     <None Include="Resources\NFMC_logo.png" />
     <None Include="Resources\dlut_logo.png" />

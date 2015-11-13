@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace Density_figure
+namespace Ice_Concentration
 {
     class DataToFile
     {

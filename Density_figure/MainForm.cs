@@ -13,7 +13,7 @@ using System.Drawing.Imaging;  //图形 picCut
 using System.Reflection;
 using System.Text.RegularExpressions; //可以使用PropertyInfo
 
-namespace Density_figure
+namespace Ice_Concentration 
 {
     public partial class MainForm : Form
     {
@@ -88,6 +88,55 @@ namespace Density_figure
                 }
 //                else
 //                    MessageBox.Show("数据处理未完成!---No cuttedPic");
+            }
+            else
+                MessageBox.Show("数据处理未完成!---No originalPic");
+            if (!isDeleteTempPic.Checked)
+            {
+                if (File.Exists(cuttedPic) && !DataToFile.isFileInUsed(cuttedPic))
+                    File.Delete(cuttedPic);
+                if (File.Exists(grayedPic) && !DataToFile.isFileInUsed(grayedPic))
+                    File.Delete(grayedPic);
+            }
+        }
+
+        //Picture deal function
+        public void allPicFunc(PictureBox picBox, Bitmap pic, Point start, Point end)
+        {
+            string cuttedPic = "";
+            string grayedPic = "";
+            if (pic != null)
+            {
+                cuttedPic = PicFunction.picCutFunction(originalPicBox, pic, start, end);
+                if (cuttedPic.Length != 0)
+                {
+                    grayedPic = PicFunction.picGrayScale(cuttedPic, Convert.ToInt32(grayNum.Value));
+                    if (grayedPic.Length != 0)
+                    {
+
+                        int iceBlockNum = 0;  //冰块总数
+                        int maxIceArea = 0;  //最大冰块
+                        int minIceArea = 0;  //最小冰块
+                        double iceDensity = 0.0;  //密集度
+                        int pixelSquare = 0; //所计算图像的像素大小
+
+                        PicFunction.picCalculate(grayedPic, ref iceBlockNum, ref iceDensity, ref maxIceArea, ref minIceArea, ref pixelSquare);
+
+                        double areaRatio = Convert.ToDouble(realAreaTextBox.Text) / pixelSquare;
+                        if (!isCalRealAreaCheckBox.Checked)
+                            areaRatio = 1.0;
+
+                        iceDensityText.Text = iceDensity.ToString();
+                        iceNumText.Text = iceBlockNum.ToString();
+                        maxIceText.Text = (Math.Round(Convert.ToDouble(maxIceArea) * areaRatio, 4)).ToString();
+                        minIceText.Text = (Math.Round(Convert.ToDouble(minIceArea) * areaRatio, 4)).ToString();
+                        resultTablePanel.Refresh();
+                    }
+                    else
+                        MessageBox.Show("数据处理未完成!---No grayedPic");
+                }
+                //                else
+                //                    MessageBox.Show("数据处理未完成!---No cuttedPic");
             }
             else
                 MessageBox.Show("数据处理未完成!---No originalPic");
@@ -272,13 +321,24 @@ namespace Density_figure
                 autoStart = start;
                 autoEnd = end;
 
-                if (start.X != end.X && start.Y != end.Y)
-                    allPicFunc(originalPicBox, currentPic, start, end);
-
-                string manualStr = DateTime.Now.ToString() + "," + iceNumText.Text + "," + iceDensityText.Text + ","
+                if (MessageBox.Show("是否确定计算", "确定计算？", MessageBoxButtons.OKCancel) == DialogResult.OK && start.X != end.X && start.Y != end.Y)
+                {
+                    if (currentPic.Length != 0)
+                    {
+                        allPicFunc(originalPicBox, currentPic, start, end);
+                        string manualStr = DateTime.Now.ToString("F") + "," + iceNumText.Text + "," + iceDensityText.Text + ","
                     + maxIceText.Text + "," + minIceText.Text + "," + currentPic;
                 DataToFile.strToFile(Application.StartupPath + @"\Datas\manual.csv", manualStr);
+                    }
+                    else
+                    {
+                        allPicFunc(originalPicBox, Properties.Resources.Ice_Front, start, end);
+                        string manualStr = DateTime.Now.ToString("F") + "," + iceNumText.Text + "," + iceDensityText.Text + ","
+                    + maxIceText.Text + "," + minIceText.Text + "," + "Default Picture!!!";
+                        DataToFile.strToFile(Application.StartupPath + @"\Datas\manual.csv", manualStr);
+                    }
 
+                }
                 //设置自动计算的坐标
                 if (picNames != null)
                 {
@@ -313,7 +373,7 @@ namespace Density_figure
                 if ((e.X > picLeftWidth) && (e.X < picShowWidth + picLeftWidth) && (e.Y > picTopHeight) && (e.Y < picShowHeight + picTopHeight))
                 {
 
-                    picCoordinateTip.Active = true;
+//                    picCoordinateTip.Active = true;
                     if (mouseInPicPress)  //重画
                     {
                         this.originalPicBox.Refresh();
@@ -346,9 +406,10 @@ namespace Density_figure
                     Bitmap bm = (Bitmap)originalPicBox.Image;
                     Color color = bm.GetPixel(original_x, original_y);
                     int gray = (int)(color.R * 0.3 + color.G * 0.59 + color.B * 0.11);
-                    picCoordinateTip.Show("（" + zoom_x + "," + zoom_y + "）" + gray, this.originalPicBox, new Point(e.X + 60, e.Y));
+                    coordinateLabel.Text = "（" + zoom_x + "," + zoom_y + "）" + gray;
+//                    picCoordinateTip.Show("（" + zoom_x + "," + zoom_y + "）" + gray, this.originalPicBox, new Point(e.X + 60, e.Y));
                 }
-                picCoordinateTip.Active = false;
+//                picCoordinateTip.Active = false;
             }
             else
             {
@@ -365,7 +426,7 @@ namespace Density_figure
                     {
                         MessageBox.Show("错误信息： " + err.Message + "\n该图像已损坏：" + currentPic + "\n点击\"确定\"重新选择图像!");
                     }
-               }
+                }
             }
         }
 
@@ -431,11 +492,11 @@ namespace Density_figure
                     currentPicNameLabel.Text = Path.GetFileName(currentPic);
                     picNumToCyc++;
 
-                    string autoStr = DateTime.Now.ToString() + "," + iceNumText.Text + "," + iceDensityText.Text + ","
+                    string autoStr = DateTime.Now.ToString("F") + "," + iceNumText.Text + "," + iceDensityText.Text + ","
                     + maxIceText.Text + "," + minIceText.Text + "," + currentPic;
                     DataToFile.strToFile(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".csv", autoStr);
                 }
-                catch(Exception err)
+                catch (Exception err)
                 {
                     timer.Stop();
                     MessageBox.Show("错误信息： " + err.Message + "\n该图像已损坏, 请删除：" + picNames[picNumToCyc] + "\n点击\"确定\"继续开始计算下一张图像!");
@@ -474,7 +535,7 @@ namespace Density_figure
 
         private void openTempButton_Click(object sender, EventArgs e)
         {
-            string path = Application.StartupPath; 
+            string path = Application.StartupPath;
             if (path.EndsWith(@"\"))
                 path = Application.StartupPath + @"Temp";
             else

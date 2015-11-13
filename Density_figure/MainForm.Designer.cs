@@ -1,4 +1,4 @@
-﻿namespace Density_figure
+﻿namespace Ice_Concentration
 {
     partial class MainForm
     {
@@ -31,13 +31,14 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.picPanel = new System.Windows.Forms.Panel();
-            this.originalPicBox = new System.Windows.Forms.PictureBox();
             this.iceNumLabel = new System.Windows.Forms.Label();
             this.iceDensityLabel = new System.Windows.Forms.Label();
             this.setFolderButton = new System.Windows.Forms.Button();
             this.manualButtonPanel = new System.Windows.Forms.Panel();
             this.isCalRealAreaCheckBox = new System.Windows.Forms.CheckBox();
             this.grayNum = new System.Windows.Forms.NumericUpDown();
+            this.coordinateLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.grayLabel = new System.Windows.Forms.Label();
             this.realAreaLabel = new System.Windows.Forms.Label();
             this.autoNotifyLabel = new System.Windows.Forms.Label();
@@ -85,8 +86,8 @@
             this.PRICPicBox = new System.Windows.Forms.PictureBox();
             this.NMEFCPicBox = new System.Windows.Forms.PictureBox();
             this.dlutPicBox = new System.Windows.Forms.PictureBox();
+            this.originalPicBox = new System.Windows.Forms.PictureBox();
             this.picPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).BeginInit();
             this.manualButtonPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grayNum)).BeginInit();
             this.autoButtonPanel.SuspendLayout();
@@ -103,6 +104,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PRICPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NMEFCPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dlutPicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // picPanel
@@ -116,21 +118,6 @@
             this.picPanel.Name = "picPanel";
             this.picPanel.Size = new System.Drawing.Size(629, 449);
             this.picPanel.TabIndex = 0;
-            // 
-            // originalPicBox
-            // 
-            this.originalPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.originalPicBox.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.originalPicBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.originalPicBox.Location = new System.Drawing.Point(0, 0);
-            this.originalPicBox.Name = "originalPicBox";
-            this.originalPicBox.Size = new System.Drawing.Size(629, 449);
-            this.originalPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.originalPicBox.TabIndex = 0;
-            this.originalPicBox.TabStop = false;
-            this.originalPicBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseDown);
-            this.originalPicBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseMove);
-            this.originalPicBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseUp);
             // 
             // iceNumLabel
             // 
@@ -175,14 +162,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.manualButtonPanel.Controls.Add(this.isCalRealAreaCheckBox);
             this.manualButtonPanel.Controls.Add(this.grayNum);
+            this.manualButtonPanel.Controls.Add(this.coordinateLabel);
+            this.manualButtonPanel.Controls.Add(this.label1);
             this.manualButtonPanel.Controls.Add(this.grayLabel);
             this.manualButtonPanel.Controls.Add(this.realAreaLabel);
             this.manualButtonPanel.Controls.Add(this.autoNotifyLabel);
             this.manualButtonPanel.Controls.Add(this.realAreaTextBox);
             this.manualButtonPanel.Controls.Add(this.squareCentLabel);
-            this.manualButtonPanel.Location = new System.Drawing.Point(478, 3);
+            this.manualButtonPanel.Location = new System.Drawing.Point(474, 3);
             this.manualButtonPanel.Name = "manualButtonPanel";
-            this.manualButtonPanel.Size = new System.Drawing.Size(264, 112);
+            this.manualButtonPanel.Size = new System.Drawing.Size(259, 112);
             this.manualButtonPanel.TabIndex = 4;
             // 
             // isCalRealAreaCheckBox
@@ -200,7 +189,7 @@
             // grayNum
             // 
             this.grayNum.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.grayNum.Location = new System.Drawing.Point(63, 29);
+            this.grayNum.Location = new System.Drawing.Point(63, 24);
             this.grayNum.Maximum = new decimal(new int[] {
             255,
             0,
@@ -217,11 +206,31 @@
             0,
             0});
             // 
+            // coordinateLabel
+            // 
+            this.coordinateLabel.AutoSize = true;
+            this.coordinateLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.coordinateLabel.Location = new System.Drawing.Point(144, 43);
+            this.coordinateLabel.Name = "coordinateLabel";
+            this.coordinateLabel.Size = new System.Drawing.Size(29, 12);
+            this.coordinateLabel.TabIndex = 3;
+            this.coordinateLabel.Text = "NONE";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(139, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "当前坐标及灰度值";
+            // 
             // grayLabel
             // 
             this.grayLabel.AutoSize = true;
             this.grayLabel.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.grayLabel.Location = new System.Drawing.Point(6, 39);
+            this.grayLabel.Location = new System.Drawing.Point(6, 34);
             this.grayLabel.Name = "grayLabel";
             this.grayLabel.Size = new System.Drawing.Size(47, 12);
             this.grayLabel.TabIndex = 3;
@@ -318,9 +327,9 @@
             this.autoButtonPanel.Controls.Add(this.label3);
             this.autoButtonPanel.Controls.Add(this.timeLabel);
             this.autoButtonPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.autoButtonPanel.Location = new System.Drawing.Point(202, 3);
+            this.autoButtonPanel.Location = new System.Drawing.Point(200, 3);
             this.autoButtonPanel.Name = "autoButtonPanel";
-            this.autoButtonPanel.Size = new System.Drawing.Size(173, 112);
+            this.autoButtonPanel.Size = new System.Drawing.Size(171, 112);
             this.autoButtonPanel.TabIndex = 5;
             // 
             // isRecursionCheckBox
@@ -543,7 +552,7 @@
             this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
             this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.85715F));
-            this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.optionButtonTablePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.optionButtonTablePanel.Controls.Add(this.panel2, 1, 0);
             this.optionButtonTablePanel.Controls.Add(this.panel3, 3, 0);
             this.optionButtonTablePanel.Controls.Add(this.autoButtonPanel, 2, 0);
@@ -560,7 +569,7 @@
             this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.panel2.Controls.Add(this.setFolderButton);
             this.panel2.Controls.Add(this.autoCalButton);
-            this.panel2.Location = new System.Drawing.Point(95, 3);
+            this.panel2.Location = new System.Drawing.Point(93, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(101, 112);
             this.panel2.TabIndex = 1;
@@ -571,7 +580,7 @@
             this.panel3.Controls.Add(this.openPicButton);
             this.panel3.Controls.Add(this.openDatasButton);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(381, 3);
+            this.panel3.Location = new System.Drawing.Point(377, 3);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(91, 112);
             this.panel3.TabIndex = 6;
@@ -662,7 +671,7 @@
             this.versionLabel.Name = "versionLabel";
             this.versionLabel.Size = new System.Drawing.Size(125, 12);
             this.versionLabel.TabIndex = 7;
-            this.versionLabel.Text = "当前程序版本: V1.2.0";
+            this.versionLabel.Text = "当前程序版本: V1.3.0";
             // 
             // resultTablePanel
             // 
@@ -743,7 +752,7 @@
             // 
             this.PRICPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PRICPicBox.Image = global::Density_figure.Properties.Resources.PRIC_logo;
+            this.PRICPicBox.Image = global::Ice_Concentration.Properties.Resources.PRIC_logo;
             this.PRICPicBox.Location = new System.Drawing.Point(2, 301);
             this.PRICPicBox.Name = "PRICPicBox";
             this.PRICPicBox.Size = new System.Drawing.Size(145, 145);
@@ -755,7 +764,7 @@
             // 
             this.NMEFCPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.NMEFCPicBox.Image = global::Density_figure.Properties.Resources.NFMC_logo;
+            this.NMEFCPicBox.Image = global::Ice_Concentration.Properties.Resources.NFMC_logo;
             this.NMEFCPicBox.Location = new System.Drawing.Point(0, 151);
             this.NMEFCPicBox.Name = "NMEFCPicBox";
             this.NMEFCPicBox.Size = new System.Drawing.Size(145, 145);
@@ -767,13 +776,29 @@
             // 
             this.dlutPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dlutPicBox.Image = global::Density_figure.Properties.Resources.dlut_logo;
+            this.dlutPicBox.Image = global::Ice_Concentration.Properties.Resources.dlut_logo;
             this.dlutPicBox.Location = new System.Drawing.Point(0, 0);
             this.dlutPicBox.Name = "dlutPicBox";
             this.dlutPicBox.Size = new System.Drawing.Size(145, 145);
             this.dlutPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.dlutPicBox.TabIndex = 0;
             this.dlutPicBox.TabStop = false;
+            // 
+            // originalPicBox
+            // 
+            this.originalPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.originalPicBox.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.originalPicBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.originalPicBox.Image = global::Ice_Concentration.Properties.Resources.Ice_Front;
+            this.originalPicBox.Location = new System.Drawing.Point(0, 0);
+            this.originalPicBox.Name = "originalPicBox";
+            this.originalPicBox.Size = new System.Drawing.Size(629, 449);
+            this.originalPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.originalPicBox.TabIndex = 0;
+            this.originalPicBox.TabStop = false;
+            this.originalPicBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseDown);
+            this.originalPicBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseMove);
+            this.originalPicBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.originalPic_MouseUp);
             // 
             // MainForm
             // 
@@ -784,10 +809,9 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(800, 400);
             this.Name = "MainForm";
-            this.Text = "冰密集度计算";
+            this.Text = "Ice Concentration";
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.picPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).EndInit();
             this.manualButtonPanel.ResumeLayout(false);
             this.manualButtonPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grayNum)).EndInit();
@@ -810,6 +834,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PRICPicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NMEFCPicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dlutPicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.originalPicBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -871,6 +896,8 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel optionButtonTablePanel;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label coordinateLabel;
+        private System.Windows.Forms.Label label1;
 
     }
 }

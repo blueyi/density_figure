@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace Density_figure
+namespace Ice_Concentration
 {
     public class FileInfoSorter : IComparer
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Density_figure
+namespace Ice_Concentration
 {
     class FindIceBlock
     {
