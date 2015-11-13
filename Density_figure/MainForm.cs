@@ -12,6 +12,7 @@ using System.IO;  //文件，openPictButton_Click
 using System.Drawing.Imaging;  //图形 picCut
 using System.Reflection;
 using System.Text.RegularExpressions; //可以使用PropertyInfo
+using System.Globalization;
 
 namespace Ice_Concentration 
 {
@@ -42,6 +43,12 @@ namespace Ice_Concentration
             {
                 DataToFile.strToFile(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".csv", manualTitle);
             }
+        }
+        string timeFormat = "yyyy'-'MM'-'dd HH':'mm':'ss'Z'";
+        CultureInfo timeInfo = new CultureInfo("en-US");
+        string timeNow()
+        {
+            return DateTime.Now.ToString(timeFormat);
         }
 
         string currentPic = "";  //文件路径
@@ -326,14 +333,14 @@ namespace Ice_Concentration
                     if (currentPic.Length != 0)
                     {
                         allPicFunc(originalPicBox, currentPic, start, end);
-                        string manualStr = DateTime.Now.ToString("F") + "," + iceNumText.Text + "," + iceDensityText.Text + ","
+                        string manualStr = timeNow() + "," + iceNumText.Text + "," + iceDensityText.Text + ","
                     + maxIceText.Text + "," + minIceText.Text + "," + currentPic;
                 DataToFile.strToFile(Application.StartupPath + @"\Datas\manual.csv", manualStr);
                     }
                     else
                     {
                         allPicFunc(originalPicBox, Properties.Resources.Ice_Front, start, end);
-                        string manualStr = DateTime.Now.ToString("F") + "," + iceNumText.Text + "," + iceDensityText.Text + ","
+                        string manualStr = timeNow() + "," + iceNumText.Text + "," + iceDensityText.Text + ","
                     + maxIceText.Text + "," + minIceText.Text + "," + "Default Picture!!!";
                         DataToFile.strToFile(Application.StartupPath + @"\Datas\manual.csv", manualStr);
                     }
@@ -492,7 +499,7 @@ namespace Ice_Concentration
                     currentPicNameLabel.Text = Path.GetFileName(currentPic);
                     picNumToCyc++;
 
-                    string autoStr = DateTime.Now.ToString("F") + "," + iceNumText.Text + "," + iceDensityText.Text + ","
+                    string autoStr = timeNow() + "," + iceNumText.Text + "," + iceDensityText.Text + ","
                     + maxIceText.Text + "," + minIceText.Text + "," + currentPic;
                     DataToFile.strToFile(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".csv", autoStr);
                 }
