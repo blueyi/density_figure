@@ -30,7 +30,6 @@ namespace Ice_Concentration
                 Directory.CreateDirectory(Application.StartupPath + @"\Datas\");
 
             //创建手动计算文件
-;
             string manualTitle = "计算时间" + "," + "冰块数量" + "," + "密集度" + ","
                 + "最大冰块面积" + "," + "最小冰块面积" + "," + "图像地址";
             if (!File.Exists(Application.StartupPath + @"\Datas\manual.csv"))
@@ -44,6 +43,7 @@ namespace Ice_Concentration
                 DataToFile.strToFile(Application.StartupPath + @"\Datas\" + DateTime.Now.ToString("yyyy-MM-dd") + ".csv", manualTitle);
             }
         }
+
         string timeFormat = "yyyy'-'MM'-'dd HH':'mm':'ss'Z'";
         CultureInfo timeInfo = new CultureInfo("en-US");
         string timeNow()

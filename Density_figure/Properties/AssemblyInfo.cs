@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Ice Concentration")]
 [assembly: AssemblyDescription("Powered by blueyi")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("大连理工大学 A0832")]
+[assembly: AssemblyCompany("大连理工大学 A0835")]
 [assembly: AssemblyProduct("Ice Concentration")]
 [assembly: AssemblyCopyright("大连理工大学 Copyright ©  2015")]
 [assembly: AssemblyTrademark("www.dlut.edu.cn")]
