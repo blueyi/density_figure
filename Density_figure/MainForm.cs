@@ -328,7 +328,7 @@ namespace Ice_Concentration
                 autoStart = start;
                 autoEnd = end;
 
-                if (MessageBox.Show("是否确定计算", "确定计算？", MessageBoxButtons.OKCancel) == DialogResult.OK && start.X != end.X && start.Y != end.Y)
+                if (start.X != end.X && start.Y != end.Y && (isConfirmAfterSelect.Checked || MessageBox.Show("是否确定计算", "确定计算？", MessageBoxButtons.OKCancel) == DialogResult.OK))
                 {
                     if (currentPic.Length != 0)
                     {
